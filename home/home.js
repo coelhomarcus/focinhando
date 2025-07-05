@@ -315,11 +315,39 @@ const pets = [
 ];
 
 // Função para renderizar os pets dinamicamente
-function renderPets() {
+function renderPets(filterType = "all") {
     const cardsContainer = document.querySelector(".cards-container");
-    cardsContainer.innerHTML = ""; // Limpa o conteúdo existente
+    cardsContainer.innerHTML = "";
 
-    pets.forEach((pet) => {
+    let filteredPets = pets;
+
+    if (filterType !== "all") {
+        if (filterType === "filhote") {
+            filteredPets = pets.filter((pet) => {
+                const age = pet.age.toLowerCase();
+                return (
+                    age.includes("meses") ||
+                    age.includes("mes") ||
+                    (age.includes("ano") && (age.includes("1 ano") || age.includes("0")))
+                );
+            });
+        } else {
+            filteredPets = pets.filter((pet) => pet.details.species === filterType);
+        }
+    }
+
+    if (filteredPets.length === 0) {
+        cardsContainer.innerHTML = `
+            <div class="no-results" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #666; background: #f8f9fa; border-radius: 15px; border: 2px dashed #ddd;">
+                <div style="font-size: 3rem; margin-bottom: 20px;">🐾</div>
+                <h3 style="margin-bottom: 10px; color: #333;">Nenhum pet encontrado</h3>
+                <p style="font-size: 1rem; line-height: 1.6;">Não há pets disponíveis para este filtro no momento.<br>Tente outro filtro ou volte mais tarde!</p>
+            </div>
+        `;
+        return;
+    }
+
+    filteredPets.forEach((pet) => {
         const petCard = document.createElement("a");
         petCard.className = "card";
         petCard.href = "#";
@@ -349,6 +377,62 @@ function renderPets() {
         });
 
         cardsContainer.appendChild(petCard);
+    });
+}
+
+// Função para configurar os filtros
+function setupFilters() {
+    const filterItems = document.querySelectorAll(".filter-item");
+
+    filterItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            filterItems.forEach((f) => f.classList.remove("active"));
+
+            item.classList.add("active");
+
+            const filterType = item.getAttribute("data-filter");
+
+            const cardsContainer = document.querySelector(".cards-container");
+            cardsContainer.classList.add("filtering");
+
+            setTimeout(() => {
+                renderPets(filterType);
+                cardsContainer.classList.remove("filtering");
+            }, 150);
+
+            const contentTitle = document.querySelector(".content h1");
+            let count = 0;
+
+            if (filterType === "all") {
+                count = pets.length;
+            } else if (filterType === "filhote") {
+                count = pets.filter((pet) => {
+                    const age = pet.age.toLowerCase();
+                    return (
+                        age.includes("meses") ||
+                        age.includes("mes") ||
+                        (age.includes("ano") && (age.includes("1 ano") || age.includes("0")))
+                    );
+                }).length;
+            } else {
+                count = pets.filter((pet) => pet.details.species === filterType).length;
+            }
+
+            switch (filterType) {
+                case "all":
+                    contentTitle.textContent = `Todos os pets (${count})`;
+                    break;
+                case "Cão":
+                    contentTitle.textContent = `Cachorros disponíveis (${count})`;
+                    break;
+                case "Gato":
+                    contentTitle.textContent = `Gatos disponíveis (${count})`;
+                    break;
+                case "filhote":
+                    contentTitle.textContent = `Filhotes disponíveis (${count})`;
+                    break;
+            }
+        });
     });
 }
 
@@ -522,7 +606,13 @@ function setActiveNavItem() {
 
 // Executa quando a página carrega
 document.addEventListener("DOMContentLoaded", function () {
-    renderPets();
+    setupFilters(); // Configurar filtros primeiro
+    renderPets(); // Depois renderizar pets
+
+    // Atualizar título inicial com contador
+    const contentTitle = document.querySelector(".content h1");
+    contentTitle.textContent = `Todos os pets (${pets.length})`;
+
     setActiveNavItem();
 
     // Fechar modal com a tecla ESC
