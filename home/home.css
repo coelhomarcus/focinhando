@@ -96,10 +96,7 @@ header .logo img {
 }
 
 .filter-item:hover {
-    background-color: #ee6551;
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(238, 101, 81, 0.3);
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
 .filter-item img {
@@ -148,7 +145,6 @@ header .logo img {
 }
 
 .card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
@@ -217,6 +213,318 @@ header .logo img {
 .header-mobile {
     display: none;
     transition: all 0.3s ease;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 2% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideIn 0.3s ease;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    background: rgba(0, 0, 0, 0.5);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #ee6551 0%, #ff8a75 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.pet-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+}
+
+.pet-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pet-basic-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.pet-age {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    opacity: 0.95;
+}
+
+.pet-location {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.pet-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pet-tags .tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.pet-description,
+.pet-details,
+.owner-contact {
+    margin-bottom: 30px;
+}
+
+.pet-description h3,
+.pet-details h3,
+.owner-contact h3 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ee6551;
+    padding-bottom: 8px;
+}
+
+.pet-description p {
+    color: #666;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.detail-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #ee6551;
+}
+
+.detail-item strong {
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.contact-info {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.contact-item {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.contact-item strong {
+    color: #333;
+    display: inline-block;
+    min-width: 140px;
+}
+
+.contact-item a {
+    color: #ee6551;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-item a:hover {
+    text-decoration: underline;
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 150px;
+    font-size: 1rem;
+}
+
+.btn-whatsapp {
+    background: #25d366;
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    background: #128c7e;
+    transform: translateY(-2px);
+}
+
+.btn-email {
+    background: #ee6551;
+    color: white;
+}
+
+.btn-email:hover {
+    background: #d14432;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive modal styles */
+@media (max-width: 890px) {
+    .modal-content {
+        width: 95%;
+        margin: 1% auto;
+        max-height: 95vh;
+    }
+
+    .modal-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+
+    .pet-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .pet-basic-info h2 {
+        font-size: 2rem;
+    }
+
+    .modal-body {
+        padding: 25px 20px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        border-radius: 15px;
+    }
+
+    .modal-header {
+        padding: 20px 15px;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .pet-basic-info h2 {
+        font-size: 1.8rem;
+    }
+
+    .modal-body {
+        padding: 20px 15px;
+    }
+
+    .contact-info {
+        padding: 20px;
+    }
+
+    .contact-item strong {
+        min-width: auto;
+        display: block;
+        margin-bottom: 5px;
+    }
 }
 
 @media (max-width: 1100px) {
@@ -365,5 +673,88 @@ header .logo img {
 
     .content h1 {
         font-size: 1.6rem;
+    }
+}
+
+/* Mobile Navigation Bar */
+.mobile-navbar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px 20px 20px 20px;
+    z-index: 1000;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #666;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 12px;
+    min-width: 60px;
+}
+
+.nav-item svg {
+    margin-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-item span {
+    font-size: 0.7rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: #ee6551;
+    background: rgba(238, 101, 81, 0.1);
+    transform: translateY(-2px);
+}
+
+.nav-item:hover svg,
+.nav-item.active svg {
+    transform: scale(1.1);
+}
+
+/* Show mobile navbar only on mobile devices */
+@media (max-width: 890px) {
+    .mobile-navbar {
+        display: flex;
+    }
+
+    /* Add bottom padding to body to prevent content from being hidden behind navbar */
+    body {
+        padding-bottom: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-navbar {
+        padding: 8px 15px 15px 15px;
+    }
+
+    .nav-item {
+        padding: 6px 8px;
+        min-width: 50px;
+    }
+
+    .nav-item span {
+        font-size: 0.65rem;
+    }
+
+    body {
+        padding-bottom: 75px;
     }
 }
