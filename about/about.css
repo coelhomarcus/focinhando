@@ -4,6 +4,12 @@
     min-height: calc(100vh - 100px);
 }
 
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/banner3.jpg");
+    background-position: center;
+    padding: 60px 0;
+}
+
 .hero-section h1 {
     font-size: 3.5rem;
 }
@@ -107,7 +113,10 @@
 
 .stats-section {
     padding: 80px 0;
-    background: #222;
+    background: linear-gradient(rgba(34, 34, 34, 0.85), rgba(34, 34, 34, 0.85)), url("../assets/home/golden.webp");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: white;
     text-align: center;
 }
@@ -126,14 +135,23 @@
 }
 
 .stat-item {
-    padding: 20px;
+    padding: 30px 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
 }
 
 .stat-number {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #ee6551;
-    margin-bottom: 10px;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ff7b6a;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .stat-label {

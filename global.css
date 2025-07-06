@@ -102,14 +102,16 @@ header .logo img {
 
 .hero-container {
     max-width: 800px;
-    margin: 0 auto;
+    max-height: 150px;
+    min-height: 120px;
+    margin: 10px auto;
     padding: 0 20px;
 }
 
 .hero-section h1 {
     font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     line-height: 1.2;
 }
 

@@ -4,6 +4,8 @@
 }
 
 .hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/banner4.webp");
+    background-position: center;
     padding: 60px 0;
 }
 
