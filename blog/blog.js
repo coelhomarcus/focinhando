@@ -1,159 +1,19 @@
-// Array de posts do blog
-const blogPosts = [
-    {
-        id: 1,
-        title: "Como preparar sua casa para receber um novo pet",
-        excerpt: "Dicas essenciais para adaptar seu lar e garantir a segurança do seu novo companheiro.",
-        image: "../assets/blog/blog.webp",
-        category: "Dicas",
-        date: "15 de Dezembro, 2024",
-        content: `
-            <p>Receber um novo pet em casa é uma experiência maravilhosa, mas requer alguns preparativos importantes. Aqui estão as principais dicas para garantir que seu novo amigo se sinta seguro e confortável.</p>
-            
-            <h3>1. Prepare o ambiente</h3>
-            <p>Retire objetos pequenos que podem ser engolidos, plantas tóxicas e produtos de limpeza do alcance do pet. Certifique-se de que não há fios elétricos expostos.</p>
-            
-            <h3>2. Tenha os itens básicos</h3>
-            <p>Comedouros, bebedouros, cama, brinquedos e uma coleira com identificação são essenciais. Para gatos, não esqueça da caixa de areia.</p>
-            
-            <h3>3. Escolha um local seguro</h3>
-            <p>Delimite um espaço inicial onde o pet pode se acostumar gradualmente. Isso ajuda a reduzir o estresse da adaptação.</p>
-            
-            <p>Lembre-se: paciência e carinho são fundamentais durante este período de adaptação. Cada animal tem seu próprio tempo para se sentir em casa.</p>
-        `,
-    },
-    {
-        id: 2,
-        title: "A importância da castração para pets",
-        excerpt: "Entenda os benefícios da castração para a saúde e bem-estar dos animais.",
-        image: "../assets/blog/blog2.png",
-        category: "Saúde",
-        date: "10 de Dezembro, 2024",
-        content: `
-            <p>A castração é um dos cuidados mais importantes que podemos oferecer aos nossos pets. Além de controlar a população de animais abandonados, traz diversos benefícios para a saúde.</p>
-            
-            <h3>Benefícios para as fêmeas</h3>
-            <p>Previne o câncer de mama, útero e ovários. Elimina o risco de piometra (infecção uterina) e reduz comportamentos relacionados ao cio.</p>
-            
-            <h3>Benefícios para os machos</h3>
-            <p>Reduz significativamente o risco de câncer de próstata e testículos. Diminui a agressividade e a tendência de fugir para procurar fêmeas.</p>
-            
-            <h3>Quando castrar?</h3>
-            <p>O ideal é castrar antes do primeiro cio nas fêmeas (por volta dos 6 meses) e nos machos quando atingem a maturidade sexual.</p>
-            
-            <p>Converse sempre com um veterinário para determinar o melhor momento e método para seu pet.</p>
-        `,
-    },
-    {
-        id: 3,
-        title: "Primeiros socorros para pets: o que todo tutor deve saber",
-        excerpt: "Situações de emergência podem acontecer. Saiba como agir nos primeiros momentos.",
-        image: "../assets/blog/blog3.jpg",
-        category: "Emergência",
-        date: "5 de Dezembro, 2024",
-        content: `
-            <p>Conhecer técnicas básicas de primeiros socorros pode salvar a vida do seu pet em situações de emergência. Aqui estão as informações mais importantes.</p>
-            
-            <h3>Engasgamento</h3>
-            <p>Para cães pequenos, segure de cabeça para baixo e dê pancadinhas nas costas. Para cães grandes, levante as patas traseiras e pressione o abdômen para cima.</p>
-            
-            <h3>Envenenamento</h3>
-            <p>NUNCA induza o vômito sem orientação veterinária. Mantenha a embalagem do produto e leve imediatamente ao veterinário.</p>
-            
-            <h3>Ferimentos</h3>
-            <p>Controle o sangramento com pressão direta usando gaze ou pano limpo. Não remova objetos cravados.</p>
-            
-            <h3>Kit de primeiros socorros</h3>
-            <p>Tenha sempre: gaze, esparadrapo, soro fisiológico, termômetro digital e o telefone do veterinário de emergência.</p>
-            
-            <p><strong>Importante:</strong> Primeiros socorros não substituem o atendimento veterinário. Sempre procure ajuda profissional o mais rápido possível.</p>
-        `,
-    },
-    {
-        id: 4,
-        title: "Histórias de sucesso: Luna encontrou sua família perfeita",
-        excerpt: "Conheça a emocionante história de Luna, uma gatinha que esperou 8 meses por uma família.",
-        image: "../assets/blog/blog4.png",
-        category: "Histórias",
-        date: "1 de Dezembro, 2024",
-        content: `
-            <p>Luna chegou ao abrigo com apenas 2 meses de idade, muito assustada e desnutrida. Encontrada em uma caixa de papelão na chuva, ela precisou de cuidados especiais para se recuperar.</p>
-            
-            <h3>A jornada de recuperação</h3>
-            <p>Durante os primeiros meses, Luna passou por tratamento veterinário e socialização. Ela era muito tímida e levou tempo para confiar nas pessoas novamente.</p>
-            
-            <h3>O dia especial</h3>
-            <p>Depois de 8 meses no abrigo, Maria e Pedro visitaram o local procurando um companheiro felino. Luna se escondeu no primeiro momento, mas algo especial aconteceu quando Pedro se agachou e estendeu a mão.</p>
-            
-            <h3>Uma nova vida</h3>
-            <p>Hoje, 6 meses depois da adoção, Luna é uma gata completamente transformada. Brincalhona, carinhosa e dona da casa. Maria conta que não consegue imaginar a vida sem ela.</p>
-            
-            <p>"A paciência vale a pena. Luna precisava apenas encontrar as pessoas certas", conta Maria. "Agora ela é nossa filha de quatro patas."</p>
-        `,
-    },
-    {
-        id: 5,
-        title: "Alimentação adequada para filhotes: guia completo",
-        excerpt: "Tudo o que você precisa saber sobre a nutrição adequada para filhotes de cães e gatos.",
-        image: "../assets/blog/blog5.jpg",
-        category: "Nutrição",
-        date: "28 de Novembro, 2024",
-        content: `
-            <p>A alimentação adequada nos primeiros meses de vida é fundamental para o desenvolvimento saudável dos filhotes. Vamos abordar os pontos principais para cada fase.</p>
-            
-            <h3>0 a 4 semanas - Aleitamento materno</h3>
-            <p>O leite materno é essencial e insubstituível. Se a mãe não estiver presente, use fórmulas específicas para filhotes, nunca leite de vaca.</p>
-            
-            <h3>4 a 8 semanas - Desmame gradual</h3>
-            <p>Introduza ração própria para filhotes umedecida com água morna. Misture gradualmente com o leite materno ou fórmula.</p>
-            
-            <h3>2 a 12 meses - Crescimento</h3>
-            <p>Use sempre ração específica para filhotes, que tem mais proteínas e calorias. Alimente de 3 a 4 vezes por dia em porções menores.</p>
-            
-            <h3>Dicas importantes</h3>
-            <p>Sempre deixe água fresca disponível. Evite mudanças bruscas na alimentação. Consulte o veterinário para estabelecer a quantidade ideal para o peso e idade do seu filhote.</p>
-            
-            <p>Uma boa alimentação na infância garante um adulto saudável e feliz!</p>
-        `,
-    },
-    {
-        id: 6,
-        title: "Como escolher o pet ideal para sua família",
-        excerpt: "Fatores importantes a considerar antes de decidir qual animal adotar.",
-        image: "../assets/blog/blog6.jpg",
-        category: "Adoção",
-        date: "25 de Novembro, 2024",
-        content: `
-            <p>Escolher um pet é uma decisão importante que deve considerar diversos fatores. Não se trata apenas de preferência, mas de compatibilidade com seu estilo de vida.</p>
-            
-            <h3>Analise seu espaço</h3>
-            <p>Cães grandes precisam de mais espaço e exercício. Apartamentos pequenos são mais adequados para gatos ou cães de porte menor.</p>
-            
-            <h3>Considere seu tempo disponível</h3>
-            <p>Filhotes demandam mais atenção e treinamento. Animais adultos podem ser mais independentes e ter personalidade já definida.</p>
-            
-            <h3>Pense no orçamento</h3>
-            <p>Além da alimentação, considere gastos com veterinário, medicamentos, brinquedos e possíveis emergências médicas.</p>
-            
-            <h3>Características comportamentais</h3>
-            <p>Pesquise sobre o temperamento da raça ou converse com os cuidadores sobre a personalidade do animal no abrigo.</p>
-            
-            <h3>Prepare a família</h3>
-            <p>Certifique-se de que todos estão preparados para a responsabilidade. Animais são compromissos de longo prazo que podem viver 15 anos ou mais.</p>
-            
-            <p>A escolha certa resultará em anos de companheirismo e alegria para toda a família!</p>
-        `,
-    },
-];
+// Variável global para armazenar os posts
+let blogPosts = [];
 
-// Função para renderizar os posts
+// Carregar dados dos posts
+async function loadPostsData() {
+    const response = await fetch("../data/posts.json");
+    blogPosts = await response.json();
+}
+
+// Renderizar os posts
 function renderPosts() {
     const postsGrid = document.getElementById("postsGrid");
 
     blogPosts.forEach((post) => {
         const postElement = document.createElement("div");
         postElement.className = "post-card";
-        postElement.setAttribute("data-post-id", post.id);
 
         postElement.innerHTML = `
             <div class="post-image">
@@ -170,14 +30,13 @@ function renderPosts() {
             </div>
         `;
 
-        // Adicionar evento de clique
         postElement.addEventListener("click", () => openModal(post.id));
 
         postsGrid.appendChild(postElement);
     });
 }
 
-// Função para abrir o modal com o post completo
+// Abrir modal com post completo
 function openModal(postId) {
     const post = blogPosts.find((p) => p.id === postId);
     if (!post) return;
@@ -197,35 +56,27 @@ function openModal(postId) {
     modalContent.innerHTML = post.content;
 
     modal.style.display = "block";
-    document.body.style.overflow = "hidden"; // Previne scroll da página
 }
 
-// Função para fechar o modal
+// Fechar modal
 function closeModal() {
     const modal = document.getElementById("postModal");
     modal.style.display = "none";
-    document.body.style.overflow = "auto"; // Restaura scroll da página
 }
 
-// Event listeners
-document.addEventListener("DOMContentLoaded", function () {
+// Quando a página carrega
+document.addEventListener("DOMContentLoaded", async function () {
+    await loadPostsData();
     renderPosts();
 
     // Fechar modal ao clicar no X
     const closeBtn = document.querySelector(".close");
     closeBtn.addEventListener("click", closeModal);
 
-    // Fechar modal ao clicar fora do conteúdo
+    // Fechar modal ao clicar fora
     const modal = document.getElementById("postModal");
     modal.addEventListener("click", function (e) {
         if (e.target === modal) {
-            closeModal();
-        }
-    });
-
-    // Fechar modal com a tecla ESC
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") {
             closeModal();
         }
     });
