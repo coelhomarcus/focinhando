@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Focinhando</title>
         <link rel="stylesheet" href="./style.css" />
-        <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon">
+        <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon" />
     </head>
     <body>
         <div class="container">
@@ -17,24 +17,25 @@
                     <h1>Olá,<br />Seja Bem-Vindo</h1>
                     <p>Seja bem-vindo ao nosso lugar especial!</p>
                 </div>
-                <form action="">
+                <form action="./home/home.html" method="get">
                     <div class="input-container">
-                        <input type="email" id="email" placeholder="Digite seu e-mail" />
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required />
                     </div>
                     <div class="input-container">
-                        <input type="password" id="password" placeholder="Digite sua senha" />
+                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
                     </div>
                     <div class="options">
                         <label for="remember">
-                            <input type="checkbox" id="remember" />
+                            <input type="checkbox" id="remember" name="remember" />
                             Lembrar de mim
                         </label>
                         <a href="#">Esqueci minha senha</a>
                     </div>
-                    <a href="./home/home.html" class="button">Entrar</a>
+                    <button type="submit" class="button">Entrar</button>
                     <div class="register-link">
                         <p>Não tem uma conta? <a href="./register/register.html">Criar conta</a></p>
                     </div>
+                </form>
             </section>
             <section class="right">
                 <img src="./assets/login/loginImage.png" alt="" />

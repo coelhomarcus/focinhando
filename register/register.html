@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Focinhando</title>
         <link rel="stylesheet" href="./register.css" />
-        <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon">
+        <link rel="shortcut icon" href="../assets/favicon.svg" type="image/x-icon" />
     </head>
     <body>
         <div class="container">
@@ -17,23 +17,24 @@
                     <h1>Criar Conta</h1>
                     <p>Junte-se à nossa comunidade culinária!</p>
                 </div>
-                <form action="">
+                <form action="../home/home.html" method="get">
                     <div class="input-container">
-                        <input type="text" id="name" placeholder="Digite seu nome completo" />
+                        <input type="text" id="name" name="name" placeholder="Digite seu nome completo" required />
                     </div>
                     <div class="input-container">
-                        <input type="email" id="email" placeholder="Digite seu e-mail" />
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required />
                     </div>
                     <div class="input-container">
-                        <input type="password" id="password" placeholder="Digite sua senha" />
+                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
                     </div>
-                    <a href="../home/home.html" class="button">Criar Conta</a>
+                    <button type="submit" class="button">Criar Conta</button>
                     <div class="login-link">
                         <p>Já tem uma conta? <a href="../index.html">Faça login</a></p>
                     </div>
+                </form>
             </section>
             <section class="right">
-                <img src="../assets/login/loginImage.png" alt="" />
+                <img src="../assets/login/register.jpg" alt="" />
             </section>
         </div>
     </body>
