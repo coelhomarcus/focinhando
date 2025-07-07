@@ -1,13 +1,10 @@
-// Variável global para armazenar os posts
 let blogPosts = [];
 
-// Carregar dados dos posts
 async function loadPostsData() {
     const response = await fetch("../data/posts.json");
     blogPosts = await response.json();
 }
 
-// Renderizar os posts
 function renderPosts() {
     const postsGrid = document.getElementById("postsGrid");
 
@@ -36,7 +33,6 @@ function renderPosts() {
     });
 }
 
-// Abrir modal com post completo
 function openModal(postId) {
     const post = blogPosts.find((p) => p.id === postId);
     if (!post) return;
@@ -58,13 +54,11 @@ function openModal(postId) {
     modal.style.display = "block";
 }
 
-// Fechar modal
 function closeModal() {
     const modal = document.getElementById("postModal");
     modal.style.display = "none";
 }
 
-// Quando a página carrega
 document.addEventListener("DOMContentLoaded", async function () {
     await loadPostsData();
     renderPosts();

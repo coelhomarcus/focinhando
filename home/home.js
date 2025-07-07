@@ -1,20 +1,16 @@
-// Variável global para armazenar os pets
 let pets = [];
 
-// Carregar dados dos pets
 async function loadPetsData() {
     const response = await fetch("../data/pets.json");
     pets = await response.json();
 }
 
-// Renderizar os pets na tela
 function renderPets(filterType = "all") {
     const cardsContainer = document.querySelector(".cards-container");
     cardsContainer.innerHTML = "";
 
     let filteredPets = pets;
 
-    // Aplicar filtros
     if (filterType === "Cão") {
         filteredPets = pets.filter((pet) => pet.details.species === "Cão");
     } else if (filterType === "Gato") {
@@ -23,7 +19,6 @@ function renderPets(filterType = "all") {
         filteredPets = pets.filter((pet) => pet.age.includes("meses"));
     }
 
-    // Criar cards dos pets
     filteredPets.forEach((pet) => {
         const petCard = document.createElement("a");
         petCard.className = "card";
@@ -54,16 +49,13 @@ function renderPets(filterType = "all") {
     });
 }
 
-// Configurar filtros
 function setupFilters() {
     const filterItems = document.querySelectorAll(".filter-item");
 
     filterItems.forEach((item) => {
         item.addEventListener("click", () => {
-            // Remove active de todos os filtros
             filterItems.forEach((f) => f.classList.remove("active"));
 
-            // Adiciona active no filtro clicado
             item.classList.add("active");
 
             const filterType = item.getAttribute("data-filter");
@@ -72,12 +64,10 @@ function setupFilters() {
     });
 }
 
-// Abrir modal com dados do pet
 function openPetModal(petId) {
     const pet = pets.find((p) => p.id === petId);
     if (!pet) return;
 
-    // Criar modal
     let modal = document.getElementById("petModal");
     if (!modal) {
         modal = document.createElement("div");
@@ -123,7 +113,6 @@ function openPetModal(petId) {
         </div>
     `;
 
-    // Fechar modal
     modal.querySelector(".close").addEventListener("click", () => {
         modal.style.display = "none";
     });
@@ -131,7 +120,6 @@ function openPetModal(petId) {
     modal.style.display = "block";
 }
 
-// Quando a página carrega
 document.addEventListener("DOMContentLoaded", async function () {
     await loadPetsData();
     setupFilters();
