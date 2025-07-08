@@ -1,6 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-
-/* Global Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -14,14 +12,12 @@ body {
     padding-top: 100px;
 }
 
-/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Header Styles */
 header {
     position: fixed;
     top: 0;
@@ -118,7 +114,6 @@ header .logo img {
     transition: all 0.3s ease;
 }
 
-/* Hero Section */
 .hero-section {
     background: linear-gradient(135deg, #ee6551 0%, #ff8a75 100%);
     color: white;
@@ -147,7 +142,6 @@ header .logo img {
     opacity: 0.95;
 }
 
-/* Button Styles */
 .btn {
     padding: 15px 30px;
     border: none;
@@ -204,7 +198,6 @@ header .logo img {
     transform: translateY(-2px);
 }
 
-/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -256,7 +249,6 @@ header .logo img {
     padding: 30px;
 }
 
-/* Form Styles */
 .form-group {
     margin-bottom: 20px;
 }
@@ -293,7 +285,6 @@ header .logo img {
     min-height: 120px;
 }
 
-/* Mobile Navigation Bar */
 .mobile-navbar {
     display: none;
     position: fixed;
@@ -345,7 +336,6 @@ header .logo img {
     transform: scale(1.1);
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -366,7 +356,6 @@ header .logo img {
     }
 }
 
-/* Global Responsive Design */
 @media (max-width: 1100px) {
     header .user p,
     header .user span {
@@ -452,12 +441,10 @@ header .logo img {
         font-size: 1rem;
     }
 
-    /* Show mobile navbar on mobile devices */
     .mobile-navbar {
         display: flex;
     }
 
-    /* Add bottom padding to body to prevent content from being hidden behind navbar */
     body {
         padding-bottom: 80px;
         padding-top: 70px;
