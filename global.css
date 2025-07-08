@@ -53,6 +53,26 @@ header .navbar a {
     position: relative;
 }
 
+header .navbar a:hover {
+    color: #ee6551;
+}
+
+header .navbar a.active {
+    color: #ee6551;
+    font-weight: 600;
+}
+
+header .navbar a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ee6551;
+    border-radius: 10px;
+}
+
 header .user {
     display: flex;
     align-items: center;
