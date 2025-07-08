@@ -1,9 +1,18 @@
+@font-face {
+    font-family: "Cabinet Grotesk";
+    src: url("./assets/font/CabinetGrotesk-Variable.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Inter", sans-serif;
+    font-family: "Cabinet Grotesk", "Inter", sans-serif;
 }
 
 body {
