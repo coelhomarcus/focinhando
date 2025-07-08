@@ -94,10 +94,13 @@ header .user {
     border-radius: 15px;
     padding-inline: 20px;
     transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
 }
 
 header .user p span {
     color: #ee6551;
+    font-weight: 600;
     transition: opacity 0.3s ease;
 }
 
@@ -112,6 +115,27 @@ header .user img {
 header .user span {
     color: rgba(0, 0, 0, 0.51);
     transition: opacity 0.3s ease;
+}
+
+header .user .user-info {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+/* header .user .user-info:hover {
+    transform: translateY(-1px);
+} */
+
+header .user .user-info p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+header .user .user-info span {
+    font-size: 0.8rem;
 }
 
 header .logo img {
