@@ -11,6 +11,7 @@
 body {
     background-color: #fafafa;
     line-height: 1.6;
+    padding-top: 100px;
 }
 
 /* Container */
@@ -22,6 +23,11 @@ body {
 
 /* Header Styles */
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
     padding-inline: 50px;
     width: 100%;
     height: 100px;
@@ -391,6 +397,11 @@ header .logo img {
     }
 
     .header-mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
         display: flex;
         justify-content: space-between;
         padding: 10px 50px;
@@ -449,6 +460,7 @@ header .logo img {
     /* Add bottom padding to body to prevent content from being hidden behind navbar */
     body {
         padding-bottom: 80px;
+        padding-top: 70px;
     }
 }
 
@@ -488,6 +500,7 @@ header .logo img {
 
     body {
         padding-bottom: 75px;
+        padding-top: 70px;
     }
 
     .modal-content {
