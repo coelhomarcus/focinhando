@@ -52,8 +52,7 @@ form {
 }
 
 .left {
-    width: 40vw;
-    padding-left: 50px;
+    padding-inline: 50px;
     padding-top: 50px;
 }
 

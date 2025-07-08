@@ -4,7 +4,7 @@
         "name": "Luna",
         "age": "8 meses",
         "location": "Marabá - PA",
-        "image": "../assets/home/luna.png",
+        "image": "../../assets/home/luna.png",
         "tags": ["Fêmea", "Vacinada"],
         "description": "Luna é uma gatinha muito carinhosa e brincalhona. Adora brincar com bolinhas e dormir no colo. É muito sociável com outros gatos e crianças.",
         "owner": {
@@ -29,7 +29,7 @@
         "name": "Max",
         "age": "1 ano",
         "location": "Belém - PA",
-        "image": "../assets/home/max.jpg",
+        "image": "../../assets/home/max.jpg",
         "tags": ["Macho", "Castrado"],
         "description": "Max é um cão muito leal e protetor. Adora passear e brincar no quintal. É obediente e se dá bem com crianças maiores de 8 anos.",
         "owner": {
@@ -54,7 +54,7 @@
         "name": "Mia",
         "age": "6 meses",
         "location": "Parauapebas - PA",
-        "image": "../assets/home/golden.webp",
+        "image": "../../assets/home/golden.webp",
         "tags": ["Fêmea", "Dócil"],
         "description": "Mia é uma cachorrinha muito dócil e tranquila. Perfeita para famílias com crianças pequenas. Adora carinho e é muito obediente.",
         "owner": {
@@ -79,7 +79,7 @@
         "name": "Thor",
         "age": "3 ano",
         "location": "Ananindeua - PA",
-        "image": "../assets/home/pastoralemao.webp",
+        "image": "../../assets/home/pastoralemao.webp",
         "tags": ["Macho", "Brincalhão"],
         "description": "Thor é cheio de energia e adora brincar. É perfeito para pessoas ativas que gostam de caminhadas e exercícios. Muito inteligente e fácil de treinar.",
         "owner": {
@@ -104,7 +104,7 @@
         "name": "Bella",
         "age": "2 anos",
         "location": "Santarém - PA",
-        "image": "../assets/home/siames.jpg",
+        "image": "../../assets/home/siames.jpg",
         "tags": ["Fêmea", "Carinhosa"],
         "description": "Bella é uma gatinha muito meiga e carinhosa. Adora dormir em lugares altos e observar pela janela. É independente mas muito afetuosa com seus tutores.",
         "owner": {
@@ -129,7 +129,7 @@
         "name": "Rex",
         "age": "4 anos",
         "location": "Castanhal - PA",
-        "image": "../assets/home/rot.jpg",
+        "image": "../../assets/home/rot.jpg",
         "tags": ["Macho", "Protetor"],
         "description": "Rex é um cão muito leal e protetor. Ideal para quem busca um companheiro fiel e um bom guardião. É carinhoso com a família e cauteloso com estranhos.",
         "owner": {
@@ -154,7 +154,7 @@
         "name": "Mel",
         "age": "5 meses",
         "location": "Abaetetuba - PA",
-        "image": "../assets/home/mel.jpg",
+        "image": "../../assets/home/mel.jpg",
         "tags": ["Fêmea", "Filhote"],
         "description": "Mel é uma filhotinha muito esperta e curiosa. Está aprendendo comandos básicos e adora brincar com crianças. É perfeita para famílias que querem treinar desde pequena.",
         "owner": {
@@ -179,7 +179,7 @@
         "name": "Simba",
         "age": "3 anos",
         "location": "Tucuruí - PA",
-        "image": "../assets/home/simba.jpg",
+        "image": "../../assets/home/simba.jpg",
         "tags": ["Macho", "Tranquilo"],
         "description": "Simba é um gato muito tranquilo e majestoso. Adora receber carinho e é muito tolerante. Ideal para apartamentos e pessoas que buscam um companheiro calmo.",
         "owner": {
@@ -204,7 +204,7 @@
         "name": "Nina",
         "age": "1 ano e 6 meses",
         "location": "Bragança - PA",
-        "image": "../assets/home/border.jpg",
+        "image": "../../assets/home/border.jpg",
         "tags": ["Fêmea", "Ativa"],
         "description": "Nina é uma cachorrinha muito ativa e brincalhona. Adora correr na praia e nadar. É perfeita para pessoas que gostam de atividades ao ar livre.",
         "owner": {
@@ -229,7 +229,7 @@
         "name": "Oliver",
         "age": "4 meses",
         "location": "Salinópolis - PA",
-        "image": "../assets/home/oliver.jpg",
+        "image": "../../assets/home/oliver.jpg",
         "tags": ["Macho", "Filhote"],
         "description": "Oliver é um filhotinho muito carinhoso e sociável. Adora brincar com outros gatos e é muito curioso. Está aprendendo a usar a caixa de areia.",
         "owner": {
@@ -254,7 +254,7 @@
         "name": "Lola",
         "age": "6 anos",
         "location": "Altamira - PA",
-        "image": "../assets/home/lola.jpg",
+        "image": "../../assets/home/lola.jpg",
         "tags": ["Fêmea", "Idosa"],
         "description": "Lola é uma senhora muito gentil e carinhosa. Já passou da fase de filhote e busca uma família que valorize sua experiência e carinho. É muito obediente.",
         "owner": {
@@ -279,7 +279,7 @@
         "name": "Zeca",
         "age": "2 anos",
         "location": "Cametá - PA",
-        "image": "../assets/home/zeca.png",
+        "image": "../../assets/home/zeca.png",
         "tags": ["Macho", "Enérgico"],
         "description": "Zeca é um cão muito enérgico e inteligente. Adora aprender truques novos e brincar de buscar. É ideal para famílias ativas que gostam de interação.",
         "owner": {

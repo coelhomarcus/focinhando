@@ -1,11 +1,11 @@
-@import url("../global.css");
+@import url("../../global.css");
 
 .about-content {
     min-height: calc(100vh - 100px);
 }
 
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/banner3.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/banner3.jpg");
     background-position: center;
     padding: 60px 0;
 }
@@ -113,7 +113,7 @@
 
 .stats-section {
     padding: 80px 0;
-    background: linear-gradient(rgba(34, 34, 34, 0.85), rgba(34, 34, 34, 0.85)), url("../assets/home/golden.webp");
+    background: linear-gradient(rgba(34, 34, 34, 0.85), rgba(34, 34, 34, 0.85)), url("../../assets/home/golden.webp");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

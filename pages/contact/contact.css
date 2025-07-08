@@ -1,11 +1,11 @@
-@import url("../global.css");
+@import url("../../global.css");
 
 .contact-content {
     min-height: calc(100vh - 100px);
 }
 
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/banner4.webp");
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../assets/banner4.webp");
     background-position: center;
     padding: 60px 0;
 }
@@ -212,7 +212,6 @@
 }
 
 @media (max-width: 890px) {
-
     .contact-section,
     .quick-actions {
         padding: 60px 0;

@@ -1,7 +1,7 @@
 let blogPosts = [];
 
 async function loadPostsData() {
-    const response = await fetch("../data/posts.json");
+    const response = await fetch("../../data/posts.json");
     blogPosts = await response.json();
 }
 

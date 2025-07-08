@@ -1,11 +1,11 @@
-@import url("../global.css");
+@import url("../../global.css");
 
 .blog-content {
     min-height: calc(100vh - 100px);
 }
 
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("../assets/banner2.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("../../assets/banner2.jpg");
     background-attachment: fixed;
     background-size: cover;
     background-position: center;

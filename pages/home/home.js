@@ -1,7 +1,7 @@
 let pets = [];
 
 async function loadPetsData() {
-    const response = await fetch("../data/pets.json");
+    const response = await fetch("../../data/pets.json");
     pets = await response.json();
 }
 
