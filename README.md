@@ -1,43 +1,73 @@
-![Logo Focinhando](./assets/logo.svg)
+# React + TypeScript + Vite
 
-## Sobre o Projeto
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-O Focinhando é uma plataforma web dedicada à adoção de animais de estimação, desenvolvida como projeto de final da materia WEB I. A plataforma conecta pessoas interessadas em adotar pets com animais disponíveis para adoção, tornando o processo mais acessível, seguro e eficiente.
+Currently, two official plugins are available:
 
-## Características Principais
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
--   **Cadastro de Usuários**: Sistema de registro e login para acesso à plataforma
--   **Catálogo de Animais**: Visualização de animais disponíveis para adoção com filtros
--   **Perfis Detalhados**: Informações completas sobre cada animal (idade, espécie, localização, etc.)
--   **Blog Informativo**: Artigos e dicas sobre cuidados com animais
--   **Design Responsivo**: Interface adaptável a dispositivos móveis e desktop
+## React Compiler
 
-## Tecnologias Utilizadas
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
--   HTML
--   CSS
--   JavaScript
--   JSON para armazenamento de dados
+## Expanding the ESLint configuration
 
-## Estrutura do Projeto
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-├── index.html          # Página de login
-├── home/               # Página principal com
-├── about/              # Página sobre o projeto
-├── blog/               # Blog com artigos sobre
-├── contact/            # Página de contato
-├── register/           # Página de registro
-├── assets/             # Imagens e ícones
-└── data/               # Arquivos JSON
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-## Como Executar
-
-1. Clone este repositório
-2. Abra o arquivo `index.html` em seu navegador
-3. Faça login ou registre-se para acessar o sistema
-
-##
-
-### Este projeto é apenas para fins acadêmicos.

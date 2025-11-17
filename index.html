@@ -1,45 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Focinhando</title>
-        <link rel="stylesheet" href="./assets/login/login.css" />
-        <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon" />
-    </head>
-    <body>
-        <div class="container">
-            <section class="left">
-                <div class="logo">
-                    <img src="./assets/logo.svg" alt="" />
-                </div>
-                <div>
-                    <h1>Olá,<br />Seja Bem-Vindo</h1>
-                    <p>Seja bem-vindo ao nosso lugar especial!</p>
-                </div>
-                <form action="./pages/home/home.html" method="get">
-                    <div class="input-container">
-                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required />
-                    </div>
-                    <div class="input-container">
-                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
-                    </div>
-                    <div class="options">
-                        <label for="remember">
-                            <input type="checkbox" id="remember" name="remember" />
-                            Lembrar de mim
-                        </label>
-                        <a href="#">Esqueci minha senha</a>
-                    </div>
-                    <button type="submit" class="button">Entrar</button>
-                    <div class="register-link">
-                        <p>Não tem uma conta? <a href="./pages/register/register.html">Criar conta</a></p>
-                    </div>
-                </form>
-            </section>
-            <section class="right">
-                <img src="./assets/login/loginImage.png" alt="" />
-            </section>
-        </div>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>focinhando</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

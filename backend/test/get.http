@@ -1,3 +1,0 @@
-# Metodo GET
-GET http://localhost:3000/users
-Content-Type: application/json
