@@ -1,1 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
+
+@font-face {
+   font-family: "Cabinet Grotesk";
+   src: url("./font/CabinetGrotesk-Variable.ttf") format("truetype");
+   font-weight: 100 900;
+   font-style: normal;
+   font-display: swap;
+}
+
+* {
+   font-family: "Cabinet Grotesk", "Inter", sans-serif;
+}
+
+@theme {
+   --color-focinhando-white: #fafafa;
+   --color-focinhando-accent: #ee6551;
+   --color-focinhando-accent-dark: #d94c42;
+   --color-focinhando-border: rgba(0, 0, 0, 0.15);
+   --color-focinhando-gray: rgba(206, 205, 205, 0.15);
+}
