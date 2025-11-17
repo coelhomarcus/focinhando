@@ -19,4 +19,31 @@
    --color-focinhando-accent-dark: #d94c42;
    --color-focinhando-border: rgba(0, 0, 0, 0.15);
    --color-focinhando-gray: rgba(206, 205, 205, 0.15);
+   --color-focinhando-dark: #333;
+   --color-focinhando-text: #666;
+
+   --animate-fadeIn: fadeIn 0.3s ease-in-out;
+   --animate-slideUp: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+   }
+
+   to {
+      opacity: 1;
+   }
+}
+
+@keyframes slideUp {
+   from {
+      opacity: 0;
+      transform: translateY(20px);
+   }
+
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
 }
