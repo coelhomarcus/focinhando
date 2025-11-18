@@ -30,4 +30,4 @@ export interface PublicationForm {
    text: string
 }
 
-export type TabType = 'contacts' | 'pets' | 'publications'
+export type TabType = 'contacts' | 'pets' | 'publications' | 'manage-pets' | 'manage-publications'

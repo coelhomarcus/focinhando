@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import Banner2 from '@/assets/banners/banner2.jpg'
 import { useApi } from '@/hooks/useApi'
+import { FaEdit, FaCalendarAlt } from 'react-icons/fa'
+import { IoMailOpenOutline } from 'react-icons/io5'
 
 interface Publication {
    id: string
@@ -73,7 +75,7 @@ const Blog = () => {
 
             <div className='container mx-auto px-6 text-center relative z-10'>
                <div className='inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6'>
-                  <span>📝</span>
+                  <FaEdit />
                   <span>Blog</span>
                </div>
                <h1 className='text-5xl md:text-6xl font-bold text-white mb-6'>
@@ -96,7 +98,7 @@ const Blog = () => {
                ) : publications.length === 0 ? (
                   <div className='flex flex-col items-center justify-center py-20'>
                      <div className='bg-blue-50 rounded-full p-6 mb-4'>
-                        <span className='text-4xl'>📭</span>
+                        <IoMailOpenOutline className='text-4xl text-blue-600' />
                      </div>
                      <p className='text-xl font-medium text-gray-900 mb-1'>
                         Nenhuma publicação encontrada
@@ -181,7 +183,7 @@ const Blog = () => {
                            {selectedPublication.title}
                         </h2>
                         <div className='flex items-center gap-2 text-sm text-blue-50'>
-                           <span>📅</span>
+                           <FaCalendarAlt />
                            <span>{formatDate(selectedPublication.createdAt)}</span>
                         </div>
                      </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router'
 import Logo from '@/assets/logo.svg'
 import { useApi } from '@/hooks/useApi'
+import { FaUser, FaSignOutAlt, FaHome, FaEdit, FaComments, FaInfoCircle, FaCog, FaDog } from 'react-icons/fa'
 
 interface User {
    id: string
@@ -12,10 +13,15 @@ interface User {
    updatedAt: string
 }
 
+interface UserComplement {
+   img: string | null
+}
+
 const Header = () => {
    const { apiBaseUrl } = useApi()
    const navigate = useNavigate()
    const [user, setUser] = useState<User | null>(null)
+   const [userComplement, setUserComplement] = useState<UserComplement | null>(null)
    const [showUserMenu, setShowUserMenu] = useState(false)
    const [showMobileMenu, setShowMobileMenu] = useState(false)
 
@@ -25,6 +31,7 @@ const Header = () => {
          if (!token) return
 
          try {
+            // Load user basic data
             const response = await fetch(`${apiBaseUrl}/user`, {
                headers: {
                   'Authorization': `Bearer ${token}`
@@ -33,6 +40,17 @@ const Header = () => {
             const data = await response.json()
             if (!data.error && data.user) {
                setUser(data.user)
+            }
+
+            // Load user complement (includes profile image)
+            const complementResponse = await fetch(`${apiBaseUrl}/user/complement`, {
+               headers: {
+                  'Authorization': `Bearer ${token}`
+               }
+            })
+            const complementData = await complementResponse.json()
+            if (!complementData.error && complementData.complement) {
+               setUserComplement(complementData.complement)
             }
          } catch (error) {
             console.error('Erro ao carregar dados do usuário:', error)
@@ -45,6 +63,13 @@ const Header = () => {
    const handleLogout = () => {
       localStorage.removeItem('authToken')
       navigate('/login')
+   }
+
+   const getUserAvatar = () => {
+      if (userComplement?.img) {
+         return userComplement.img
+      }
+      return `https://ui-avatars.com/api/?name=${user?.name || 'User'}&background=ee6551&color=fff&size=40`
    }
 
    return (
@@ -107,19 +132,6 @@ const Header = () => {
                   >
                      Contato
                   </NavLink>
-                  {localStorage.getItem('isAdmin') === 'true' && (
-                     <NavLink
-                        to="/admin"
-                        className={({ isActive }) =>
-                           `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive
-                              ? 'bg-focinhando-accent-dark text-white'
-                              : 'text-focinhando-accent hover:bg-focinhando-accent/10'
-                           }`
-                        }
-                     >
-                        Admin
-                     </NavLink>
-                  )}
                </nav>
 
                {/* User Profile & Mobile Menu Button */}
@@ -133,9 +145,12 @@ const Header = () => {
                         {user ? (
                            <>
                               <img
-                                 src={`https://ui-avatars.com/api/?name=${user.name}&background=ee6551&color=fff&size=40`}
+                                 src={getUserAvatar()}
                                  alt="Profile"
-                                 className='w-9 h-9 rounded-full border-2 border-white shadow-sm shrink-0'
+                                 className='w-9 h-9 rounded-full border-2 border-white shadow-sm shrink-0 object-cover'
+                                 onError={(e) => {
+                                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${user.name}&background=ee6551&color=fff&size=40`
+                                 }}
                               />
                               <div className='text-left flex-1 min-w-0'>
                                  <p className='text-sm font-semibold text-gray-900 truncate'>{user.name}</p>
@@ -177,14 +192,36 @@ const Header = () => {
                                  navigate('/profile')
                               }}
                            >
-                              <span>👤</span>
+                              <FaUser />
                               <span>Meu Perfil</span>
                            </button>
                            <button
-                              className='w-full px-4 py-2.5 text-left text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors flex items-center gap-2'
+                              className='w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-focinhando-accent/10 hover:text-focinhando-accent transition-colors flex items-center gap-2 border-t border-gray-100'
+                              onClick={() => {
+                                 setShowUserMenu(false)
+                                 navigate('/register-pet')
+                              }}
+                           >
+                              <FaDog />
+                              <span>Cadastrar Pet</span>
+                           </button>
+                           {user?.role === 'admin' && (
+                              <button
+                                 className='w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-focinhando-accent/10 hover:text-focinhando-accent transition-colors flex items-center gap-2 border-t border-gray-100'
+                                 onClick={() => {
+                                    setShowUserMenu(false)
+                                    navigate('/admin')
+                                 }}
+                              >
+                                 <FaCog />
+                                 <span>Painel Admin</span>
+                              </button>
+                           )}
+                           <button
+                              className='w-full px-4 py-2.5 text-left text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors flex items-center gap-2 border-t border-gray-100'
                               onClick={handleLogout}
                            >
-                              <span>🚪</span>
+                              <FaSignOutAlt />
                               <span>Sair</span>
                            </button>
                         </div>
@@ -223,7 +260,7 @@ const Header = () => {
                      }
                      onClick={() => setShowMobileMenu(false)}
                   >
-                     🏠 Início
+                     <FaHome className="inline mr-2" /> Início
                   </NavLink>
                   <NavLink
                      to="/about"
@@ -235,7 +272,7 @@ const Header = () => {
                      }
                      onClick={() => setShowMobileMenu(false)}
                   >
-                     ℹ️ Sobre
+                     <FaInfoCircle className="inline mr-2" /> Sobre
                   </NavLink>
                   <NavLink
                      to="/blog"
@@ -247,7 +284,7 @@ const Header = () => {
                      }
                      onClick={() => setShowMobileMenu(false)}
                   >
-                     📝 Blog
+                     <FaEdit className="inline mr-2" /> Blog
                   </NavLink>
                   <NavLink
                      to="/contact"
@@ -259,30 +296,19 @@ const Header = () => {
                      }
                      onClick={() => setShowMobileMenu(false)}
                   >
-                     💬 Contato
+                     <FaComments className="inline mr-2" /> Contato
                   </NavLink>
-                  {localStorage.getItem('isAdmin') === 'true' && (
-                     <NavLink
-                        to="/admin"
-                        className={({ isActive }) =>
-                           `block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
-                              ? 'bg-focinhando-accent-dark text-white'
-                              : 'text-focinhando-accent hover:bg-focinhando-accent/10'
-                           }`
-                        }
-                        onClick={() => setShowMobileMenu(false)}
-                     >
-                        ⚙️ Admin
-                     </NavLink>
-                  )}
                   <div className='pt-4 mt-4 border-t border-gray-200'>
                      <div className='flex items-center gap-3 px-4 py-3 bg-focinhando-accent/5 rounded-lg mb-2 min-h-[66px]'>
                         {user ? (
                            <>
                               <img
-                                 src={`https://ui-avatars.com/api/?name=${user.name}&background=ee6551&color=fff&size=40`}
+                                 src={getUserAvatar()}
                                  alt="Profile"
-                                 className='w-10 h-10 rounded-full border-2 border-white shadow-sm shrink-0'
+                                 className='w-10 h-10 rounded-full border-2 border-white shadow-sm shrink-0 object-cover'
+                                 onError={(e) => {
+                                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${user.name}&background=ee6551&color=fff&size=40`
+                                 }}
                               />
                               <div className='flex-1 min-w-0'>
                                  <p className='text-sm font-semibold text-gray-900 truncate'>{user.name}</p>
@@ -308,13 +334,33 @@ const Header = () => {
                            navigate('/profile')
                         }}
                      >
-                        👤 Meu Perfil
+                        <FaUser className="inline mr-2" /> Meu Perfil
                      </button>
+                     <button
+                        className='w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-focinhando-accent/10 hover:text-focinhando-accent rounded-lg transition-colors'
+                        onClick={() => {
+                           setShowMobileMenu(false)
+                           navigate('/register-pet')
+                        }}
+                     >
+                        <FaDog className="inline mr-2" /> Cadastrar Pet
+                     </button>
+                     {user?.role === 'admin' && (
+                        <button
+                           className='w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-focinhando-accent/10 hover:text-focinhando-accent rounded-lg transition-colors'
+                           onClick={() => {
+                              setShowMobileMenu(false)
+                              navigate('/admin')
+                           }}
+                        >
+                           <FaCog className="inline mr-2" /> Painel Admin
+                        </button>
+                     )}
                      <button
                         className='w-full px-4 py-3 text-left text-sm text-red-600 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors'
                         onClick={handleLogout}
                      >
-                        🚪 Sair
+                        <FaSignOutAlt className="inline mr-2" /> Sair
                      </button>
                   </div>
                </div>

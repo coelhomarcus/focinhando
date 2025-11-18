@@ -6,10 +6,12 @@ import AdminTabs from './components/AdminTabs'
 import ContactsTab from './components/ContactsTab'
 import PetForm from './components/PetForm'
 import PublicationForm from './components/PublicationForm'
+import PetsManagement from './components/PetsManagement'
+import PublicationsManagement from './components/PublicationsManagement'
 
 const Admin = () => {
    const { apiBaseUrl } = useApi()
-   const [activeTab, setActiveTab] = useState<TabType>('contacts')
+   const [activeTab, setActiveTab] = useState<TabType>('manage-pets')
    const [contacts, setContacts] = useState<Contact[]>([])
    const [loading, setLoading] = useState(false)
 
@@ -54,6 +56,8 @@ const Admin = () => {
                contactsCount={contacts.length}
             />
 
+            {activeTab === 'manage-pets' && <PetsManagement apiBaseUrl={apiBaseUrl} />}
+            {activeTab === 'manage-publications' && <PublicationsManagement apiBaseUrl={apiBaseUrl} />}
             {activeTab === 'contacts' && <ContactsTab contacts={contacts} loading={loading} />}
             {activeTab === 'pets' && <PetForm apiBaseUrl={apiBaseUrl} />}
             {activeTab === 'publications' && <PublicationForm apiBaseUrl={apiBaseUrl} />}

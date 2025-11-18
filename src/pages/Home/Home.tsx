@@ -5,6 +5,8 @@ import CachorrosIcon from '@/assets/home/cachorros.png'
 import GatosIcon from '@/assets/home/gatos.png'
 import FilhotesIcon from '@/assets/home/filhotes.png'
 import { useApi } from '@/hooks/useApi'
+import { FaDog, FaCat, FaBirthdayCake, FaMapMarkerAlt, FaSyringe, FaHeart, FaMars, FaVenus } from 'react-icons/fa'
+import { IoPaw } from 'react-icons/io5'
 
 interface Pet {
    id: string
@@ -219,7 +221,7 @@ const Home = () => {
                </div>
             ) : filteredPets.length === 0 ? (
                <div className='text-center py-20 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-300'>
-                  <div className='text-6xl mb-4'>🐾</div>
+                  <IoPaw className='text-6xl mx-auto mb-4 text-gray-400' />
                   <p className='text-2xl font-semibold text-gray-700 mb-2'>Nenhum pet encontrado</p>
                   <p className='text-gray-500'>Tente outro filtro ou volte mais tarde</p>
                </div>
@@ -242,14 +244,14 @@ const Home = () => {
 
                               {/* Badge de espécie */}
                               <div className='absolute top-3 left-3 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-gray-700 shadow-md flex items-center gap-1'>
-                                 <span>{pet.specie === 'cão' ? '🐕' : '🐱'}</span>
+                                 {pet.specie === 'cão' ? <FaDog /> : <FaCat />}
                                  <span className='capitalize'>{pet.specie}</span>
                               </div>
 
                               {/* Badge de vacinação */}
                               {pet.vaccinated && (
                                  <div className='absolute top-3 right-3 bg-green-500/95 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-md flex items-center gap-1'>
-                                    <span>💉</span>
+                                    <FaSyringe />
                                     <span>Vacinado</span>
                                  </div>
                               )}
@@ -260,15 +262,15 @@ const Home = () => {
 
                               <div className='space-y-2 mb-4'>
                                  <div className='flex items-center gap-2 text-sm text-gray-600'>
-                                    <span className='text-gray-400'>🎂</span>
+                                    <FaBirthdayCake className='text-gray-400' />
                                     <span>{calculateAge(pet.age)}</span>
                                  </div>
                                  <div className='flex items-center gap-2 text-sm text-gray-600'>
-                                    <span className='text-gray-400'>📍</span>
+                                    <FaMapMarkerAlt className='text-gray-400' />
                                     <span>{pet.city} - {pet.state}</span>
                                  </div>
                                  <div className='flex items-center gap-2 text-sm text-gray-600'>
-                                    <span className='text-gray-400'>{pet.sex === 'macho' ? '♂️' : '♀️'}</span>
+                                    {pet.sex === 'macho' ? <FaMars className='text-gray-400' /> : <FaVenus className='text-gray-400' />}
                                     <span className='capitalize'>{pet.sex}</span>
                                  </div>
                               </div>
@@ -317,7 +319,7 @@ const Home = () => {
                         {/* Badges flutuantes */}
                         <div className='absolute top-4 left-4 flex gap-2'>
                            <span className='bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-semibold text-gray-800 shadow-lg flex items-center gap-1.5'>
-                              <span>{selectedPet.specie === 'cão' ? '🐕' : '🐱'}</span>
+                              {selectedPet.specie === 'cão' ? <FaDog /> : <FaCat />}
                               <span className='capitalize'>{selectedPet.specie}</span>
                            </span>
                            {selectedPet.vaccinated && (
@@ -332,15 +334,15 @@ const Home = () => {
                            <h2 className='text-4xl font-bold text-white mb-3 drop-shadow-lg'>{selectedPet.name}</h2>
                            <div className='flex items-center gap-3 flex-wrap'>
                               <span className='bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-sm font-medium text-white flex items-center gap-2'>
-                                 <span>🎂</span>
+                                 <FaBirthdayCake />
                                  <span>{calculateAge(selectedPet.age)}</span>
                               </span>
                               <span className='bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-sm font-medium text-white flex items-center gap-2'>
-                                 <span>📍</span>
+                                 <FaMapMarkerAlt />
                                  <span>{selectedPet.city} - {selectedPet.state}</span>
                               </span>
                               <span className='bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-sm font-medium text-white flex items-center gap-2'>
-                                 <span>{selectedPet.sex === 'macho' ? '♂️' : '♀️'}</span>
+                                 {selectedPet.sex === 'macho' ? <FaMars /> : <FaVenus />}
                                  <span className='capitalize'>{selectedPet.sex}</span>
                               </span>
                            </div>
@@ -385,19 +387,19 @@ const Home = () => {
                      <div className='mb-6'>
                         <h3 className='text-xl font-bold text-gray-900 mb-4'>Características</h3>
                         <div className='flex flex-wrap gap-2'>
-                           <span className='bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium border border-blue-200'>
-                              {selectedPet.specie === 'cão' ? '🐕 Cachorro' : '🐱 Gato'}
+                           <span className='bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium border border-blue-200 flex items-center gap-2'>
+                              {selectedPet.specie === 'cão' ? <><FaDog /> Cachorro</> : <><FaCat /> Gato</>}
                            </span>
-                           <span className='bg-purple-50 text-purple-700 px-4 py-2 rounded-full text-sm font-medium border border-purple-200'>
-                              {selectedPet.sex === 'macho' ? '♂️ Macho' : '♀️ Fêmea'}
+                           <span className='bg-purple-50 text-purple-700 px-4 py-2 rounded-full text-sm font-medium border border-purple-200 flex items-center gap-2'>
+                              {selectedPet.sex === 'macho' ? <><FaMars /> Macho</> : <><FaVenus /> Fêmea</>}
                            </span>
                            {selectedPet.vaccinated && (
-                              <span className='bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium border border-green-200'>
-                                 💉 Vacinado
+                              <span className='bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium border border-green-200 flex items-center gap-2'>
+                                 <FaSyringe /> Vacinado
                               </span>
                            )}
-                           <span className='bg-orange-50 text-orange-700 px-4 py-2 rounded-full text-sm font-medium border border-orange-200'>
-                              📍 {selectedPet.city}/{selectedPet.state}
+                           <span className='bg-orange-50 text-orange-700 px-4 py-2 rounded-full text-sm font-medium border border-orange-200 flex items-center gap-2'>
+                              <FaMapMarkerAlt /> {selectedPet.city}/{selectedPet.state}
                            </span>
                         </div>
                      </div>
@@ -409,7 +411,7 @@ const Home = () => {
                         className='w-full bg-focinhando-accent text-white py-3.5 rounded-xl font-semibold text-base hover:bg-focinhando-accent/90 transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2'
                         onClick={() => alert('Funcionalidade de contato será implementada em breve!')}
                      >
-                        <span>💌</span>
+                        <FaHeart />
                         <span>Entrar em contato para adotar</span>
                      </button>
                      <p className='text-center text-xs text-gray-500 mt-3'>

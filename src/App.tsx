@@ -7,6 +7,7 @@ import About from "./pages/About/About"
 import Blog from "./pages/Blog/Blog"
 import Contact from "./pages/Contact/Contact"
 import Profile from "./pages/Profile/Profile"
+import RegisterPet from "./pages/RegisterPet/RegisterPet"
 import Admin from "./pages/Admin/Admin"
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
@@ -55,6 +56,14 @@ const App = () => {
                   <div className='min-h-screen'>
                      <Header />
                      <Profile />
+                  </div>
+               </ProtectedRoute>
+            } />
+            <Route path="/register-pet" element={
+               <ProtectedRoute>
+                  <div className='min-h-screen'>
+                     <Header />
+                     <RegisterPet />
                   </div>
                </ProtectedRoute>
             } />

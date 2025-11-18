@@ -7,8 +7,8 @@ import { useApi } from '@/hooks/useApi'
 const Login = () => {
    const { apiBaseUrl } = useApi()
    const navigate = useNavigate()
-   const [email, setEmail] = useState('admin@email.com')
-   const [password, setPassword] = useState('admin123')
+   const [email, setEmail] = useState('marcus@gmail.com')
+   const [password, setPassword] = useState('24marcus@G20')
    const [error, setError] = useState('')
    const [loading, setLoading] = useState(false)
    const [success, setSuccess] = useState(false)

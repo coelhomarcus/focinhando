@@ -124,9 +124,6 @@ const PublicationForm = ({ apiBaseUrl }: PublicationFormProps) => {
                   placeholder='Escreva o conteúdo da publicação aqui...'
                   className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 focus:outline-none transition resize-none text-sm leading-relaxed'
                />
-               <p className='text-xs text-gray-500 mt-2'>
-                  💡 Use \n para quebras de linha no texto
-               </p>
             </div>
 
             {/* Status Messages */}
@@ -143,8 +140,8 @@ const PublicationForm = ({ apiBaseUrl }: PublicationFormProps) => {
                   type='submit'
                   disabled={loading}
                   className={`flex-1 px-6 py-3 rounded-lg font-medium text-sm transition-all ${loading
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                        : 'bg-focinhando-accent text-white hover:bg-gray-800 active:scale-[0.98]'
+                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                     : 'bg-focinhando-accent text-white hover:bg-gray-800 active:scale-[0.98]'
                      }`}
                >
                   {loading ? (

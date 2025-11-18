@@ -1,5 +1,7 @@
 import type { Contact } from '../types'
-import { LoadingSpinner, EmptyState } from './SharedComponents'
+import { LoadingSpinner } from './SharedComponents'
+import { FaEnvelope, FaPhone } from 'react-icons/fa'
+import { IoMailOpenOutline } from 'react-icons/io5'
 
 interface ContactsTabProps {
    contacts: Contact[]
@@ -21,11 +23,11 @@ const ContactsTab = ({ contacts, loading }: ContactsTabProps) => {
          {loading ? (
             <LoadingSpinner message='Carregando contatos...' />
          ) : contacts.length === 0 ? (
-            <EmptyState
-               icon='📭'
-               title='Nenhum contato encontrado'
-               description='As mensagens aparecerão aqui'
-            />
+            <div className='flex flex-col items-center justify-center py-12'>
+               <IoMailOpenOutline className='text-5xl text-gray-400 mb-3' />
+               <p className='text-lg font-medium text-gray-900 mb-1'>Nenhum contato encontrado</p>
+               <p className='text-sm text-gray-600'>As mensagens aparecerão aqui</p>
+            </div>
          ) : (
             <div className='divide-y divide-gray-200'>
                {contacts.map((contact) => (
@@ -40,12 +42,12 @@ const ContactsTab = ({ contacts, loading }: ContactsTabProps) => {
                            </div>
                            <div className='flex items-center gap-4 text-sm text-gray-600'>
                               <span className='flex items-center gap-1.5'>
-                                 <span>✉️</span>
+                                 <FaEnvelope />
                                  {contact.email}
                               </span>
                               {contact.phoneNumber && (
                                  <span className='flex items-center gap-1.5'>
-                                    <span>📱</span>
+                                    <FaPhone />
                                     {contact.phoneNumber}
                                  </span>
                               )}

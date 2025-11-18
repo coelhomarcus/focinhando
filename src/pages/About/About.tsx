@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router'
+import { FaHome, FaHeart, FaHandshake, FaDollarSign, FaComments, FaMobileAlt } from 'react-icons/fa'
 
 const About = () => {
    return (
@@ -27,7 +28,7 @@ const About = () => {
                <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
                   <div className='bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors'>
                      <div className='w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl mb-5'>
-                        🏠
+                        <FaHome className="text-blue-600" />
                      </div>
                      <h3 className='text-xl font-semibold text-gray-900 mb-3'>Nossa missão</h3>
                      <p className='text-gray-600 leading-relaxed'>
@@ -36,7 +37,7 @@ const About = () => {
                   </div>
                   <div className='bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors'>
                      <div className='w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-2xl mb-5'>
-                        ❤️
+                        <FaHeart className="text-red-600" />
                      </div>
                      <h3 className='text-xl font-semibold text-gray-900 mb-3'>Nossa visão</h3>
                      <p className='text-gray-600 leading-relaxed'>
@@ -45,7 +46,7 @@ const About = () => {
                   </div>
                   <div className='bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors'>
                      <div className='w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-2xl mb-5'>
-                        🤝
+                        <FaHandshake className="text-green-600" />
                      </div>
                      <h3 className='text-xl font-semibold text-gray-900 mb-3'>Nossos valores</h3>
                      <p className='text-gray-600 leading-relaxed'>
@@ -68,7 +69,7 @@ const About = () => {
                <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
                   <div className='bg-white p-8 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow'>
                      <div className='w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-2xl mb-5'>
-                        💰
+                        <FaDollarSign className="text-green-600" />
                      </div>
                      <h4 className='text-lg font-semibold text-gray-900 mb-3'>100% Gratuito</h4>
                      <p className='text-gray-600 leading-relaxed text-sm'>
@@ -77,7 +78,7 @@ const About = () => {
                   </div>
                   <div className='bg-white p-8 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow'>
                      <div className='w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl mb-5'>
-                        💬
+                        <FaComments className="text-blue-600" />
                      </div>
                      <h4 className='text-lg font-semibold text-gray-900 mb-3'>Contato Direto</h4>
                      <p className='text-gray-600 leading-relaxed text-sm'>
@@ -86,7 +87,7 @@ const About = () => {
                   </div>
                   <div className='bg-white p-8 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow'>
                      <div className='w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-2xl mb-5'>
-                        📱
+                        <FaMobileAlt className="text-purple-600" />
                      </div>
                      <h4 className='text-lg font-semibold text-gray-900 mb-3'>Interface Simples</h4>
                      <p className='text-gray-600 leading-relaxed text-sm'>

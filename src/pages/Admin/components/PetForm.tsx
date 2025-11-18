@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { PetForm as PetFormType } from '../types'
 import { StatusMessage } from './SharedComponents'
+import { FaSyringe } from 'react-icons/fa'
 
 interface PetFormProps {
    apiBaseUrl: string
@@ -138,8 +139,8 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                      required
                      className='w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 focus:outline-none transition text-sm bg-white'
                   >
-                     <option value='cão'>🐕 Cão</option>
-                     <option value='gato'>🐱 Gato</option>
+                     <option value='cão'>Cão</option>
+                     <option value='gato'>Gato</option>
                   </select>
                </div>
 
@@ -247,8 +248,8 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                         onChange={(e) => setPetForm({ ...petForm, vaccinated: e.target.checked })}
                         className='w-5 h-5 rounded border-gray-300 text-gray-900 focus:ring-2 focus:ring-gray-900/10'
                      />
-                     <span className='text-sm font-medium text-gray-700 group-hover:text-gray-900'>
-                        💉 Pet vacinado
+                     <span className='text-sm font-medium text-gray-700 group-hover:text-gray-900 flex items-center gap-2'>
+                        <FaSyringe /> Pet vacinado
                      </span>
                   </label>
                </div>
@@ -287,8 +288,8 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   type='submit'
                   disabled={loading}
                   className={`flex-1 px-6 py-3 rounded-lg font-medium text-sm transition-all ${loading
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                        : 'bg-focinhando-accent text-white hover:bg-gray-800 active:scale-[0.98]'
+                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                     : 'bg-focinhando-accent text-white hover:bg-gray-800 active:scale-[0.98]'
                      }`}
                >
                   {loading ? (

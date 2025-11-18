@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Banner4 from '@/assets/banners/banner4.webp'
 import { useApi } from '@/hooks/useApi'
+import { FaEnvelope, FaWhatsapp, FaMapMarkerAlt, FaClock, FaComments, FaCheckCircle, FaTimesCircle } from 'react-icons/fa'
 
 const Contact = () => {
    const { apiBaseUrl } = useApi()
@@ -83,7 +84,7 @@ const Contact = () => {
 
             <div className='container mx-auto px-6 text-center relative z-10'>
                <div className='inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6'>
-                  <span>💬</span>
+                  <FaComments />
                   <span>Entre em contato</span>
                </div>
                <h1 className='text-5xl md:text-6xl font-bold text-white mb-6'>
@@ -110,7 +111,7 @@ const Contact = () => {
                         {/* Email */}
                         <div className='flex items-start gap-4 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors'>
                            <div className='w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl shrink-0'>
-                              📧
+                              <FaEnvelope className="text-blue-600" />
                            </div>
                            <div>
                               <h3 className='text-lg font-semibold mb-1 text-gray-900'>Email</h3>
@@ -127,7 +128,7 @@ const Contact = () => {
                         {/* WhatsApp */}
                         <div className='flex items-start gap-4 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors'>
                            <div className='w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-2xl shrink-0'>
-                              📱
+                              <FaWhatsapp className="text-green-600" />
                            </div>
                            <div>
                               <h3 className='text-lg font-semibold mb-1 text-gray-900'>WhatsApp</h3>
@@ -146,7 +147,7 @@ const Contact = () => {
                         {/* Location */}
                         <div className='flex items-start gap-4 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors'>
                            <div className='w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-2xl shrink-0'>
-                              📍
+                              <FaMapMarkerAlt className="text-purple-600" />
                            </div>
                            <div>
                               <h3 className='text-lg font-semibold mb-1 text-gray-900'>Localização</h3>
@@ -158,7 +159,7 @@ const Contact = () => {
                         {/* Hours */}
                         <div className='flex items-start gap-4 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors'>
                            <div className='w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-2xl shrink-0'>
-                              🕒
+                              <FaClock className="text-orange-600" />
                            </div>
                            <div>
                               <h3 className='text-lg font-semibold mb-1 text-gray-900'>Horário de Atendimento</h3>
@@ -235,11 +236,11 @@ const Contact = () => {
                               className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-focinhando-accent/50 focus:outline-none transition bg-white text-sm'
                            >
                               <option value=''>Selecione um assunto</option>
-                              <option value='Quero adotar um pet'>🐾 Quero adotar um pet</option>
-                              <option value='Quero cadatrar um pet'>📝 Quero cadastrar um pet</option>
-                              <option value='Dúvidas gerais'>❓ Dúvidas gerais</option>
-                              <option value='Sugestões'>💡 Sugestões</option>
-                              <option value='Outro'>💬 Outro</option>
+                              <option value='Quero adotar um pet'>Quero adotar um pet</option>
+                              <option value='Quero cadatrar um pet'>Quero cadastrar um pet</option>
+                              <option value='Dúvidas gerais'>Dúvidas gerais</option>
+                              <option value='Sugestões'>Sugestões</option>
+                              <option value='Outro'>Outro</option>
                            </select>
                         </div>
 
@@ -264,13 +265,13 @@ const Contact = () => {
                         {/* Status Messages */}
                         {submitStatus === 'success' && (
                            <div className='bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-center gap-3'>
-                              <span className='text-xl'>✓</span>
+                              <FaCheckCircle className='text-xl' />
                               <span className='text-sm font-medium'>Mensagem enviada com sucesso! Responderemos em breve.</span>
                            </div>
                         )}
                         {submitStatus === 'error' && (
                            <div className='bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg flex items-center gap-3'>
-                              <span className='text-xl'>✕</span>
+                              <FaTimesCircle className='text-xl' />
                               <span className='text-sm font-medium'>Erro ao enviar. Tente novamente.</span>
                            </div>
                         )}
@@ -315,14 +316,14 @@ const Contact = () => {
                         rel='noopener noreferrer'
                         className='inline-flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors'
                      >
-                        <span>💬</span>
+                        <FaWhatsapp />
                         <span>Falar no WhatsApp</span>
                      </a>
                      <a
                         href='mailto:contato@focinhando.com'
                         className='inline-flex items-center gap-2 px-8 py-3 bg-white text-gray-900 border-2 border-gray-300 rounded-lg font-medium hover:border-gray-400 transition-colors'
                      >
-                        <span>📧</span>
+                        <FaEnvelope />
                         <span>Enviar Email</span>
                      </a>
                   </div>
