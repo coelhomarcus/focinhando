@@ -8,9 +8,11 @@ import InfoIcon from '@/assets/icons/info.svg'
 
 interface User {
    id: string
+   name: string
    email: string
    role: string
    createdAt: Date
+   updatedAt: Date
 }
 
 interface UserComplement {
@@ -54,7 +56,26 @@ const Profile = () => {
       try {
          setLoading(true)
 
-         // Load complement (which includes user data)
+         // Load user data from GET /user
+         const userResponse = await fetch(`${apiBaseUrl}/user`, {
+            headers: {
+               'Authorization': `Bearer ${token}`
+            }
+         })
+         const userData = await userResponse.json()
+
+         if (!userData.error && userData.user) {
+            setUser({
+               id: userData.user.id,
+               name: userData.user.name,
+               email: userData.user.email,
+               role: userData.user.role,
+               createdAt: new Date(userData.user.createdAt),
+               updatedAt: new Date(userData.user.updatedAt)
+            })
+         }
+
+         // Load complement (which includes additional user data)
          const complementResponse = await fetch(`${apiBaseUrl}/user/complement`, {
             headers: {
                'Authorization': `Bearer ${token}`
@@ -71,22 +92,6 @@ const Profile = () => {
                dateOfBirth: complementData.complement.dateOfBirth
                   ? new Date(complementData.complement.dateOfBirth).toISOString().split('T')[0]
                   : ''
-            })
-
-            // Set basic user info from complement's createdAt
-            setUser({
-               id: '',
-               email: '',
-               role: 'member',
-               createdAt: complementData.complement.createdAt
-            })
-         } else {
-            // If no complement, just set a default user
-            setUser({
-               id: '',
-               email: '',
-               role: 'member',
-               createdAt: new Date()
             })
          }
       } catch (error) {
@@ -206,14 +211,17 @@ const Profile = () => {
                      <div className='flex flex-col md:flex-row items-center md:items-start gap-6 mb-8 pb-8 border-b-2 border-focinhando-border'>
                         <div className='w-32 h-32 rounded-full overflow-hidden border-4 border-focinhando-accent shrink-0'>
                            <img
-                              src={complement?.img || `https://ui-avatars.com/api/?name=${complement?.user.name}&background=ee6551&color=fff&size=128`}
+                              src={complement?.img || `https://ui-avatars.com/api/?name=${user?.name || 'User'}&background=ee6551&color=fff&size=128`}
                               alt='Profile'
                               className='w-full h-full object-cover'
                            />
                         </div>
                         <div className='text-center md:text-left'>
-                           <h2 className='text-3xl font-bold mb-2'>{complement?.user.name}</h2>
+                           <h2 className='text-3xl font-bold mb-2'>{user?.name || 'Usuário'}</h2>
                            <p className='text-lg text-focinhando-accent mb-2'>
+                              {user?.role === 'admin' ? 'Administrador' : 'Membro'}
+                           </p>
+                           <p className='text-focinhando-text'>
                               {complement ? `${complement.city} - ${complement.state}` : 'Localização não informada'}
                            </p>
                            <p className='text-focinhando-text'>

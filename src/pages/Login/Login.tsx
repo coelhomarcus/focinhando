@@ -67,59 +67,113 @@ const Login = () => {
    }
 
    return (
-      <div className='grid grid-cols-2 min-h-screen'>
-         <div className='bg-focinhando-white p-10 flex flex-col'>
-            <img src={Logo} alt="Logo" className='mb-auto max-w-[200px]' />
+      <div className='grid lg:grid-cols-2 min-h-screen'>
+         {/* Formulário */}
+         <div className='bg-white flex items-center justify-center p-8 lg:p-12'>
+            <div className='w-full max-w-md'>
+               {/* Logo */}
+               <div className='mb-8'>
+                  <img src={Logo} alt="Logo" className='h-12 w-auto' />
+               </div>
 
-            <div className='flex flex-col justify-center flex-1'>
-               <h1 className='text-5xl font-bold mb-2'>Bem-vindo de volta!</h1>
-               <p className='text-focinhando-gray my-10'>Por favor, insira suas credenciais para fazer login.</p>
+               {/* Heading */}
+               <div className='mb-8'>
+                  <h1 className='text-3xl font-bold text-gray-900 mb-2'>
+                     Bem-vindo de volta!
+                  </h1>
+                  <p className='text-gray-600'>
+                     Entre com suas credenciais para acessar sua conta
+                  </p>
+               </div>
 
-               <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
-                  {error && (
-                     <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded'>
-                        {error}
-                     </div>
-                  )}
+               {/* Mensagens de Erro/Sucesso */}
+               {error && (
+                  <div className='mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-r'>
+                     <p className='text-sm font-medium'>{error}</p>
+                  </div>
+               )}
 
-                  {success && (
-                     <div className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded'>
-                        Login realizado com sucesso! Redirecionando...
-                     </div>
-                  )}
+               {success && (
+                  <div className='mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-r'>
+                     <p className='text-sm font-medium'>Login realizado com sucesso! Redirecionando...</p>
+                  </div>
+               )}
 
-                  <input
-                     type="email"
-                     placeholder='Digite seu e-mail'
-                     value={email}
-                     onChange={(e) => setEmail(e.target.value)}
-                     disabled={loading}
-                     className='border-none rounded-md shadow-[0_0_10px_rgba(0,0,0,0.1)] focus:outline-none focus:shadow-[0_0_5px_#ee6551] p-3 disabled:opacity-50'
-                  />
-                  <input
-                     type="password"
-                     placeholder='Digite sua senha'
-                     value={password}
-                     onChange={(e) => setPassword(e.target.value)}
-                     disabled={loading}
-                     className='border-none rounded-md shadow-[0_0_10px_rgba(0,0,0,0.1)] focus:outline-none focus:shadow-[0_0_5px_#ee6551] p-3 disabled:opacity-50'
-                  />
+               {/* Formulário */}
+               <form onSubmit={handleSubmit} className='space-y-6'>
+                  <div>
+                     <label htmlFor="email" className='block text-sm font-medium text-gray-700 mb-2'>
+                        E-mail
+                     </label>
+                     <input
+                        id="email"
+                        type="email"
+                        placeholder='seu@email.com'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        disabled={loading}
+                        className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-focinhando-accent focus:border-transparent transition duration-200 disabled:opacity-50 disabled:bg-gray-50'
+                        autoComplete='email'
+                     />
+                  </div>
+
+                  <div>
+                     <label htmlFor="password" className='block text-sm font-medium text-gray-700 mb-2'>
+                        Senha
+                     </label>
+                     <input
+                        id="password"
+                        type="password"
+                        placeholder='••••••••'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        disabled={loading}
+                        className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-focinhando-accent focus:border-transparent transition duration-200 disabled:opacity-50 disabled:bg-gray-50'
+                        autoComplete='current-password'
+                     />
+                  </div>
+
                   <button
                      type="submit"
                      disabled={loading}
-                     className='rounded-md bg-focinhando-accent text-focinhando-white p-3 cursor-pointer hover:bg-focinhando-accent-dark transition disabled:opacity-50 disabled:cursor-not-allowed'
+                     className='w-full py-3 px-4 bg-focinhando-accent text-white font-medium rounded-lg hover:bg-focinhando-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-focinhando-accent transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm'
                   >
-                     {loading ? 'Entrando...' : 'Login'}
+                     {loading ? (
+                        <span className='flex items-center justify-center'>
+                           <svg className='animate-spin -ml-1 mr-3 h-5 w-5 text-white' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
+                              <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
+                              <path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+                           </svg>
+                           Entrando...
+                        </span>
+                     ) : 'Entrar'}
                   </button>
-                  <div className='text-center'>
-                     Não tem uma conta? <Link to="/register" className='text-focinhando-accent hover:text-focinhando-accent-dark underline'>Registre-se</Link>
-                  </div>
                </form>
+
+               {/* Link para Registro */}
+               <p className='mt-8 text-center text-sm text-gray-600'>
+                  Não tem uma conta?{' '}
+                  <Link to="/register" className='font-medium text-focinhando-accent hover:text-focinhando-accent-dark transition'>
+                     Criar conta gratuita
+                  </Link>
+               </p>
             </div>
          </div>
 
-         {/* Background */}
-         <div className='bg-[url(./assets/login/Login.png)] bg-cover bg-center'>
+         {/* Background com Overlay */}
+         <div className='hidden lg:block relative bg-gray-900'>
+            <div className='absolute inset-0 bg-[url(./assets/login/Login.png)] bg-cover bg-center opacity-75'></div>
+            <div className='absolute inset-0 bg-linear-to-br from-focinhando-accent/20 to-transparent'></div>
+            <div className='relative h-full flex items-center justify-center p-12 text-white'>
+               <div className='max-w-lg'>
+                  <h2 className='text-4xl font-bold mb-4'>
+                     Conecte-se com quem ama pets!
+                  </h2>
+                  <p className='text-lg opacity-90'>
+                     Encontre o companheiro perfeito para sua família e faça parte da nossa comunidade.
+                  </p>
+               </div>
+            </div>
          </div>
       </div>
    )
