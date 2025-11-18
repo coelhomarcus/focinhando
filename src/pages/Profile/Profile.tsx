@@ -45,6 +45,13 @@ const Profile = () => {
                'Authorization': `Bearer ${token}`
             }
          })
+
+         if (userResponse.status === 401 || userResponse.status === 403) {
+            localStorage.removeItem('authToken');
+            navigate('/login');
+            return;
+         }
+
          const userData = await userResponse.json()
 
          if (!userData.error && userData.user) {

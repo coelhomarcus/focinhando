@@ -37,6 +37,13 @@ const Header = () => {
                   'Authorization': `Bearer ${token}`
                }
             })
+
+            if (response.status === 401 || response.status === 403) {
+               localStorage.removeItem('authToken');
+               navigate('/login');
+               return;
+            }
+
             const data = await response.json()
             if (!data.error && data.user) {
                setUser(data.user)
@@ -58,7 +65,7 @@ const Header = () => {
       }
 
       loadUserData()
-   }, [apiBaseUrl])
+   }, [apiBaseUrl, navigate])
 
    const handleLogout = () => {
       localStorage.removeItem('authToken')

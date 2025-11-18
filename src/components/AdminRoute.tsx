@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router'
+import { Navigate, useNavigate } from 'react-router'
 import type { ReactNode } from 'react'
 import { useState, useEffect } from 'react'
 import { useApi } from '@/hooks/useApi'
@@ -18,6 +18,7 @@ interface User {
 
 const AdminRoute = ({ children }: AdminRouteProps) => {
    const { apiBaseUrl } = useApi()
+   const navigate = useNavigate();
    const token = localStorage.getItem('authToken')
    const [user, setUser] = useState<User | null>(null)
    const [loading, setLoading] = useState(true)
@@ -35,6 +36,12 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
                   'Authorization': `Bearer ${token}`
                }
             })
+            if (response.status === 401 || response.status === 403) {
+               localStorage.removeItem('authToken');
+               navigate('/login');
+               return;
+            }
+
             const data = await response.json()
             if (!data.error && data.user) {
                setUser(data.user)
@@ -47,7 +54,7 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
       }
 
       loadUser()
-   }, [apiBaseUrl, token])
+   }, [apiBaseUrl, token, navigate])
 
    if (loading) {
       // Mostra loading enquanto verifica
