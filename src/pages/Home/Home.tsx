@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useApi } from '@/hooks/useApi'
 import type { Pet, FilterType } from './types'
-import { HeroSection, FilterBar, PetGrid, PetModal } from './components'
+import HeroSection from './components/HeroSection'
+import FilterBar from './components/FilterBar'
+import PetGrid from './components/PetGrid'
+import PetModal from './components/PetModal'
 
 const Home = () => {
    const { apiBaseUrl } = useApi()

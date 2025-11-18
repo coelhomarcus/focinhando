@@ -2,13 +2,11 @@ import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router'
 import { useApi } from '@/hooks/useApi'
 import type { User, UserComplement, EditData } from './types'
-import {
-   LoadingState,
-   HeroSection,
-   ProfileHeader,
-   PersonalInfoCard,
-   QuickActions
-} from './components'
+
+import ProfileHeader from './components/ProfileHeader'
+import LoadingState from './components/LoadingState'
+import PersonalInfoCard from './components/PersonalInfoCard'
+import QuickActions from './components/QuickActions'
 
 const Profile = () => {
    const { apiBaseUrl } = useApi()
@@ -37,7 +35,6 @@ const Profile = () => {
       try {
          setLoading(true)
 
-         // Load user data from GET /user
          const userResponse = await fetch(`${apiBaseUrl}/user`, {
             headers: {
                'Authorization': `Bearer ${token}`
@@ -56,7 +53,6 @@ const Profile = () => {
             })
          }
 
-         // Load complement (which includes additional user data)
          const complementResponse = await fetch(`${apiBaseUrl}/user/complement`, {
             headers: {
                'Authorization': `Bearer ${token}`
@@ -94,14 +90,12 @@ const Profile = () => {
       setError('')
       setSaveSuccess(false)
 
-      // Validate phone number format
       const phoneRegex = /^\(?\d{2}\)?[\s-]?\d{4,5}-?\d{4}$/
       if (editData.phoneNumber && !phoneRegex.test(editData.phoneNumber)) {
          setError('Formato de telefone inválido. Use: (00) 00000-0000')
          return
       }
 
-      // Validate required fields
       if (!editData.city || !editData.state) {
          setError('Cidade e Estado são obrigatórios')
          return
@@ -157,8 +151,6 @@ const Profile = () => {
 
    return (
       <div className='min-h-screen bg-gray-50'>
-         <HeroSection userName={user?.name} />
-
          <section className='py-6 sm:py-8 md:py-12'>
             <div className='container mx-auto px-4 sm:px-6 max-w-5xl'>
                <div className='space-y-4 sm:space-y-6'>

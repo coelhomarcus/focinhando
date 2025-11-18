@@ -36,21 +36,7 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
                      className='w-full h-full object-cover'
                   />
 
-                  {/* Gradient overlay */}
                   <div className='absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent'></div>
-
-                  {/* Badges flutuantes */}
-                  <div className='absolute top-4 left-4 flex gap-2'>
-                     <span className='bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-semibold text-gray-800 shadow-lg flex items-center gap-1.5'>
-                        {pet.specie === 'cão' ? <FaDog /> : <FaCat />}
-                        <span className='capitalize'>{pet.specie}</span>
-                     </span>
-                     {pet.vaccinated && (
-                        <span className='bg-green-500/95 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-lg flex items-center gap-1.5'>
-                           <span>Vacinado</span>
-                        </span>
-                     )}
-                  </div>
 
                   {/* Info sobre a imagem */}
                   <div className='absolute bottom-0 left-0 right-0 p-6'>
@@ -59,10 +45,6 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
                         <span className='bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-sm font-medium text-white flex items-center gap-2'>
                            <FaBirthdayCake />
                            <span>{calculateAge(pet.age)}</span>
-                        </span>
-                        <span className='bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-sm font-medium text-white flex items-center gap-2'>
-                           <FaMapMarkerAlt />
-                           <span>{pet.city} - {pet.state}</span>
                         </span>
                         <span className='bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-sm font-medium text-white flex items-center gap-2'>
                            {pet.sex === 'macho' ? <FaMars /> : <FaVenus />}
@@ -112,9 +94,6 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
                   <div className='flex flex-wrap gap-2'>
                      <span className='bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium border border-blue-200 flex items-center gap-2'>
                         {pet.specie === 'cão' ? <><FaDog /> Cachorro</> : <><FaCat /> Gato</>}
-                     </span>
-                     <span className='bg-purple-50 text-purple-700 px-4 py-2 rounded-full text-sm font-medium border border-purple-200 flex items-center gap-2'>
-                        {pet.sex === 'macho' ? <><FaMars /> Macho</> : <><FaVenus /> Fêmea</>}
                      </span>
                      {pet.vaccinated && (
                         <span className='bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium border border-green-200 flex items-center gap-2'>

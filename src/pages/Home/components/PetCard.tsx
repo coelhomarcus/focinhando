@@ -1,4 +1,4 @@
-import { FaDog, FaCat, FaBirthdayCake, FaMapMarkerAlt, FaSyringe, FaMars, FaVenus } from 'react-icons/fa'
+import { FaDog, FaCat, FaBirthdayCake, FaMapMarkerAlt, FaMars, FaVenus } from 'react-icons/fa'
 import type { Pet } from '../types'
 import { calculateAge } from '../utils'
 
@@ -24,13 +24,12 @@ const PetCard = ({ pet, onClick }: PetCardProps) => {
             {/* Badge de espécie */}
             <div className='absolute top-3 left-3 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-gray-700 shadow-md flex items-center gap-1'>
                {pet.specie === 'cão' ? <FaDog /> : <FaCat />}
-               <span className='capitalize'>{pet.specie}</span>
+               <span className='capitalize'>{pet.specie === "cão" ? "Cachorro" : "Gato"}</span>
             </div>
 
             {/* Badge de vacinação */}
             {pet.vaccinated && (
                <div className='absolute top-3 right-3 bg-green-500/95 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-md flex items-center gap-1'>
-                  <FaSyringe />
                   <span>Vacinado</span>
                </div>
             )}

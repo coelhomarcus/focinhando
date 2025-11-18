@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Banner4 from '@/assets/banners/banner4.webp'
 import { useApi } from '@/hooks/useApi'
 import { FaEnvelope, FaWhatsapp, FaMapMarkerAlt, FaClock, FaComments, FaCheckCircle, FaTimesCircle } from 'react-icons/fa'
 
@@ -74,10 +73,7 @@ const Contact = () => {
       <div className='min-h-screen bg-white'>
          {/* Hero Section */}
          <section
-            className='relative bg-cover bg-center py-20 border-b border-gray-200'
-            style={{
-               backgroundImage: `url(${Banner4})`
-            }}
+            className='relative bg-[url(./assets/banners/banner5.png)] bg-cover bg-center py-20 border-b border-gray-200'
          >
             {/* Overlay preto */}
             <div className='absolute inset-0 bg-black/60'></div>
@@ -88,10 +84,10 @@ const Contact = () => {
                   <span>Entre em contato</span>
                </div>
                <h1 className='text-5xl md:text-6xl font-bold text-white mb-6'>
-                  Estamos aqui para ajudar
+                  Estamos aqui para ajudar!
                </h1>
                <p className='text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed'>
-                  Dúvidas sobre adoção? Quer cadastrar um pet? Nossa equipe está pronta para te atender
+                  Dúvidas sobre adoção? Quer cadastrar um pet?<br /> Nossa equipe está pronta para te atender
                </p>
             </div>
          </section>

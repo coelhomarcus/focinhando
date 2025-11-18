@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router'
 import { useApi } from '@/hooks/useApi'
 import { FaDog } from 'react-icons/fa'
 import type { PetForm, SubmitStatus } from './types'
-import {
-   LoadingState,
-   HeroSection,
-   IncompleteProfileWarning,
-   PetFormFields,
-   StatusMessages,
-   InfoCard
-} from './components'
+
+import LoadingState from './components/LoadingState'
+import HeroSection from './components/HeroSection'
+import IncompleteProfileWarning from './components/IncompleteProfileWarning'
+import PetFormFields from './components/PetFormFields'
+import StatusMessages from './components/StatusMessages'
+import InfoCard from './components/InfoCard'
 
 const RegisterPet = () => {
    const { apiBaseUrl } = useApi()

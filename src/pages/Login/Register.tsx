@@ -72,7 +72,6 @@ const Register = () => {
 
    return (
       <div className='grid lg:grid-cols-2 min-h-screen'>
-         {/* Background com Overlay - Aparece primeiro no mobile */}
          <div className='hidden lg:block relative bg-gray-900 order-2 lg:order-1'>
             <div className='absolute inset-0 bg-[url(./assets/login/Register.jpg)] bg-cover bg-center opacity-75'></div>
             <div className='absolute inset-0 bg-linear-to-br from-focinhando-accent/20 to-transparent'></div>

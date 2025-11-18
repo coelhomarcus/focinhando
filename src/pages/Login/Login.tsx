@@ -160,7 +160,6 @@ const Login = () => {
             </div>
          </div>
 
-         {/* Background com Overlay */}
          <div className='hidden lg:block relative bg-gray-900'>
             <div className='absolute inset-0 bg-[url(./assets/login/loginImage.webp)] bg-cover bg-center opacity-75'></div>
             <div className='absolute inset-0 bg-linear-to-br from-focinhando-accent/50 to-transparent'></div>
