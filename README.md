@@ -1,4 +1,4 @@
-![Logo Focinhando](./assets/logo.svg)
+![Logo Focinhando](./src/assets/logo.svg)
 
 ## Sobre o Projeto
 
