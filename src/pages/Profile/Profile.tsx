@@ -197,6 +197,10 @@ const Profile = () => {
          setEditing(false)
          loadUserData()
 
+         if (selectedFile) {
+            window.location.reload()
+         }
+
          setTimeout(() => setSaveSuccess(false), 3000)
       } catch (error) {
          console.error('❌ [SAVE] Erro ao salvar:', error)

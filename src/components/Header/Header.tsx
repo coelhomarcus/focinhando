@@ -31,7 +31,6 @@ const Header = () => {
          if (!token) return
 
          try {
-            // Load user basic data
             const response = await fetch(`${apiBaseUrl}/user`, {
                headers: {
                   'Authorization': `Bearer ${token}`
@@ -49,7 +48,6 @@ const Header = () => {
                setUser(data.user)
             }
 
-            // Load user complement (includes profile image)
             const complementResponse = await fetch(`${apiBaseUrl}/user/complement`, {
                headers: {
                   'Authorization': `Bearer ${token}`
