@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router'
 import { useApi } from '@/hooks/useApi'
-import { useUser } from '@/hooks/useUser'
 import type { User, UserComplement, EditData } from './types'
 import {
    LoadingState,
@@ -14,7 +13,6 @@ import {
 const Profile = () => {
    const { apiBaseUrl } = useApi()
    const navigate = useNavigate()
-   const { refreshUserData } = useUser()
    const [user, setUser] = useState<User | null>(null)
    const [complement, setComplement] = useState<UserComplement | null>(null)
    const [loading, setLoading] = useState(true)
@@ -140,8 +138,6 @@ const Profile = () => {
          setSaveSuccess(true)
          setEditing(false)
          loadUserData()
-         // Atualiza o contexto global do usuário para refletir no Header
-         refreshUserData()
 
          setTimeout(() => setSaveSuccess(false), 3000)
       } catch (error) {
