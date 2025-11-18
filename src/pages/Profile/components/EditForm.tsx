@@ -1,4 +1,5 @@
-import { FaUser, FaPhone, FaMapMarkerAlt, FaBirthdayCake, FaTimes, FaCheck, FaSave } from 'react-icons/fa'
+import { useState } from 'react'
+import { FaUser, FaPhone, FaMapMarkerAlt, FaBirthdayCake, FaTimes, FaCheck, FaSave, FaUpload, FaImage } from 'react-icons/fa'
 import type { EditData, User } from '../types'
 
 interface EditFormProps {
@@ -8,33 +9,81 @@ interface EditFormProps {
    saveSuccess: boolean
    user: User | null
    onSave: () => void
+   onFileSelect?: (file: File) => void
+   uploading?: boolean
 }
 
-const EditForm = ({ editData, setEditData, error, saveSuccess, user, onSave }: EditFormProps) => {
+const EditForm = ({ editData, setEditData, error, saveSuccess, user, onSave, onFileSelect, uploading }: EditFormProps) => {
+   const [selectedFileName, setSelectedFileName] = useState<string>('')
+   const [selectedFileObj, setSelectedFileObj] = useState<File | null>(null)
+
+   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0]
+
+      if (file) {
+         setSelectedFileName(file.name)
+         setSelectedFileObj(file)
+         if (onFileSelect) {
+            onFileSelect(file)
+         }
+      }
+   }
+
    return (
       <div className='space-y-4 sm:space-y-5'>
-         {/* Image URL Input */}
+         {/* Image Upload Section */}
          <div>
             <label className='flex items-center gap-2 text-xs sm:text-sm font-semibold text-gray-700 mb-2'>
                <FaUser className='text-focinhando-accent' />
-               URL da Imagem de Perfil
+               Imagem de Perfil
             </label>
-            <input
-               type='url'
-               value={editData.img}
-               onChange={(e) => setEditData({ ...editData, img: e.target.value })}
-               className='w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-focinhando-accent/50 focus:border-focinhando-accent outline-none transition'
-               placeholder='https://exemplo.com/sua-foto.jpg'
-            />
-            <p className='text-xs text-gray-500 mt-1.5'>
-               Cole a URL de uma imagem pública. Deixe em branco para usar o avatar padrão.
-            </p>
+
+            {/* File Input */}
+            <div className='space-y-3'>
+               <label className='w-full cursor-pointer'>
+                  <div className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 rounded-lg transition flex items-center justify-center gap-2 ${uploading
+                     ? 'border-focinhando-accent bg-focinhando-accent/5 cursor-wait'
+                     : 'border-gray-300 bg-gray-50 hover:border-focinhando-accent hover:bg-gray-100'
+                     }`}>
+                     {uploading ? (
+                        <>
+                           <FaUpload className='text-focinhando-accent animate-pulse' />
+                           <span className='text-focinhando-accent font-semibold'>
+                              Fazendo upload... {selectedFileName}
+                           </span>
+                        </>
+                     ) : (
+                        <>
+                           <FaImage className='text-focinhando-accent' />
+                           <span className='text-gray-700'>
+                              {selectedFileName || 'Escolher arquivo'}
+                           </span>
+                        </>
+                     )}
+                  </div>
+                  <input
+                     type='file'
+                     accept='image/*'
+                     onChange={handleFileChange}
+                     disabled={uploading}
+                     className='hidden'
+                  />
+               </label>
+
+               <p className='text-xs text-gray-500'>
+                  {uploading
+                     ? 'Aguarde... fazendo upload da imagem para o Cloudinary'
+                     : 'Selecione uma imagem do seu computador. O upload será feito automaticamente.'
+                  }
+               </p>
+            </div>
+
             {/* Preview da imagem */}
-            {editData.img && (
+            {(selectedFileObj || editData.img) && (
                <div className='mt-3 flex items-center gap-3'>
                   <div className='w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 border-focinhando-accent/20'>
                      <img
-                        src={editData.img}
+                        src={selectedFileObj ? URL.createObjectURL(selectedFileObj) : editData.img}
                         alt='Preview'
                         className='w-full h-full object-cover'
                         onError={(e) => {

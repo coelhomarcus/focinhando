@@ -8,6 +8,9 @@ import LoadingState from './components/LoadingState'
 import PersonalInfoCard from './components/PersonalInfoCard'
 import QuickActions from './components/QuickActions'
 
+const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+
 const Profile = () => {
    const { apiBaseUrl } = useApi()
    const navigate = useNavigate()
@@ -24,6 +27,8 @@ const Profile = () => {
    })
    const [saveSuccess, setSaveSuccess] = useState(false)
    const [error, setError] = useState('')
+   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+   const [uploading, setUploading] = useState(false)
 
    const loadUserData = useCallback(async () => {
       const token = localStorage.getItem('authToken')
@@ -83,7 +88,48 @@ const Profile = () => {
       loadUserData()
    }, [loadUserData])
 
+   const uploadToCloudinary = async (file: File): Promise<string | null> => {
+      setUploading(true)
+      setError('')
+
+      try {
+         const formData = new FormData()
+         formData.append('file', file)
+         formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+
+         const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+            {
+               method: 'POST',
+               body: formData
+            }
+         )
+
+         const data = await response.json()
+
+         if (data.secure_url) {
+            setEditData(prev => ({ ...prev, img: data.secure_url }))
+            return data.secure_url
+         } else {
+            console.error('❌ [UPLOAD] Nenhuma URL retornada. Data completo:', data)
+            setError('Erro ao fazer upload da imagem')
+            return null
+         }
+      } catch (error) {
+         console.error('❌ [UPLOAD] Erro no upload:', error)
+         setError('Erro ao fazer upload da imagem')
+         return null
+      } finally {
+         setUploading(false)
+      }
+   }
+
+   const handleFileSelect = async (file: File) => {
+      setSelectedFile(file)
+   }
+
    const handleSave = async () => {
+
       const token = localStorage.getItem('authToken')
       if (!token) return
 
@@ -92,6 +138,7 @@ const Profile = () => {
 
       const phoneRegex = /^\(?\d{2}\)?[\s-]?\d{4,5}-?\d{4}$/
       if (editData.phoneNumber && !phoneRegex.test(editData.phoneNumber)) {
+         console.warn('⚠️ [SAVE] Telefone inválido:', editData.phoneNumber)
          setError('Formato de telefone inválido. Use: (00) 00000-0000')
          return
       }
@@ -101,9 +148,18 @@ const Profile = () => {
          return
       }
 
+      let imageUrl = editData.img
+      if (selectedFile) {
+         imageUrl = await uploadToCloudinary(selectedFile) || ''
+         if (!imageUrl) {
+            setError('Erro ao fazer upload da imagem')
+            return
+         }
+      }
+
       try {
          const dataToSend = {
-            img: editData.img || `https://ui-avatars.com/api/?name=${user?.name || 'User'}&background=ee6551&color=fff&size=128`,
+            img: imageUrl || `https://ui-avatars.com/api/?name=${user?.name || 'User'}&background=ee6551&color=fff&size=128`,
             phoneNumber: editData.phoneNumber,
             city: editData.city,
             state: editData.state.toUpperCase(),
@@ -125,6 +181,7 @@ const Profile = () => {
          const data = await response.json()
 
          if (data.error) {
+            console.error('❌ [SAVE] Erro retornado da API:', data.error)
             setError(data.error)
             return
          }
@@ -135,7 +192,7 @@ const Profile = () => {
 
          setTimeout(() => setSaveSuccess(false), 3000)
       } catch (error) {
-         console.error('Erro ao salvar:', error)
+         console.error('❌ [SAVE] Erro ao salvar:', error)
          setError('Erro ao salvar dados')
       }
    }
@@ -166,6 +223,8 @@ const Profile = () => {
                      error={error}
                      saveSuccess={saveSuccess}
                      onSave={handleSave}
+                     onFileSelect={handleFileSelect}
+                     uploading={uploading}
                   />
 
                   <QuickActions onNavigate={navigate} onLogout={handleLogout} />

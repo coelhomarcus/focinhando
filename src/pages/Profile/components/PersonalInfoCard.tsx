@@ -13,6 +13,8 @@ interface PersonalInfoCardProps {
    error: string
    saveSuccess: boolean
    onSave: () => void
+   onFileSelect?: (file: File) => void
+   uploading?: boolean
 }
 
 const PersonalInfoCard = ({
@@ -24,7 +26,9 @@ const PersonalInfoCard = ({
    setEditData,
    error,
    saveSuccess,
-   onSave
+   onSave,
+   onFileSelect,
+   uploading
 }: PersonalInfoCardProps) => {
    return (
       <div className='bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 md:p-8'>
@@ -49,6 +53,8 @@ const PersonalInfoCard = ({
                saveSuccess={saveSuccess}
                user={user}
                onSave={onSave}
+               onFileSelect={onFileSelect}
+               uploading={uploading}
             />
          ) : (
             <InfoDisplay user={user} complement={complement} />

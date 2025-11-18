@@ -4,9 +4,12 @@ import type { PetForm } from '../types'
 interface PetFormFieldsProps {
    petForm: PetForm
    setPetForm: (form: PetForm) => void
+   onFileSelect?: (file: File) => void
+   uploading?: boolean
+   selectedFileObj?: File | null
 }
 
-const PetFormFields = ({ petForm, setPetForm }: PetFormFieldsProps) => {
+const PetFormFields = ({ petForm, setPetForm, onFileSelect, uploading, selectedFileObj }: PetFormFieldsProps) => {
    return (
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6'>
          {/* Nome */}
@@ -24,19 +27,52 @@ const PetFormFields = ({ petForm, setPetForm }: PetFormFieldsProps) => {
             />
          </div>
 
-         {/* Imagem URL */}
+         {/* Imagem Upload */}
          <div>
             <label className='block text-xs sm:text-sm font-semibold text-gray-700 mb-2'>
-               URL da Imagem <span className='text-red-500'>*</span>
+               Imagem do Pet <span className='text-red-500'>*</span>
             </label>
-            <input
-               type='url'
-               value={petForm.img}
-               onChange={(e) => setPetForm({ ...petForm, img: e.target.value })}
-               required
-               placeholder='https://exemplo.com/foto.jpg'
-               className='w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg border border-gray-300 focus:border-focinhando-accent focus:ring-2 focus:ring-focinhando-accent/50 outline-none transition'
-            />
+            <label className='w-full cursor-pointer'>
+               <div className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 rounded-lg transition flex items-center justify-center gap-2 ${uploading
+                  ? 'border-focinhando-accent bg-focinhando-accent/5 cursor-wait'
+                  : 'border-gray-300 bg-gray-50 hover:border-focinhando-accent hover:bg-gray-100'
+                  }`}>
+                  {uploading ? (
+                     <>
+                        <span className='text-focinhando-accent font-semibold'>Enviando imagem...</span>
+                     </>
+                  ) : (
+                     <>
+                        <span className='text-gray-700'>
+                           {selectedFileObj ? selectedFileObj.name : 'Escolher arquivo'}
+                        </span>
+                     </>
+                  )}
+               </div>
+               <input
+                  type='file'
+                  accept='image/*'
+                  onChange={e => {
+                     const file = e.target.files?.[0]
+                     if (file && onFileSelect) onFileSelect(file)
+                  }}
+                  disabled={uploading}
+                  className='hidden'
+               />
+            </label>
+            {/* Preview da imagem */}
+            {(selectedFileObj || petForm.img) && (
+               <div className='mt-3 flex items-center gap-3'>
+                  <div className='w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 border-focinhando-accent/20'>
+                     <img
+                        src={selectedFileObj ? URL.createObjectURL(selectedFileObj) : petForm.img}
+                        alt='Preview'
+                        className='w-full h-full object-cover'
+                     />
+                  </div>
+                  <span className='text-xs text-gray-600'>Preview da imagem</span>
+               </div>
+            )}
          </div>
 
          {/* Data de Nascimento */}

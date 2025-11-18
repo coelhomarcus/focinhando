@@ -32,6 +32,41 @@ const RegisterPet = () => {
       race: '',
       weight: 0
    })
+   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+   const [uploading, setUploading] = useState(false)
+   // Cloudinary config (use env vars se possível)
+   const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+   const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+
+   const uploadToCloudinary = async (file: File): Promise<string | null> => {
+      setUploading(true)
+      setErrorMessage('')
+      try {
+         const formData = new FormData()
+         formData.append('file', file)
+         formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+         const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+            {
+               method: 'POST',
+               body: formData
+            }
+         )
+         const data = await response.json()
+         if (data.secure_url) {
+            setPetForm(prev => ({ ...prev, img: data.secure_url }))
+            return data.secure_url
+         } else {
+            setErrorMessage('Erro ao fazer upload da imagem')
+            return null
+         }
+      } catch (error) {
+         setErrorMessage('Erro ao fazer upload da imagem ' + error)
+         return null
+      } finally {
+         setUploading(false)
+      }
+   }
 
    useEffect(() => {
       const checkUserComplement = async () => {
@@ -71,6 +106,15 @@ const RegisterPet = () => {
       setSubmitStatus('idle')
       setErrorMessage('')
 
+      let imageUrl = petForm.img
+      if (selectedFile) {
+         imageUrl = await uploadToCloudinary(selectedFile) || ''
+         if (!imageUrl) {
+            setLoading(false)
+            return
+         }
+      }
+
       try {
          const token = localStorage.getItem('authToken')
          const response = await fetch(`${apiBaseUrl}/pets/user`, {
@@ -81,6 +125,7 @@ const RegisterPet = () => {
             },
             body: JSON.stringify({
                ...petForm,
+               img: imageUrl,
                weight: Number(petForm.weight)
             })
          })
@@ -141,7 +186,13 @@ const RegisterPet = () => {
                   </div>
 
                   <form onSubmit={handleSubmit} className='p-6 sm:p-8'>
-                     <PetFormFields petForm={petForm} setPetForm={setPetForm} />
+                     <PetFormFields
+                        petForm={petForm}
+                        setPetForm={setPetForm}
+                        onFileSelect={setSelectedFile}
+                        uploading={uploading}
+                        selectedFileObj={selectedFile}
+                     />
 
                      {/* Sobre o Pet */}
                      <div className='mt-4 sm:mt-6'>

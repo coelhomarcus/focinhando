@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { FaEdit, FaTrash, FaCalendarAlt, FaSpinner, FaTimes } from 'react-icons/fa'
+import { FaEdit, FaTrash, FaCalendarAlt, FaSpinner, FaTimes, FaUpload } from 'react-icons/fa'
 
 interface Publication {
    id: string
@@ -20,6 +20,39 @@ const PublicationsManagement = ({ apiBaseUrl }: PublicationsManagementProps) => 
    const [deletingId, setDeletingId] = useState<string | null>(null)
    const [editingPublication, setEditingPublication] = useState<Publication | null>(null)
    const [saving, setSaving] = useState(false)
+   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+   const [uploading, setUploading] = useState(false)
+   // Cloudinary config (use env vars se possível)
+   const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+   const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+
+   const uploadToCloudinary = async (file: File): Promise<string | null> => {
+      setUploading(true)
+      try {
+         const formData = new FormData()
+         formData.append('file', file)
+         formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+         const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+            {
+               method: 'POST',
+               body: formData
+            }
+         )
+         const data = await response.json()
+         if (data.secure_url) {
+            return data.secure_url
+         } else {
+            alert('Erro ao fazer upload da imagem')
+            return null
+         }
+      } catch {
+         alert('Erro ao fazer upload da imagem')
+         return null
+      } finally {
+         setUploading(false)
+      }
+   }
 
    const loadPublications = useCallback(async () => {
       setLoading(true)
@@ -79,6 +112,14 @@ const PublicationsManagement = ({ apiBaseUrl }: PublicationsManagementProps) => 
       if (!editingPublication) return
 
       setSaving(true)
+      let imageUrl = editingPublication.img
+      if (selectedFile) {
+         imageUrl = await uploadToCloudinary(selectedFile) || ''
+         if (!imageUrl) {
+            setSaving(false)
+            return
+         }
+      }
       try {
          const token = localStorage.getItem('authToken')
          const response = await fetch(`${apiBaseUrl}/publication/${editingPublication.id}`, {
@@ -88,18 +129,17 @@ const PublicationsManagement = ({ apiBaseUrl }: PublicationsManagementProps) => 
                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-               title: editingPublication.title,
-               topic: editingPublication.topic,
-               img: editingPublication.img,
-               text: editingPublication.text
+               ...editingPublication,
+               img: imageUrl
             })
          })
 
          const data = await response.json()
 
          if (!data.error) {
-            setPublications(publications.map(pub => pub.id === editingPublication.id ? editingPublication : pub))
+            setPublications(publications.map(pub => pub.id === editingPublication.id ? { ...editingPublication, img: imageUrl } : pub))
             setEditingPublication(null)
+            setSelectedFile(null)
          } else {
             alert('Erro ao atualizar publicação: ' + data.error)
          }
@@ -256,15 +296,48 @@ const PublicationsManagement = ({ apiBaseUrl }: PublicationsManagementProps) => 
                            />
                         </div>
 
-                        {/* Imagem URL */}
+                        {/* Imagem Upload */}
                         <div>
-                           <label className='block text-sm font-semibold text-gray-700 mb-2'>URL da Imagem *</label>
-                           <input
-                              type='text'
-                              value={editingPublication.img}
-                              onChange={(e) => setEditingPublication({ ...editingPublication, img: e.target.value })}
-                              className='w-full px-4 py-2.5 rounded-lg border-2 border-gray-200 focus:border-focinhando-accent focus:outline-none'
-                           />
+                           <label className='block text-sm font-semibold text-gray-700 mb-2'>Imagem *</label>
+                           <label className='w-full cursor-pointer'>
+                              <div className={`w-full px-4 py-2.5 rounded-lg border-2 transition flex items-center justify-center gap-2 ${uploading
+                                 ? 'border-focinhando-accent bg-focinhando-accent/5 cursor-wait'
+                                 : 'border-gray-200 bg-gray-50 hover:border-focinhando-accent hover:bg-gray-100'
+                                 }`}>
+                                 {uploading ? (
+                                    <span className='text-focinhando-accent font-semibold'>Enviando imagem...</span>
+                                 ) : (
+                                    <span className='text-gray-700 flex items-center gap-2'>
+                                       <FaUpload />
+                                       {selectedFile ? selectedFile.name : 'Escolher arquivo'}
+                                    </span>
+                                 )}
+                              </div>
+                              <input
+                                 type='file'
+                                 accept='image/*'
+                                 onChange={e => {
+                                    const file = e.target.files?.[0]
+                                    if (file) setSelectedFile(file)
+                                 }}
+                                 disabled={uploading}
+                                 className='hidden'
+                              />
+                           </label>
+
+                           {/* Preview da imagem */}
+                           {(selectedFile || editingPublication.img) && (
+                              <div className='mt-3 flex items-center gap-3'>
+                                 <div className='w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 border-focinhando-accent/20'>
+                                    <img
+                                       src={selectedFile ? URL.createObjectURL(selectedFile) : editingPublication.img}
+                                       alt='Preview'
+                                       className='w-full h-full object-cover'
+                                    />
+                                 </div>
+                                 <span className='text-xs text-gray-600'>Preview da imagem</span>
+                              </div>
+                           )}
                         </div>
 
                         {/* Texto */}
