@@ -162,14 +162,14 @@ const Login = () => {
 
          {/* Background com Overlay */}
          <div className='hidden lg:block relative bg-gray-900'>
-            <div className='absolute inset-0 bg-[url(./assets/login/Login.png)] bg-cover bg-center opacity-75'></div>
-            <div className='absolute inset-0 bg-linear-to-br from-focinhando-accent/20 to-transparent'></div>
+            <div className='absolute inset-0 bg-[url(./assets/login/loginImage.webp)] bg-cover bg-center opacity-75'></div>
+            <div className='absolute inset-0 bg-linear-to-br from-focinhando-accent/50 to-transparent'></div>
             <div className='relative h-full flex items-center justify-center p-12 text-white'>
                <div className='max-w-lg'>
-                  <h2 className='text-4xl font-bold mb-4'>
-                     Conecte-se com quem ama pets!
+                  <h2 className='text-6xl font-bold mb-4 text-center text-shadow-lg'>
+                     Conecte-se com quem ama <span className='text-focinhando-green-light'>pets</span>!
                   </h2>
-                  <p className='text-lg opacity-90'>
+                  <p className='text-lg opacity-90 text-center'>
                      Encontre o companheiro perfeito para sua família e faça parte da nossa comunidade.
                   </p>
                </div>

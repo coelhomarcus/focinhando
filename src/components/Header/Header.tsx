@@ -1,64 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router'
 import Logo from '@/assets/logo.svg'
-import { useApi } from '@/hooks/useApi'
+import { useUser } from '@/hooks/useUser'
 import { FaUser, FaSignOutAlt, FaHome, FaEdit, FaComments, FaInfoCircle, FaCog, FaDog } from 'react-icons/fa'
 
-interface User {
-   id: string
-   name: string
-   email: string
-   role: string
-   createdAt: string
-   updatedAt: string
-}
-
-interface UserComplement {
-   img: string | null
-}
-
 const Header = () => {
-   const { apiBaseUrl } = useApi()
    const navigate = useNavigate()
-   const [user, setUser] = useState<User | null>(null)
-   const [userComplement, setUserComplement] = useState<UserComplement | null>(null)
+   const { user, userComplement } = useUser()
    const [showUserMenu, setShowUserMenu] = useState(false)
    const [showMobileMenu, setShowMobileMenu] = useState(false)
-
-   useEffect(() => {
-      const loadUserData = async () => {
-         const token = localStorage.getItem('authToken')
-         if (!token) return
-
-         try {
-            // Load user basic data
-            const response = await fetch(`${apiBaseUrl}/user`, {
-               headers: {
-                  'Authorization': `Bearer ${token}`
-               }
-            })
-            const data = await response.json()
-            if (!data.error && data.user) {
-               setUser(data.user)
-            }
-
-            // Load user complement (includes profile image)
-            const complementResponse = await fetch(`${apiBaseUrl}/user/complement`, {
-               headers: {
-                  'Authorization': `Bearer ${token}`
-               }
-            })
-            const complementData = await complementResponse.json()
-            if (!complementData.error && complementData.complement) {
-               setUserComplement(complementData.complement)
-            }
-         } catch (error) {
-            console.error('Erro ao carregar dados do usuário:', error)
-         }
-      }
-
-      loadUserData()
-   }, [apiBaseUrl])
 
    const handleLogout = () => {
       localStorage.removeItem('authToken')

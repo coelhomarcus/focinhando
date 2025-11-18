@@ -78,10 +78,10 @@ const Register = () => {
             <div className='absolute inset-0 bg-linear-to-br from-focinhando-accent/20 to-transparent'></div>
             <div className='relative h-full flex items-center justify-center p-12 text-white'>
                <div className='max-w-lg'>
-                  <h2 className='text-4xl font-bold mb-4'>
-                     Comece sua jornada conosco!
+                  <h2 className='text-6xl font-bold mb-4 text-center text-shadow-lg'>
+                     Comece sua <span className='text-focinhando-green-light'>jornada</span> conosco!
                   </h2>
-                  <p className='text-lg opacity-90'>
+                  <p className='text-lg opacity-90 text-center'>
                      Crie sua conta e tenha acesso a centenas de pets esperando por um lar.
                   </p>
                </div>
