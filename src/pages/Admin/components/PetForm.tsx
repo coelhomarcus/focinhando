@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { PetForm as PetFormType } from '../types'
 import { StatusMessage } from './SharedComponents'
-import { FaSyringe } from 'react-icons/fa'
+import { FaSyringe, FaSpinner } from 'react-icons/fa'
 
 interface PetFormProps {
    apiBaseUrl: string
@@ -26,7 +26,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
    })
    const [selectedFile, setSelectedFile] = useState<File | null>(null)
    const [uploading, setUploading] = useState(false)
-   // Cloudinary config (use env vars se possível)
+
    const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
    const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
 
@@ -130,7 +130,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
 
          <form onSubmit={handleSubmit} className='p-6'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-               {/* Nome */}
+
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      Nome do pet <span className='text-red-500'>*</span>
@@ -145,7 +145,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   />
                </div>
 
-               {/* Imagem Upload */}
+
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      Imagem <span className='text-red-500'>*</span>
@@ -174,7 +174,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                         className='hidden'
                      />
                   </label>
-                  {/* Preview da imagem */}
+
                   {(selectedFile || petForm.img) && (
                      <div className='mt-3 flex items-center gap-3'>
                         <div className='w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 border-focinhando-accent/20'>
@@ -189,7 +189,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   )}
                </div>
 
-               {/* Data de Nascimento */}
+
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      Data de nascimento <span className='text-red-500'>*</span>
@@ -203,7 +203,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   />
                </div>
 
-               {/* Espécie */}
+
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      Espécie <span className='text-red-500'>*</span>
@@ -219,7 +219,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   </select>
                </div>
 
-               {/* Raça */}
+
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      Raça <span className='text-red-500'>*</span>
@@ -234,7 +234,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   />
                </div>
 
-               {/* Sexo */}
+
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      Sexo <span className='text-red-500'>*</span>
@@ -250,7 +250,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   </select>
                </div>
 
-               {/* Peso */}
+
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      Peso (kg) <span className='text-red-500'>*</span>
@@ -267,7 +267,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   />
                </div>
 
-               {/* Cidade */}
+
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      Cidade <span className='text-red-500'>*</span>
@@ -282,7 +282,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   />
                </div>
 
-               {/* Estado */}
+
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      Estado <span className='text-red-500'>*</span>
@@ -298,7 +298,6 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   />
                </div>
 
-               {/* User Complement ID */}
                <div>
                   <label className='block text-sm font-medium text-gray-700 mb-2'>
                      ID do usuário <span className='text-red-500'>*</span>
@@ -313,7 +312,6 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                   />
                </div>
 
-               {/* Vacinado */}
                <div className='flex items-center h-full pt-8'>
                   <label className='flex items-center gap-3 cursor-pointer group'>
                      <input
@@ -330,7 +328,6 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                </div>
             </div>
 
-            {/* Sobre o Pet */}
             <div className='mt-5'>
                <label className='block text-sm font-medium text-gray-700 mb-2'>
                   Sobre o pet <span className='text-red-500'>*</span>
@@ -345,7 +342,6 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                />
             </div>
 
-            {/* Status Messages */}
             {submitStatus === 'success' && (
                <div className='mt-5'>
                   <StatusMessage type='success' message='Pet cadastrado com sucesso!' />
@@ -357,7 +353,6 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                </div>
             )}
 
-            {/* Submit Button */}
             <div className='mt-6 flex gap-3'>
                <button
                   type='submit'
@@ -369,7 +364,7 @@ const PetForm = ({ apiBaseUrl }: PetFormProps) => {
                >
                   {loading ? (
                      <span className='flex items-center justify-center gap-2'>
-                        <span className='inline-block animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent'></span>
+                        <FaSpinner className='animate-spin h-4 w-4' />
                         Cadastrando...
                      </span>
                   ) : (

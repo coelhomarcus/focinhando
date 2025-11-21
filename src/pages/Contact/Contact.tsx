@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useApi } from '@/hooks/useApi'
-import { FaEnvelope, FaWhatsapp, FaMapMarkerAlt, FaClock, FaComments, FaCheckCircle, FaTimesCircle } from 'react-icons/fa'
+import { FaEnvelope, FaWhatsapp, FaMapMarkerAlt, FaClock, FaComments, FaCheckCircle, FaTimesCircle, FaSpinner } from 'react-icons/fa'
 
 const Contact = () => {
    const { apiBaseUrl } = useApi()
@@ -282,7 +282,7 @@ const Contact = () => {
                         >
                            {loading ? (
                               <span className='flex items-center justify-center gap-2'>
-                                 <span className='inline-block animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent'></span>
+                                 <FaSpinner className='animate-spin h-4 w-4' />
                                  Enviando...
                               </span>
                            ) : (

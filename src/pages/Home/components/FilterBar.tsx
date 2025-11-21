@@ -3,7 +3,9 @@ import CachorrosIcon from '@/assets/home/cachorros.png'
 import GatosIcon from '@/assets/home/gatos.png'
 import FilhotesIcon from '@/assets/home/filhotes.png'
 import type { FilterType } from '../types'
-import { RxCross1, RxCrossCircled } from 'react-icons/rx' 
+import { IoSearchSharp } from "react-icons/io5";
+
+import { RxCross1 } from 'react-icons/rx' 
 
 interface FilterBarProps {
    activeFilter: FilterType
@@ -62,7 +64,7 @@ const FilterBar = ({ activeFilter, filteredCount, onFilterChange, searchQuery, o
             <div className='mt-6 max-w-[700px] w-full'>
                <div className='relative '>
                   <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-                     <RxCross1 />
+                     <IoSearchSharp />
                   </div>
                   <input
                      type='text'
@@ -76,7 +78,7 @@ const FilterBar = ({ activeFilter, filteredCount, onFilterChange, searchQuery, o
                         onClick={() => onSearchChange('')}
                         className='absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors'
                      >
-                        <RxCrossCircled />
+                        <RxCross1 />
                      </button>
                   )}
                </div>

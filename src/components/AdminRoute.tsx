@@ -2,6 +2,7 @@ import { Navigate, useNavigate } from 'react-router'
 import type { ReactNode } from 'react'
 import { useState, useEffect } from 'react'
 import { useApi } from '@/hooks/useApi'
+import { FaSpinner } from 'react-icons/fa'
 
 interface AdminRouteProps {
    children: ReactNode
@@ -61,7 +62,7 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
       return (
          <div className="flex items-center justify-center min-h-screen">
             <div className="text-center">
-               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-focinhando-accent mx-auto"></div>
+               <FaSpinner className="animate-spin h-12 w-12 text-focinhando-accent mx-auto" />
                <p className="mt-4 text-gray-600">Verificando permissões...</p>
             </div>
          </div>

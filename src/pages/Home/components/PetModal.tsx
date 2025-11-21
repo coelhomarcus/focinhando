@@ -19,7 +19,6 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
             className='bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-slideUp flex flex-col'
             onClick={(e) => e.stopPropagation()}
          >
-            {/* Header com imagem */}
             <div className='relative shrink-0'>
                <button
                   className='absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm hover:bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center text-2xl hover:rotate-90 transition-all duration-300 shadow-lg'
@@ -29,7 +28,7 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
                   ×
                </button>
 
-               <div className='h-80 bg-gray-100 relative overflow-hidden'>
+               <div className='h-100 bg-gray-100 relative overflow-hidden'>
                   <img
                      src={pet.img}
                      alt={pet.name}
@@ -38,7 +37,6 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
 
                   <div className='absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent'></div>
 
-                  {/* Info sobre a imagem */}
                   <div className='absolute bottom-0 left-0 right-0 p-6'>
                      <h2 className='text-4xl font-bold text-white mb-3 drop-shadow-lg'>{pet.name}</h2>
                      <div className='flex items-center gap-3 flex-wrap'>
@@ -55,9 +53,7 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
                </div>
             </div>
 
-            {/* Conteúdo com scroll */}
             <div className='flex-1 overflow-y-auto px-6 py-6 bg-white'>
-               {/* Sobre */}
                <div className='mb-8'>
                   <h3 className='text-xl font-bold text-gray-900 mb-3'>Sobre {pet.name}</h3>
                   <p className='text-gray-600 leading-relaxed'>
@@ -65,7 +61,6 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
                   </p>
                </div>
 
-               {/* Informações em Grid */}
                <div className='mb-6'>
                   <h3 className='text-xl font-bold text-gray-900 mb-4'>Informações</h3>
                   <div className='grid grid-cols-2 md:grid-cols-4 gap-3'>
@@ -88,7 +83,6 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
                   </div>
                </div>
 
-               {/* Características */}
                <div className='mb-6'>
                   <h3 className='text-xl font-bold text-gray-900 mb-4'>Características</h3>
                   <div className='flex flex-wrap gap-2'>
@@ -107,7 +101,6 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
                </div>
             </div>
 
-            {/* Footer com CTA */}
             <div className='shrink-0 p-6 bg-gray-50 border-t border-gray-200'>
                {pet.userName && (
                   <div className='mb-4 text-center'>

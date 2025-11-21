@@ -5,8 +5,8 @@ import type { Publication } from './types'
 import BlogHero from './components/BlogHero'
 import BlogGrid from './components/BlogGrid'
 import BlogModal from './components/BlogModal'
-import LoadingState from './components/LoadingState'
-import EmptyState from './components/EmptyState'
+import LoadingState from '../../components/LoadingState'
+import EmptyState from './components/EmptyState'   
 
 const Blog = () => {
    const { apiBaseUrl } = useApi()
@@ -64,7 +64,7 @@ const Blog = () => {
          <section className='py-20 bg-white'>
             <div className='container mx-auto px-6 max-w-7xl'>
                {loading ? (
-                  <LoadingState />
+                  <LoadingState text="Carregando publicações" />
                ) : publications.length === 0 ? (
                   <EmptyState />
                ) : (

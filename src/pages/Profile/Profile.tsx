@@ -4,7 +4,7 @@ import { useApi } from '@/hooks/useApi'
 import type { User, UserComplement, EditData } from './types'
 
 import ProfileHeader from './components/ProfileHeader'
-import LoadingState from './components/LoadingState'
+import LoadingState from '../../components/LoadingState'
 import PersonalInfoCard from './components/PersonalInfoCard'
 import QuickActions from './components/QuickActions'
 
@@ -214,7 +214,7 @@ const Profile = () => {
    }
 
    if (loading) {
-      return <LoadingState />
+      return <LoadingState text="Carregando perfil" />
    }
 
    return (

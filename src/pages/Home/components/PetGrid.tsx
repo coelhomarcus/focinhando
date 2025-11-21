@@ -1,6 +1,7 @@
 import { IoPaw } from 'react-icons/io5'
 import type { Pet, FilterType } from '../types'
 import PetCard from './PetCard'
+import { FaSpinner } from "react-icons/fa";
 
 interface PetGridProps {
    pets: Pet[]
@@ -28,8 +29,8 @@ const PetGrid = ({ pets, loading, activeFilter, onPetClick }: PetGridProps) => {
    if (loading) {
       return (
          <section className='container mx-auto max-w-7xl px-5 py-12'>
-            <div className='text-center py-20'>
-               <div className='inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-focinhando-accent'></div>
+            <div className='flex flex-col items-center py-20'>
+               <FaSpinner className='animate-spin w-16 h-16 text-focinhando-accent'/>
                <p className='text-xl text-gray-600 mt-4'>Carregando pets...</p>
             </div>
          </section>

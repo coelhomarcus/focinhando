@@ -1,3 +1,5 @@
+import { FaSpinner } from "react-icons/fa";
+
 interface LoadingSpinnerProps {
    message?: string
 }
@@ -5,7 +7,7 @@ interface LoadingSpinnerProps {
 export const LoadingSpinner = ({ message = 'Carregando...' }: LoadingSpinnerProps) => {
    return (
       <div className='flex flex-col items-center justify-center py-16'>
-         <div className='inline-block animate-spin rounded-full h-10 w-10 border-3 border-gray-300 border-t-gray-900'></div>
+         <FaSpinner className='animate-spin h-10 w-10 text-gray-900' />
          <p className='text-sm text-gray-600 mt-4'>{message}</p>
       </div>
    )

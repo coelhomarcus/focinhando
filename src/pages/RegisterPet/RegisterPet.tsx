@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useApi } from '@/hooks/useApi'
-import { FaDog } from 'react-icons/fa'
+import { FaDog, FaSpinner } from 'react-icons/fa'
 import type { PetForm, SubmitStatus } from './types'
 
-import LoadingState from './components/LoadingState'
+import LoadingState from '../../components/LoadingState'
 import HeroSection from './components/HeroSection'
 import IncompleteProfileWarning from './components/IncompleteProfileWarning'
 import PetFormFields from './components/PetFormFields'
@@ -152,7 +152,7 @@ const RegisterPet = () => {
    }
 
    if (checkingProfile) {
-      return <LoadingState />
+      return <LoadingState text="Verificando seu perfil" />
    }
 
    if (!hasComplement) {
@@ -230,7 +230,7 @@ const RegisterPet = () => {
                         >
                            {loading ? (
                               <span className='flex items-center justify-center gap-3'>
-                                 <span className='inline-block animate-spin rounded-full h-5 w-5 border-3 border-white border-t-transparent'></span>
+                                 <FaSpinner className='animate-spin h-5 w-5' />
                                  Cadastrando pet...
                               </span>
                            ) : (

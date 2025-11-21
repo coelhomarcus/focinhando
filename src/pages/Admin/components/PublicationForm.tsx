@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { PublicationForm as PublicationFormType } from '../types'
 import { StatusMessage } from './SharedComponents'
+import { FaSpinner } from 'react-icons/fa'
 
 interface PublicationFormProps {
    apiBaseUrl: string
@@ -223,7 +224,7 @@ const PublicationForm = ({ apiBaseUrl }: PublicationFormProps) => {
                >
                   {loading ? (
                      <span className='flex items-center justify-center gap-2'>
-                        <span className='inline-block animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent'></span>
+                        <FaSpinner className='animate-spin h-4 w-4' />
                         Publicando...
                      </span>
                   ) : (

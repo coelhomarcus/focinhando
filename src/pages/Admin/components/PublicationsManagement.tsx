@@ -164,7 +164,7 @@ const PublicationsManagement = ({ apiBaseUrl }: PublicationsManagementProps) => 
       return (
          <div className='flex items-center justify-center py-20'>
             <div className='text-center'>
-               <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-focinhando-accent mx-auto mb-4'></div>
+               <FaSpinner className='animate-spin h-12 w-12 text-focinhando-accent mx-auto mb-4' />
                <p className='text-gray-600'>Carregando publicações...</p>
             </div>
          </div>
