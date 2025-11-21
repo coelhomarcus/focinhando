@@ -14,7 +14,14 @@ const AuthLayout = ({ children, imageUrl, imagePosition = 'right', title, subtit
    return (
       <div className='grid lg:grid-cols-2 min-h-screen'>
          <div className={`hidden lg:block relative bg-gray-900 ${isImageLeft ? 'order-1' : 'order-2'}`}>
-            <div className={`absolute inset-0 bg-[url(${imageUrl})] bg-cover bg-center opacity-75`}></div>
+            <div 
+               className='absolute inset-0 opacity-75'
+               style={{
+                  backgroundImage: `url(${imageUrl})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+               }}
+            ></div>
             <div className='absolute inset-0 bg-linear-to-br from-focinhando-accent/50 to-transparent'></div>
             <div className='relative h-full flex items-center justify-center p-12 text-white'>
                <div className='max-w-lg'>

@@ -7,6 +7,7 @@ import AuthFormContainer from '@/pages/Login/Auth/AuthFormContainer'
 import FormInput from '@/pages/Login/Auth/FormInput'
 import AuthButton from '@/pages/Login/Auth/AuthButton'
 import AlertMessage from '@/pages/Login/Auth/AlertMessage'
+import LoginImage from '@/assets/login/loginImage.webp'
 
 const Login = () => {
    const { apiBaseUrl } = useApi()
@@ -69,7 +70,7 @@ const Login = () => {
 
    return (
       <AuthLayout
-         imageUrl="./assets/login/loginImage.webp"
+         imageUrl={LoginImage}
          imagePosition="right"
          title='Conecte-se com quem ama <span class="text-focinhando-green-light">pets</span>!'
          subtitle="Encontre o companheiro perfeito para sua família e faça parte da nossa comunidade."

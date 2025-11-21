@@ -7,6 +7,8 @@ import AuthFormContainer from '@/pages/Login/Auth/AuthFormContainer'
 import FormInput from '@/pages/Login/Auth/FormInput'
 import AuthButton from '@/pages/Login/Auth/AuthButton'
 import AlertMessage from '@/pages/Login/Auth/AlertMessage'
+import RegisterImage from '@/assets/login/Register.jpg'
+
 
 const Register = () => {
    const { apiBaseUrl } = useApi()
@@ -73,7 +75,7 @@ const Register = () => {
 
    return (
       <AuthLayout
-         imageUrl="./assets/login/Register.jpg"
+         imageUrl={RegisterImage}
          imagePosition="left"
          title='Comece sua <span class="text-focinhando-green-light">jornada</span> conosco!'
          subtitle="Crie sua conta e tenha acesso a centenas de pets esperando por um lar."
