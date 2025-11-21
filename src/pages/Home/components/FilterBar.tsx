@@ -3,14 +3,17 @@ import CachorrosIcon from '@/assets/home/cachorros.png'
 import GatosIcon from '@/assets/home/gatos.png'
 import FilhotesIcon from '@/assets/home/filhotes.png'
 import type { FilterType } from '../types'
+import { RxCross1, RxCrossCircled } from 'react-icons/rx' 
 
 interface FilterBarProps {
    activeFilter: FilterType
    filteredCount: number
    onFilterChange: (filter: FilterType) => void
+   searchQuery: string
+   onSearchChange: (query: string) => void
 }
 
-const FilterBar = ({ activeFilter, filteredCount, onFilterChange }: FilterBarProps) => {
+const FilterBar = ({ activeFilter, filteredCount, onFilterChange, searchQuery, onSearchChange }: FilterBarProps) => {
    const filters = [
       { id: 'all' as FilterType, label: 'Todos os pets', icon: DogIcon },
       { id: 'Cão' as FilterType, label: 'Cachorros', icon: CachorrosIcon },
@@ -20,17 +23,17 @@ const FilterBar = ({ activeFilter, filteredCount, onFilterChange }: FilterBarPro
 
    return (
       <section className='px-5 py-8 bg-white border-b border-gray-200'>
-         <div className='container mx-auto max-w-7xl'>
+         <div className='container mx-auto max-w-7xl flex flex-col items-center justify-center text-center'>
             <div className='flex items-center justify-between mb-6'>
                <div>
-                  <h2 className='text-2xl font-bold text-gray-900'>Encontre seu pet ideal</h2>
+                  <h2 className='text-2xl font-bold text-gray-900'>Encontre seu Pet</h2>
                   <p className='text-sm text-gray-600 mt-1'>
                      {filteredCount} {filteredCount === 1 ? 'pet disponível' : 'pets disponíveis'}
                   </p>
                </div>
             </div>
 
-            <div className='flex gap-3 flex-wrap'>
+            <div className='flex gap-3 justify-center flex-wrap'>
                {filters.map((filter) => (
                   <button
                      key={filter.id}
@@ -54,6 +57,29 @@ const FilterBar = ({ activeFilter, filteredCount, onFilterChange }: FilterBarPro
                      )}
                   </button>
                ))}
+            </div>
+
+            <div className='mt-6 max-w-[700px] w-full'>
+               <div className='relative '>
+                  <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
+                     <RxCross1 />
+                  </div>
+                  <input
+                     type='text'
+                     placeholder='Buscar por nome ou raça...'
+                     value={searchQuery}
+                     onChange={(e) => onSearchChange(e.target.value)}
+                     className='w-full pl-12 pr-10 py-3 border-2 border-gray-200 rounded-full text-sm focus:outline-none focus:border-focinhando-accent focus:ring-2 focus:ring-focinhando-accent/20 transition-all duration-200'
+                  />
+                  {searchQuery && (
+                     <button
+                        onClick={() => onSearchChange('')}
+                        className='absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors'
+                     >
+                        <RxCrossCircled />
+                     </button>
+                  )}
+               </div>
             </div>
          </div>
       </section>

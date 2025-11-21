@@ -135,7 +135,7 @@ const Header = () => {
                         }`
                      }
                   >
-                     Contato
+                     Suporte
                   </NavLink>
                </nav>
 

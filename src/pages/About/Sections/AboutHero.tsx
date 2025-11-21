@@ -6,7 +6,7 @@ const Hero = () => {
             <div className='inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6'>
                <span>Sobre nós</span>
             </div>
-            <h1 className='text-5xl md:text-6xl font-bold text-white mb-6 leading-20'>
+            <h1 className='text-4xl md:text-6xl font-bold text-white mb-6 leading-12 md:leading-20'>
                Conectando <span className="text-focinhando-accent bg-black/60 border rounded-xl px-2">pets</span> com <br /> suas novas <span className="bg-black/60 border rounded-xl px-2 text-focinhando-green">famílias</span>
             </h1>
             <p className='text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed'>

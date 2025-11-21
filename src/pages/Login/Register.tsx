@@ -19,7 +19,6 @@ const Register = () => {
       setError('')
       setLoading(true)
 
-      // Validação básica
       if (!name || !email || !password) {
          setError('Por favor, preencha todos os campos')
          setLoading(false)
@@ -55,10 +54,8 @@ const Register = () => {
             return
          }
 
-         // Registro bem-sucedido
          setSuccess(true)
 
-         // Redirecionar para a página de login após 2 segundos
          setTimeout(() => {
             navigate('/login')
          }, 2000)
@@ -87,15 +84,12 @@ const Register = () => {
             </div>
          </div>
 
-         {/* Formulário */}
          <div className='bg-white flex items-center justify-center p-8 lg:p-12 order-1 lg:order-2'>
             <div className='w-full max-w-md'>
-               {/* Logo */}
                <div className='mb-8'>
                   <img src={Logo} alt="Logo" className='h-12 w-auto' />
                </div>
 
-               {/* Heading */}
                <div className='mb-8'>
                   <h1 className='text-3xl font-bold text-gray-900 mb-2'>
                      Crie sua conta
@@ -105,7 +99,6 @@ const Register = () => {
                   </p>
                </div>
 
-               {/* Mensagens de Erro/Sucesso */}
                {error && (
                   <div className='mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-r'>
                      <p className='text-sm font-medium'>{error}</p>
@@ -118,7 +111,6 @@ const Register = () => {
                   </div>
                )}
 
-               {/* Formulário */}
                <form onSubmit={handleSubmit} className='space-y-6'>
                   <div>
                      <label htmlFor="name" className='block text-sm font-medium text-gray-700 mb-2'>
@@ -207,7 +199,6 @@ const Register = () => {
                   </button>
                </form>
 
-               {/* Link para Login */}
                <p className='mt-8 text-center text-sm text-gray-600'>
                   Já tem uma conta?{' '}
                   <Link to="/login" className='font-medium text-focinhando-accent hover:text-focinhando-accent-dark transition'>

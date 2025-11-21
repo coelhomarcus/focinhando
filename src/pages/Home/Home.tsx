@@ -13,6 +13,7 @@ const Home = () => {
    const [loading, setLoading] = useState(true)
    const [activeFilter, setActiveFilter] = useState<FilterType>('all')
    const [selectedPet, setSelectedPet] = useState<Pet | null>(null)
+   const [searchQuery, setSearchQuery] = useState('')
 
    useEffect(() => {
       const loadPets = async () => {
@@ -26,8 +27,9 @@ const Home = () => {
                return
             }
 
-            setPets(data.pets || [])
-            setFilteredPets(data.pets || [])
+            const sortedPets = (data.pets || []).sort((a: Pet, b: Pet) => a.name.localeCompare(b.name))
+            setPets(sortedPets)
+            setFilteredPets(sortedPets)
          } catch (error) {
             console.error('Erro ao conectar com o servidor:', error)
          } finally {
@@ -38,20 +40,42 @@ const Home = () => {
       loadPets()
    }, [apiBaseUrl])
 
-   const handleFilter = (filterType: FilterType) => {
-      setActiveFilter(filterType)
+   const applyFilters = (filterType: FilterType, search: string) => {
+      let filtered: Pet[]
 
       if (filterType === 'all') {
-         setFilteredPets(pets)
+         filtered = pets
       } else if (filterType === 'Cão') {
-         setFilteredPets(pets.filter(pet => pet.specie === 'cão'))
+         filtered = pets.filter(pet => pet.specie === 'cão')
       } else if (filterType === 'Gato') {
-         setFilteredPets(pets.filter(pet => pet.specie === 'gato'))
+         filtered = pets.filter(pet => pet.specie === 'gato')
       } else if (filterType === 'filhote') {
          const oneYearAgo = new Date()
          oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
-         setFilteredPets(pets.filter(pet => new Date(pet.age) > oneYearAgo))
+         filtered = pets.filter(pet => new Date(pet.age) > oneYearAgo)
+      } else {
+         filtered = pets
       }
+
+      if (search.trim()) {
+         const searchLower = search.toLowerCase()
+         filtered = filtered.filter(pet => 
+            pet.name.toLowerCase().includes(searchLower) ||
+            pet.race.toLowerCase().includes(searchLower)
+         )
+      }
+      
+      setFilteredPets(filtered.sort((a: Pet, b: Pet) => a.name.localeCompare(b.name)))
+   }
+
+   const handleFilter = (filterType: FilterType) => {
+      setActiveFilter(filterType)
+      applyFilters(filterType, searchQuery)
+   }
+
+   const handleSearch = (query: string) => {
+      setSearchQuery(query)
+      applyFilters(activeFilter, query)
    }
 
    const openModal = (pet: Pet) => {
@@ -70,6 +94,8 @@ const Home = () => {
             activeFilter={activeFilter}
             filteredCount={filteredPets.length}
             onFilterChange={handleFilter}
+            searchQuery={searchQuery}
+            onSearchChange={handleSearch}
          />
 
          <PetGrid

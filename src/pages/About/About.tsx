@@ -1,9 +1,9 @@
-import Hero from './Sections/Hero'
-import Mission from './Sections/Mission'
-import Features from './Sections/Features'
-import Stats from './Sections/Stats'
-import Team from './Sections/Team'
-import CTA from './Sections/CTA'
+import Hero from './Sections/AboutHero'
+import Mission from './Sections/AboutMission'
+import Features from './Sections/AboutFeatures'
+import Stats from './Sections/AboutStats'
+import Team from './Sections/AboutTeam'
+import CTA from './Sections/AboutCTA'
 
 const About = () => {
    return (

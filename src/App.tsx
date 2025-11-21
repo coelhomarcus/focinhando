@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router'
 import Login from './pages/Login/Login'
 import Register from './pages/Login/Register'
-import Header from "./components/Header/Header"
+import Layout from './components/Layout'
 import Home from "./pages/Home/Home"
 import About from "./pages/About/About"
 import Blog from "./pages/Blog/Blog"
@@ -19,62 +19,17 @@ const App = () => {
    return (
       <ApiProvider apiBaseUrl={API_BASE_URL}>
          <Routes>
-            <Route path="/" element={
-               <ProtectedRoute>
-                  <div className='min-h-screen'>
-                     <Header />
-                     <Home />
-                  </div>
-               </ProtectedRoute>
-            } />
-            <Route path="/about" element={
-               <ProtectedRoute>
-                  <div className='min-h-screen'>
-                     <Header />
-                     <About />
-                  </div>
-               </ProtectedRoute>
-            } />
-            <Route path="/blog" element={
-               <ProtectedRoute>
-                  <div className='min-h-screen'>
-                     <Header />
-                     <Blog />
-                  </div>
-               </ProtectedRoute>
-            } />
-            <Route path="/contact" element={
-               <ProtectedRoute>
-                  <div className='min-h-screen'>
-                     <Header />
-                     <Contact />
-                  </div>
-               </ProtectedRoute>
-            } />
-            <Route path="/profile" element={
-               <ProtectedRoute>
-                  <div className='min-h-screen'>
-                     <Header />
-                     <Profile />
-                  </div>
-               </ProtectedRoute>
-            } />
-            <Route path="/register-pet" element={
-               <ProtectedRoute>
-                  <div className='min-h-screen'>
-                     <Header />
-                     <RegisterPet />
-                  </div>
-               </ProtectedRoute>
-            } />
-            <Route path="/admin" element={
-               <AdminRoute>
-                  <div className='min-h-screen'>
-                     <Header />
-                     <Admin />
-                  </div>
-               </AdminRoute>
-            } />
+            <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+               <Route path="/" element={<Home />} />
+               <Route path="/about" element={<About />} />
+               <Route path="/blog" element={<Blog />} />
+               <Route path="/contact" element={<Contact />} />
+               <Route path="/profile" element={<Profile />} />
+               <Route path="/register-pet" element={<RegisterPet />} />
+            </Route>
+            <Route element={<AdminRoute><Layout /></AdminRoute>}>
+               <Route path="/admin" element={<Admin />} />
+            </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/" replace />} />

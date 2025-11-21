@@ -18,7 +18,6 @@ const Login = () => {
       setError('')
       setLoading(true)
 
-      // Validação básica
       if (!email || !password) {
          setError('Por favor, preencha todos os campos')
          setLoading(false)
@@ -48,12 +47,10 @@ const Login = () => {
             return
          }
 
-         // Salvar token no localStorage
          if (data.token) {
             localStorage.setItem('authToken', data.token)
             setSuccess(true)
 
-            // Redirecionar para a home após 1 segundo
             setTimeout(() => {
                navigate('/')
             }, 1000)
@@ -68,15 +65,13 @@ const Login = () => {
 
    return (
       <div className='grid lg:grid-cols-2 min-h-screen'>
-         {/* Formulário */}
          <div className='bg-white flex items-center justify-center p-8 lg:p-12'>
             <div className='w-full max-w-md'>
-               {/* Logo */}
+
                <div className='mb-8'>
                   <img src={Logo} alt="Logo" className='h-12 w-auto' />
                </div>
 
-               {/* Heading */}
                <div className='mb-8'>
                   <h1 className='text-3xl font-bold text-gray-900 mb-2'>
                      Bem-vindo de volta!
@@ -86,7 +81,6 @@ const Login = () => {
                   </p>
                </div>
 
-               {/* Mensagens de Erro/Sucesso */}
                {error && (
                   <div className='mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-r'>
                      <p className='text-sm font-medium'>{error}</p>
@@ -99,7 +93,6 @@ const Login = () => {
                   </div>
                )}
 
-               {/* Formulário */}
                <form onSubmit={handleSubmit} className='space-y-6'>
                   <div>
                      <label htmlFor="email" className='block text-sm font-medium text-gray-700 mb-2'>
@@ -150,7 +143,6 @@ const Login = () => {
                   </button>
                </form>
 
-               {/* Link para Registro */}
                <p className='mt-8 text-center text-sm text-gray-600'>
                   Não tem uma conta?{' '}
                   <Link to="/register" className='font-medium text-focinhando-accent hover:text-focinhando-accent-dark transition'>
