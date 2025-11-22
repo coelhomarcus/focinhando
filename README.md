@@ -61,12 +61,14 @@ Repositório Backend: [focinhando-backend](https://github.com/AngeloResplandes/f
 ### Passos para Instalação
 
 1. **Clone o repositório**
+
    ```bash
    git clone https://github.com/coelhomarcus/focinhando.git
    cd focinhando
    ```
 
 2. **Instale as dependências**
+
    ```bash
    npm install
    ```
@@ -102,6 +104,9 @@ Repositório Backend: [focinhando-backend](https://github.com/AngeloResplandes/f
 </table>
 
 ---
+
+- TODOLIST
+  - Na pagina de suporte pegar email e numero(se tiver) automaticamente e preencher
 
 ## 📝
 
