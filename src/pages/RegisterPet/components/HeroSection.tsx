@@ -1,10 +1,4 @@
-import type { ReactNode } from 'react'
-
-interface HeroSectionProps {
-   icon: ReactNode
-   title: string
-   description: string
-}
+import type { HeroSectionProps } from "../types"
 
 const HeroSection = ({ icon, title, description }: HeroSectionProps) => {
    return (

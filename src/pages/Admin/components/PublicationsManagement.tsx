@@ -1,18 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { FaEdit, FaTrash, FaCalendarAlt, FaSpinner, FaTimes, FaUpload } from 'react-icons/fa'
-
-interface Publication {
-   id: string
-   title: string
-   topic: string
-   img: string
-   text: string
-   createdAt: string
-}
-
-interface PublicationsManagementProps {
-   apiBaseUrl: string
-}
+import type { Publication, PublicationsManagementProps } from '../types'
 
 const PublicationsManagement = ({ apiBaseUrl }: PublicationsManagementProps) => {
    const [publications, setPublications] = useState<Publication[]>([])

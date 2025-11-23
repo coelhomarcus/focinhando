@@ -1,11 +1,7 @@
 import { useState } from 'react'
-import type { PublicationForm as PublicationFormType } from '../types'
+import type { PublicationForm as PublicationFormType, PublicationFormProps } from '../types'
 import { StatusMessage } from './SharedComponents'
 import { FaSpinner } from 'react-icons/fa'
-
-interface PublicationFormProps {
-   apiBaseUrl: string
-}
 
 const PublicationForm = ({ apiBaseUrl }: PublicationFormProps) => {
    const [loading, setLoading] = useState(false)

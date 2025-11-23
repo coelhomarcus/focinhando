@@ -1,12 +1,6 @@
-import type { TabType } from '../types'
+import type { AdminTabsProps } from '../types'
 import { FaEnvelope, FaEdit, FaList } from 'react-icons/fa'
 import { IoPaw } from 'react-icons/io5'
-
-interface AdminTabsProps {
-   activeTab: TabType
-   setActiveTab: (tab: TabType) => void
-   contactsCount: number
-}
 
 const AdminTabs = ({ activeTab, setActiveTab, contactsCount }: AdminTabsProps) => {
    return (

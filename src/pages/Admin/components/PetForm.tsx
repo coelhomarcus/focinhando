@@ -1,11 +1,7 @@
 import { useState } from 'react'
-import type { PetForm as PetFormType } from '../types'
+import type { PetForm as PetFormType, PetFormProps } from '../types'
 import { StatusMessage } from './SharedComponents'
 import { FaSyringe, FaSpinner } from 'react-icons/fa'
-
-interface PetFormProps {
-   apiBaseUrl: string
-}
 
 const PetForm = ({ apiBaseUrl }: PetFormProps) => {
    const [loading, setLoading] = useState(false)

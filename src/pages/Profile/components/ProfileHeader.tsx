@@ -1,11 +1,7 @@
 import { FaUser, FaMapMarkerAlt, FaClock } from 'react-icons/fa'
-import type { User, UserComplement } from '../types'
+import type { ProfileHeaderProps } from '../types'
 import { getMemberSince } from '../utils'
 
-interface ProfileHeaderProps {
-   user: User | null
-   complement: UserComplement | null
-}
 
 const ProfileHeader = ({ user, complement }: ProfileHeaderProps) => {
    return (

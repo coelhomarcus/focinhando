@@ -1,11 +1,6 @@
 import { FaDog, FaCat, FaBirthdayCake, FaMapMarkerAlt, FaMars, FaVenus } from 'react-icons/fa'
-import type { Pet } from '../types'
+import type { PetCardProps } from '../types'
 import { calculateAge } from '../utils'
-
-interface PetCardProps {
-   pet: Pet
-   onClick: (pet: Pet) => void
-}
 
 const PetCard = ({ pet, onClick }: PetCardProps) => {
    return (

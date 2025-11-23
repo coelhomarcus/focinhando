@@ -1,7 +1,4 @@
-interface AlertMessageProps {
-   type: 'error' | 'success'
-   message: string
-}
+import type { AlertMessageProps } from '../types'
 
 const AlertMessage = ({ type, message }: AlertMessageProps) => {
    const isError = type === 'error'

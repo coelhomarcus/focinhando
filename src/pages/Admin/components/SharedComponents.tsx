@@ -1,8 +1,5 @@
 import { FaSpinner } from "react-icons/fa";
-
-interface LoadingSpinnerProps {
-   message?: string
-}
+import type { LoadingSpinnerProps, EmptyStateProps, StatusMessageProps } from '../types'
 
 export const LoadingSpinner = ({ message = 'Carregando...' }: LoadingSpinnerProps) => {
    return (
@@ -11,12 +8,6 @@ export const LoadingSpinner = ({ message = 'Carregando...' }: LoadingSpinnerProp
          <p className='text-sm text-gray-600 mt-4'>{message}</p>
       </div>
    )
-}
-
-interface EmptyStateProps {
-   icon: string
-   title: string
-   description: string
 }
 
 export const EmptyState = ({ icon, title, description }: EmptyStateProps) => {
@@ -29,11 +20,6 @@ export const EmptyState = ({ icon, title, description }: EmptyStateProps) => {
          <p className='text-sm text-gray-600'>{description}</p>
       </div>
    )
-}
-
-interface StatusMessageProps {
-   type: 'success' | 'error'
-   message: string
 }
 
 export const StatusMessage = ({ type, message }: StatusMessageProps) => {

@@ -13,7 +13,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
 import { ApiProvider } from './contexts/ApiProvider'
 
-const API_BASE_URL = 'https://focinhando-backend.up.railway.app'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const App = () => {
    return (

@@ -2,18 +2,10 @@ import DogIcon from '@/assets/home/dog.png'
 import CachorrosIcon from '@/assets/home/cachorros.png'
 import GatosIcon from '@/assets/home/gatos.png'
 import FilhotesIcon from '@/assets/home/filhotes.png'
-import type { FilterType } from '../types'
+import type { FilterType, FilterBarProps } from '../types'
 import { IoSearchSharp } from "react-icons/io5";
 
 import { RxCross1 } from 'react-icons/rx' 
-
-interface FilterBarProps {
-   activeFilter: FilterType
-   filteredCount: number
-   onFilterChange: (filter: FilterType) => void
-   searchQuery: string
-   onSearchChange: (query: string) => void
-}
 
 const FilterBar = ({ activeFilter, filteredCount, onFilterChange, searchQuery, onSearchChange }: FilterBarProps) => {
    const filters = [

@@ -29,3 +29,43 @@ export interface EditData {
    state: string
    dateOfBirth: string
 }
+
+export interface EditFormProps {
+   editData: EditData
+   setEditData: (data: EditData) => void
+   error: string
+   saveSuccess: boolean
+   user: User | null
+   onSave: () => void
+   onFileSelect?: (file: File) => void
+   uploading?: boolean
+}
+
+export interface InfoDisplayProps {
+   user: User | null
+   complement: UserComplement | null
+}
+
+export interface PersonalInfoCardProps {
+   user: User | null
+   complement: UserComplement | null
+   editing: boolean
+   setEditing: (editing: boolean) => void
+   editData: EditData
+   setEditData: (data: EditData) => void
+   error: string
+   saveSuccess: boolean
+   onSave: () => void
+   onFileSelect?: (file: File) => void
+   uploading?: boolean
+}
+
+export interface ProfileHeaderProps {
+   user: User | null
+   complement: UserComplement | null
+}
+
+export interface QuickActionsProps {
+   onNavigate: (path: string) => void
+   onLogout: () => void
+}

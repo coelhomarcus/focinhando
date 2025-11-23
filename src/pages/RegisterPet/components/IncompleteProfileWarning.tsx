@@ -1,10 +1,7 @@
 import { FaExclamationTriangle } from 'react-icons/fa'
 import HeroSection from './HeroSection'
+import type { IncompleteProfileWarningProps } from '../types'
 
-interface IncompleteProfileWarningProps {
-   onNavigateHome: () => void
-   onNavigateProfile: () => void
-}
 
 const IncompleteProfileWarning = ({ onNavigateHome, onNavigateProfile }: IncompleteProfileWarningProps) => {
    return (

@@ -1,10 +1,4 @@
-import type { InputHTMLAttributes } from 'react'
-
-interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
-   label: string
-   id: string
-   helperText?: string
-}
+import type { FormInputProps } from "../types"
 
 const FormInput = ({ label, id, helperText, ...props }: FormInputProps) => {
    return (

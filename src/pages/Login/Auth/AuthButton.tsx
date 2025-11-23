@@ -1,12 +1,6 @@
-import type { ButtonHTMLAttributes } from 'react'
+import type { AuthButtonProps } from '../types'
+
 import { FaSpinner } from "react-icons/fa";
-
-
-interface AuthButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-   loading?: boolean
-   loadingText?: string
-   children: string
-}
 
 const AuthButton = ({ loading = false, loadingText = 'Carregando...', children, ...props }: AuthButtonProps) => {
    return (

@@ -1,14 +1,7 @@
 import { IoPaw } from 'react-icons/io5'
-import type { Pet, FilterType } from '../types'
+import type { PetGridProps } from '../types'
 import PetCard from './PetCard'
 import { FaSpinner } from "react-icons/fa";
-
-interface PetGridProps {
-   pets: Pet[]
-   loading: boolean
-   activeFilter: FilterType
-   onPetClick: (pet: Pet) => void
-}
 
 const PetGrid = ({ pets, loading, activeFilter, onPetClick }: PetGridProps) => {
    const getTitle = () => {

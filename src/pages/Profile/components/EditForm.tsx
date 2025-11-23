@@ -1,17 +1,6 @@
 import { useState } from 'react'
 import { FaUser, FaPhone, FaMapMarkerAlt, FaBirthdayCake, FaTimes, FaCheck, FaSave, FaUpload, FaImage } from 'react-icons/fa'
-import type { EditData, User } from '../types'
-
-interface EditFormProps {
-   editData: EditData
-   setEditData: (data: EditData) => void
-   error: string
-   saveSuccess: boolean
-   user: User | null
-   onSave: () => void
-   onFileSelect?: (file: File) => void
-   uploading?: boolean
-}
+import type { EditFormProps } from '../types'
 
 const EditForm = ({ editData, setEditData, error, saveSuccess, user, onSave, onFileSelect, uploading }: EditFormProps) => {
    const [selectedFileName, setSelectedFileName] = useState<string>('')

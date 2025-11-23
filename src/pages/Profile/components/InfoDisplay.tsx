@@ -1,11 +1,6 @@
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaBirthdayCake } from 'react-icons/fa'
-import type { User, UserComplement } from '../types'
+import type { InfoDisplayProps } from '../types'
 import { formatDate } from '../utils'
-
-interface InfoDisplayProps {
-   user: User | null
-   complement: UserComplement | null
-}
 
 const InfoDisplay = ({ user, complement }: InfoDisplayProps) => {
    return (

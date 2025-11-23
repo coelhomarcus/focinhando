@@ -1,25 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { FaDog, FaCat, FaTrash, FaMapMarkerAlt, FaSyringe, FaSpinner, FaEdit, FaTimes } from 'react-icons/fa'
-
-interface Pet {
-   id: string
-   name: string
-   img: string
-   age: string
-   city: string
-   state: string
-   sex: string
-   vaccinated: boolean
-   about: string
-   specie: string
-   race: string
-   weight: number
-   userComplementId?: string
-}
-
-interface PetsManagementProps {
-   apiBaseUrl: string
-}
+import type { Pet, PetsManagementProps } from '../types'
 
 const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
    const [pets, setPets] = useState<Pet[]>([])

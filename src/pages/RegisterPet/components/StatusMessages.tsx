@@ -1,10 +1,5 @@
 import { FaCheck, FaTimes } from 'react-icons/fa'
-import type { SubmitStatus } from '../types'
-
-interface StatusMessagesProps {
-   submitStatus: SubmitStatus
-   errorMessage: string
-}
+import type { StatusMessagesProps } from '../types'
 
 const StatusMessages = ({ submitStatus, errorMessage }: StatusMessagesProps) => {
    if (submitStatus === 'idle') return null

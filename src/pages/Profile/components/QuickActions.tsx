@@ -1,9 +1,5 @@
 import { FaPaw, FaHome, FaInfoCircle, FaEdit, FaEnvelope, FaSignOutAlt } from 'react-icons/fa'
-
-interface QuickActionsProps {
-   onNavigate: (path: string) => void
-   onLogout: () => void
-}
+import type { QuickActionsProps } from '../types'
 
 const QuickActions = ({ onNavigate, onLogout }: QuickActionsProps) => {
    return (

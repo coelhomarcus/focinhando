@@ -1,12 +1,4 @@
-import type { ReactNode } from 'react'
-
-interface AuthLayoutProps {
-   children: ReactNode
-   imageUrl: string
-   imagePosition?: 'left' | 'right'
-   title: string
-   subtitle: string
-}
+import type { AuthLayoutProps } from '../types'
 
 const AuthLayout = ({ children, imageUrl, imagePosition = 'right', title, subtitle }: AuthLayoutProps) => {
    const isImageLeft = imagePosition === 'left'

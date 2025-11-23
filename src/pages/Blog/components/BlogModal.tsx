@@ -1,11 +1,5 @@
 import { FaCalendarAlt } from 'react-icons/fa'
-import type { Publication } from '../types'
-
-interface BlogModalProps {
-   publication: Publication | null
-   onClose: () => void
-   formatDate: (dateString: string) => string
-}
+import type { BlogModalProps } from '../types'
 
 const BlogModal = ({ publication, onClose, formatDate }: BlogModalProps) => {
    if (!publication) return null

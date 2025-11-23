@@ -1,12 +1,5 @@
-import type { Publication } from '../types'
+import type { BlogGridProps } from '../types'
 import BlogCard from './BlogCard'
-
-interface BlogGridProps {
-   publications: Publication[]
-   onSelectPublication: (publication: Publication) => void
-   formatDate: (dateString: string) => string
-   getExcerpt: (text: string) => string
-}
 
 const BlogGrid = ({ publications, onSelectPublication, formatDate, getExcerpt }: BlogGridProps) => {
    return (

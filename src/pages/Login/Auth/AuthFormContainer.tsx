@@ -1,11 +1,5 @@
-import type { ReactNode } from 'react'
 import Logo from '@/assets/logo.svg'
-
-interface AuthFormContainerProps {
-   title: string
-   subtitle: string
-   children: ReactNode
-}
+import type { AuthFormContainerProps } from '../types'
 
 const AuthFormContainer = ({ title, subtitle, children }: AuthFormContainerProps) => {
    return (

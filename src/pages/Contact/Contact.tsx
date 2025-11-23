@@ -1,9 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useApi } from '@/hooks/useApi'
 import { FaEnvelope, FaWhatsapp, FaMapMarkerAlt, FaClock, FaComments, FaCheckCircle, FaTimesCircle, FaSpinner } from 'react-icons/fa'
 
+interface User {
+   id: string
+   name: string
+   email: string
+   role: string
+   createdAt: string
+   updatedAt: string
+}
+
 const Contact = () => {
    const { apiBaseUrl } = useApi()
+   const [_, setUser] = useState<User | null>(null)
    const [formData, setFormData] = useState({
       fullName: '',
       email: '',
@@ -13,6 +23,35 @@ const Contact = () => {
    })
    const [loading, setLoading] = useState(false)
    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+   useEffect(() => {
+      const loadUserData = async () => {
+         const token = localStorage.getItem('authToken')
+         if (!token) return
+
+         try {
+            const response = await fetch(`${apiBaseUrl}/user`, {
+               headers: {
+                  'Authorization': `Bearer ${token}`
+               }
+            })
+
+            const data = await response.json()
+            if (!data.error && data.user) {
+               setUser(data.user)
+               setFormData(prev => ({
+                  ...prev,
+                  fullName: data.user.name,
+                  email: data.user.email
+               }))
+            }
+         } catch (error) {
+            console.error('Erro ao carregar dados do usuário:', error)
+         }
+      }
+
+      loadUserData()
+   }, [apiBaseUrl])
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       const { name, value } = e.target
@@ -30,9 +69,6 @@ const Contact = () => {
       try {
          const token = localStorage.getItem('authToken')
 
-         console.log('📤 Dados sendo enviados:', formData)
-         console.log('🔑 Token:', token ? 'Presente' : 'Ausente')
-
          const response = await fetch(`${apiBaseUrl}/contact/register`, {
             method: 'POST',
             headers: {
@@ -42,10 +78,7 @@ const Contact = () => {
             body: JSON.stringify(formData)
          })
 
-         console.log('📥 Status da resposta:', response.status)
-
          const data = await response.json()
-         console.log('📥 Resposta da API:', data)
 
          if (data.error) {
             setSubmitStatus('error')
@@ -174,34 +207,36 @@ const Contact = () => {
                      <form onSubmit={handleSubmit} className='space-y-5'>
                         <div>
                            <label htmlFor='fullName' className='block mb-2 text-sm font-medium text-gray-700'>
-                              Nome Completo <span className='text-red-500'>*</span>
+                              Nome Completo
                            </label>
                            <input
                               type='text'
                               id='fullName'
                               name='fullName'
                               value={formData.fullName}
-                              onChange={handleChange}
-                              required
-                              placeholder='Seu nome completo'
-                              className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-focinhando-accent/50 focus:outline-none transition text-sm'
+                              readOnly
+                              disabled
+                              placeholder='Carregando...'
+                              className='w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-200 text-gray-600 cursor-not-allowed text-sm'
                            />
+                           <p className='text-xs text-gray-500 mt-1'>Preenchido automaticamente com seus dados</p>
                         </div>
 
                         <div>
                            <label htmlFor='email' className='block mb-2 text-sm font-medium text-gray-700'>
-                              Email <span className='text-red-500'>*</span>
+                              Email
                            </label>
                            <input
                               type='email'
                               id='email'
                               name='email'
                               value={formData.email}
-                              onChange={handleChange}
-                              required
-                              placeholder='seu@email.com'
-                              className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-focinhando-accent/50 focus:outline-none transition text-sm'
+                              readOnly
+                              disabled
+                              placeholder='Carregando...'
+                              className='w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-200 text-gray-600 cursor-not-allowed text-sm'
                            />
+                           <p className='text-xs text-gray-500 mt-1'>Preenchido automaticamente com seus dados</p>
                         </div>
 
                         <div>

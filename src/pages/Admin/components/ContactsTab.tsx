@@ -1,12 +1,7 @@
-import type { Contact } from '../types'
+import type { ContactsTabProps } from '../types'
 import { LoadingSpinner } from './SharedComponents'
 import { FaEnvelope, FaPhone } from 'react-icons/fa'
 import { IoMailOpenOutline } from 'react-icons/io5'
-
-interface ContactsTabProps {
-   contacts: Contact[]
-   loading: boolean
-}
 
 const ContactsTab = ({ contacts, loading }: ContactsTabProps) => {
    const formatDate = (dateString: string) => {

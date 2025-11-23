@@ -1,11 +1,4 @@
-import type { Publication } from '../types'
-
-interface BlogCardProps {
-   publication: Publication
-   onClick: (publication: Publication) => void
-   formatDate: (dateString: string) => string
-   getExcerpt: (text: string) => string
-}
+import type { BlogCardProps } from '../types'
 
 const BlogCard = ({ publication, onClick, formatDate, getExcerpt }: BlogCardProps) => {
    return (

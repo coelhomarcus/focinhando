@@ -1,21 +1,7 @@
 import { FaUser, FaEdit, FaTimes } from 'react-icons/fa'
-import type { User, UserComplement, EditData } from '../types'
+import type { PersonalInfoCardProps } from '../types'
 import EditForm from './EditForm'
 import InfoDisplay from './InfoDisplay'
-
-interface PersonalInfoCardProps {
-   user: User | null
-   complement: UserComplement | null
-   editing: boolean
-   setEditing: (editing: boolean) => void
-   editData: EditData
-   setEditData: (data: EditData) => void
-   error: string
-   saveSuccess: boolean
-   onSave: () => void
-   onFileSelect?: (file: File) => void
-   uploading?: boolean
-}
 
 const PersonalInfoCard = ({
    user,

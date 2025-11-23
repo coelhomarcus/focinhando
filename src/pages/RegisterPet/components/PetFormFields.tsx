@@ -1,13 +1,5 @@
 import { FaSyringe } from 'react-icons/fa'
-import type { PetForm } from '../types'
-
-interface PetFormFieldsProps {
-   petForm: PetForm
-   setPetForm: (form: PetForm) => void
-   onFileSelect?: (file: File) => void
-   uploading?: boolean
-   selectedFileObj?: File | null
-}
+import type { PetFormFieldsProps } from '../types'   
 
 const PetFormFields = ({ petForm, setPetForm, onFileSelect, uploading, selectedFileObj }: PetFormFieldsProps) => {
    return (

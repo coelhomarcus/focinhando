@@ -1,13 +1,17 @@
+import { useEffect } from 'react'
 import { FaDog, FaCat, FaBirthdayCake, FaMapMarkerAlt, FaSyringe, FaMars, FaVenus, FaWhatsapp, FaEnvelope } from 'react-icons/fa'
-import type { Pet } from '../types'
+import type { PetModalProps } from '../types'
 import { calculateAge } from '../utils'
 
-interface PetModalProps {
-   pet: Pet | null
-   onClose: () => void
-}
-
 const PetModal = ({ pet, onClose }: PetModalProps) => {
+   useEffect(() => {
+      if (pet) document.body.style.overflow = 'hidden'
+
+      return () => {
+         document.body.style.overflow = 'unset'
+      }
+   }, [pet])
+
    if (!pet) return null
 
    return (

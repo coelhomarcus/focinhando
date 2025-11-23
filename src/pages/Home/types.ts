@@ -16,4 +16,29 @@ export interface Pet {
    email?: string
 }
 
+export interface PetModalProps {
+   pet: Pet | null
+   onClose: () => void
+}
+
+export interface PetCardProps {
+   pet: Pet
+   onClick: (pet: Pet) => void
+}
+
 export type FilterType = 'all' | 'Cão' | 'Gato' | 'filhote'
+
+export interface FilterBarProps {
+   activeFilter: FilterType
+   filteredCount: number
+   onFilterChange: (filter: FilterType) => void
+   searchQuery: string
+   onSearchChange: (query: string) => void
+}
+
+export interface PetGridProps {
+   pets: Pet[]
+   loading: boolean
+   activeFilter: FilterType
+   onPetClick: (pet: Pet) => void
+}
