@@ -10,10 +10,9 @@ const BlogModal = ({ publication, onClose, formatDate }: BlogModalProps) => {
          onClick={onClose}
       >
          <div
-            className='bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-slideUp flex flex-col border border-blue-100'
+            className='bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-slideUp flex flex-col border-4 border-gray-200'
             onClick={(e) => e.stopPropagation()}
          >
-            {/* Modal Header - Fixo */}
             <div className='sticky top-0 z-10 bg-linear-to-r from-blue-600 to-blue-500 text-white p-8 rounded-t-2xl shadow-lg'>
                <button
                   onClick={onClose}
@@ -36,7 +35,6 @@ const BlogModal = ({ publication, onClose, formatDate }: BlogModalProps) => {
                </div>
             </div>
 
-            {/* Modal Body - Scrollable */}
             <div className='flex-1 overflow-y-auto bg-blue-50/30'>
                <div className='p-8'>
                   <div className='relative h-96 rounded-xl overflow-hidden mb-8 bg-blue-100 border border-blue-200'>
@@ -51,7 +49,6 @@ const BlogModal = ({ publication, onClose, formatDate }: BlogModalProps) => {
                   </div>
                </div>
 
-               {/* Modal Footer */}
                <div className='px-8 pb-8'>
                   <button
                      onClick={onClose}
