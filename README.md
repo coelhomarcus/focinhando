@@ -105,9 +105,6 @@ Repositório Backend: [focinhando-backend](https://github.com/AngeloResplandes/f
 
 ---
 
-- TODOLIST
-  - Na pagina de suporte pegar email e numero(se tiver) automaticamente e preencher
-
 ## 📝
 
 Este projeto foi desenvolvido para fins **acadêmicos** como parte da disciplina WEB I e II.
