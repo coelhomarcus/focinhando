@@ -16,132 +16,147 @@ const PetModal = ({ pet, onClose }: PetModalProps) => {
 
    return (
       <div
-         className='fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fadeIn'
+         className='fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn'
          onClick={onClose}
       >
          <div
-            className='bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-slideUp flex flex-col'
+            className='bg-white rounded-3xl max-w-5xl w-full h-[85vh] md:h-[90vh] overflow-hidden shadow-2xl animate-slideUp flex flex-col md:flex-row border-4 border-gray-200'
             onClick={(e) => e.stopPropagation()}
          >
-            <div className='relative shrink-0'>
+            <div className='relative w-full md:w-1/2 bg-gray-900 flex items-center justify-center overflow-hidden shrink-0 h-[35vh] md:h-full'>
+               <img 
+                  src={pet.img} 
+                  alt="" 
+                  className='absolute inset-0 w-full h-full object-cover blur-xl opacity-50' 
+               />
+
                <button
-                  className='absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-sm hover:bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center text-2xl hover:rotate-90 transition-all duration-300 shadow-lg'
+                  className='absolute top-6 left-4 z-20 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 flex items-center justify-center text-2xl transition-all duration-300 md:hidden'
+                  onClick={onClose}
+                  aria-label='Fechar modal'
+               >
+                  ×
+               </button>
+               
+               <div className='w-full h-full relative z-10'>
+                  <img
+                     src={pet.img}
+                     alt={pet.name}
+                     className='w-full h-full object-cover md:object-contain drop-shadow-xl'
+                  />
+               </div>
+            </div>
+
+            <div className='flex-1 flex flex-col w-full md:w-1/2 h-full bg-white relative min-h-0'>
+               <button
+                  className='absolute top-4 right-4 z-20 hover:bg-gray-100 text-red-500 hover:text-red-800 rounded-full w-10 h-10 hidden md:flex items-center justify-center text-3xl transition-all duration-300'
                   onClick={onClose}
                   aria-label='Fechar modal'
                >
                   ×
                </button>
 
-               <div className='h-100 bg-gray-100 relative overflow-hidden'>
-                  <img
-                     src={pet.img}
-                     alt={pet.name}
-                     className='w-full h-full object-cover'
-                  />
-
-                  <div className='absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent'></div>
-
-                  <div className='absolute bottom-0 left-0 right-0 p-6'>
-                     <h2 className='text-4xl font-bold text-white mb-3 drop-shadow-lg'>{pet.name}</h2>
-                     <div className='flex items-center gap-3 flex-wrap'>
-                        <span className='bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-sm font-medium text-white flex items-center gap-2'>
-                           <FaBirthdayCake />
+               <div className='flex-1 overflow-y-auto p-5 md:p-6'>
+                  <div className='mb-6'>
+                     <div className='flex items-center justify-between mb-2'>
+                        <h2 className='text-3xl md:text-4xl font-bold text-gray-900'>{pet.name}</h2>
+                     </div>
+                     
+                     <div className='flex items-center gap-2 flex-wrap mb-4'>
+                        <span className='bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs md:text-sm font-medium border border-blue-100 flex items-center gap-2'>
+                           <FaBirthdayCake className="text-blue-500" />
                            <span>{calculateAge(pet.age)}</span>
                         </span>
-                        <span className='bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-sm font-medium text-white flex items-center gap-2'>
-                           {pet.sex === 'macho' ? <FaMars /> : <FaVenus />}
+                        <span className='bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-xs md:text-sm font-medium border border-purple-100 flex items-center gap-2'>
+                           {pet.sex === 'macho' ? <FaMars className="text-purple-500" /> : <FaVenus className="text-purple-500" />}
                            <span className='capitalize'>{pet.sex}</span>
                         </span>
                      </div>
-                  </div>
-               </div>
-            </div>
 
-            <div className='flex-1 overflow-y-auto px-6 py-6 bg-white'>
-               <div className='mb-8'>
-                  <h3 className='text-xl font-bold text-gray-900 mb-3'>Sobre {pet.name}</h3>
-                  <p className='text-gray-600 leading-relaxed'>
-                     {pet.about}
-                  </p>
-               </div>
-
-               <div className='mb-6'>
-                  <h3 className='text-xl font-bold text-gray-900 mb-4'>Informações</h3>
-                  <div className='grid grid-cols-2 md:grid-cols-4 gap-3'>
-                     <div className='bg-gray-50 border border-gray-200 p-4 rounded-xl text-center'>
-                        <p className='text-xs text-gray-500 font-medium mb-1 uppercase tracking-wide'>Raça</p>
-                        <p className='text-sm font-bold text-gray-900'>{pet.race}</p>
-                     </div>
-                     <div className='bg-gray-50 border border-gray-200 p-4 rounded-xl text-center'>
-                        <p className='text-xs text-gray-500 font-medium mb-1 uppercase tracking-wide'>Peso</p>
-                        <p className='text-sm font-bold text-gray-900'>{pet.weight} kg</p>
-                     </div>
-                     <div className='bg-gray-50 border border-gray-200 p-4 rounded-xl text-center'>
-                        <p className='text-xs text-gray-500 font-medium mb-1 uppercase tracking-wide'>Idade</p>
-                        <p className='text-sm font-bold text-gray-900'>{calculateAge(pet.age)}</p>
-                     </div>
-                     <div className='bg-gray-50 border border-gray-200 p-4 rounded-xl text-center'>
-                        <p className='text-xs text-gray-500 font-medium mb-1 uppercase tracking-wide'>Sexo</p>
-                        <p className='text-sm font-bold text-gray-900 capitalize'>{pet.sex}</p>
-                     </div>
-                  </div>
-               </div>
-
-               <div className='mb-6'>
-                  <h3 className='text-xl font-bold text-gray-900 mb-4'>Características</h3>
-                  <div className='flex flex-wrap gap-2'>
-                     <span className='bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium border border-blue-200 flex items-center gap-2'>
-                        {pet.specie === 'cão' ? <><FaDog /> Cachorro</> : <><FaCat /> Gato</>}
-                     </span>
-                     {pet.vaccinated && (
-                        <span className='bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium border border-green-200 flex items-center gap-2'>
-                           <FaSyringe /> Vacinado
-                        </span>
-                     )}
-                     <span className='bg-orange-50 text-orange-700 px-4 py-2 rounded-full text-sm font-medium border border-orange-200 flex items-center gap-2'>
-                        <FaMapMarkerAlt /> {pet.city}/{pet.state}
-                     </span>
-                  </div>
-               </div>
-            </div>
-
-            <div className='shrink-0 p-6 bg-gray-50 border-t border-gray-200'>
-               {pet.userName && (
-                  <div className='mb-4 text-center'>
-                     <p className='text-sm text-gray-600'>
-                        Responsável: <span className='font-semibold text-gray-800'>{pet.userName}</span>
+                     <h3 className='text-lg md:text-xl font-bold text-gray-900 mb-2'>Sobre {pet.name}</h3>
+                     <p className='text-gray-600 leading-relaxed text-base md:text-lg'>
+                        {pet.about}
                      </p>
                   </div>
-               )}
-               <div className='grid grid-cols-2 gap-3'>
-                  <button
-                     className='bg-green-500 text-white py-3.5 rounded-xl font-semibold text-base hover:bg-green-600 transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2'
-                     onClick={() => {
-                        const phone = pet.phoneNumber?.replace(/\D/g, '')
-                        const message = encodeURIComponent(`Olá! Tenho interesse em adotar o(a) ${pet.name}.`)
-                        window.open(`https://wa.me/${phone}?text=${message}`, '_blank')
-                     }}
-                     disabled={!pet.phoneNumber}
-                  >
-                     <FaWhatsapp className='text-lg' />
-                     <span>WhatsApp</span>
-                  </button>
-                  <button
-                     className='bg-focinhando-accent text-white py-3.5 rounded-xl font-semibold text-base hover:bg-focinhando-accent/90 transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2'
-                     onClick={() => {
-                        const subject = encodeURIComponent(`Interesse em adotar ${pet.name}`)
-                        const body = encodeURIComponent(`Olá ${pet.userName || ''},\n\nTenho interesse em adotar o(a) ${pet.name}.\n\nAguardo seu contato.`)
-                        window.open(`mailto:${pet.email}?subject=${subject}&body=${body}`, '_blank')
-                     }}
-                     disabled={!pet.email}
-                  >
-                     <FaEnvelope className='text-lg' />
-                     <span>E-mail</span>
-                  </button>
+
+                  <div className='mb-6'>
+                     <h3 className='text-base md:text-lg font-bold text-gray-900 mb-3'>Informações</h3>
+                     <div className='grid grid-cols-2 gap-2 md:gap-3'>
+                        <div className='bg-gray-50 border border-gray-100 p-3 rounded-xl'>
+                           <p className='text-[10px] md:text-xs text-gray-500 font-medium mb-1 uppercase tracking-wide'>Raça</p>
+                           <p className='text-sm md:text-base font-bold text-gray-900'>{pet.race}</p>
+                        </div>
+                        <div className='bg-gray-50 border border-gray-100 p-3 rounded-xl'>
+                           <p className='text-[10px] md:text-xs text-gray-500 font-medium mb-1 uppercase tracking-wide'>Peso</p>
+                           <p className='text-sm md:text-base font-bold text-gray-900'>{pet.weight} kg</p>
+                        </div>
+                        <div className='bg-gray-50 border border-gray-100 p-3 rounded-xl'>
+                           <p className='text-[10px] md:text-xs text-gray-500 font-medium mb-1 uppercase tracking-wide'>Espécie</p>
+                           <div className='flex items-center gap-2 text-sm md:text-base font-bold text-gray-900'>
+                              {pet.specie === 'cão' ? <FaDog className="text-gray-400" /> : <FaCat className="text-gray-400" />}
+                              <span className="capitalize">{pet.specie}</span>
+                           </div>
+                        </div>
+                        <div className='bg-gray-50 border border-gray-100 p-3 rounded-xl'>
+                           <p className='text-[10px] md:text-xs text-gray-500 font-medium mb-1 uppercase tracking-wide'>Local</p>
+                           <div className='flex items-center gap-2 text-sm md:text-base font-bold text-gray-900 truncate'>
+                              <FaMapMarkerAlt className="text-gray-400 shrink-0" />
+                              <span className="truncate">{pet.city}/{pet.state}</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  {pet.vaccinated && (
+                     <div className='mb-4'>
+                        <span className='bg-green-50 text-green-700 px-4 py-2 md:py-3 rounded-xl text-sm font-medium border border-green-200 flex items-center gap-3 w-full'>
+                           <div className="bg-green-100 p-2 rounded-full">
+                              <FaSyringe className="text-green-600" />
+                           </div>
+                           <div>
+                              <p className="font-bold text-green-800">Vacinado</p>
+                              <p className="text-xs text-green-600">Este pet está com as vacinas em dia</p>
+                           </div>
+                        </span>
+                     </div>
+                  )}
                </div>
-               <p className='text-center text-xs text-gray-500 mt-3'>
-                  Escolha a melhor forma de entrar em contato
-               </p>
+
+               <div className='shrink-0 p-4 md:p-6 bg-gray-50 border-t border-gray-100 z-10'>
+                  {pet.userName && (
+                     <div className='mb-3 flex items-center justify-center gap-2 text-gray-600'>
+                        <p className='text-xs md:text-sm'>
+                           Responsável: <span className='font-semibold text-gray-900'>{pet.userName}</span>
+                        </p>
+                     </div>
+                  )}
+                  <div className='grid grid-cols-2 gap-3'>
+                     <button
+                        className='bg-green-500 text-white py-3 rounded-xl font-bold text-sm md:text-base hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/30 flex items-center justify-center gap-2 active:scale-[0.98]'
+                        onClick={() => {
+                           const phone = pet.phoneNumber?.replace(/\D/g, '')
+                           const message = encodeURIComponent(`Olá! Tenho interesse em adotar o(a) ${pet.name}.`)
+                           window.open(`https://wa.me/${phone}?text=${message}`, '_blank')
+                        }}
+                        disabled={!pet.phoneNumber}
+                     >
+                        <FaWhatsapp className='text-lg' />
+                        <span>WhatsApp</span>
+                     </button>
+                     <button
+                        className='bg-focinhando-accent text-white py-3 rounded-xl font-bold text-sm md:text-base hover:bg-focinhando-accent/90 transition-all duration-300 shadow-lg hover:shadow-orange-500/30 flex items-center justify-center gap-2 active:scale-[0.98]'
+                        onClick={() => {
+                           const subject = encodeURIComponent(`Interesse em adotar ${pet.name}`)
+                           const body = encodeURIComponent(`Olá ${pet.userName || ''},\n\nTenho interesse em adotar o(a) ${pet.name}.\n\nAguardo seu contato.`)
+                           window.open(`mailto:${pet.email}?subject=${subject}&body=${body}`, '_blank')
+                        }}
+                        disabled={!pet.email}
+                     >
+                        <FaEnvelope className='text-lg' />
+                        <span>E-mail</span>
+                     </button>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
