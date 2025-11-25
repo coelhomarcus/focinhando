@@ -1,22 +1,29 @@
-import type { AuthButtonProps } from '../types'
+import type { AuthButtonProps } from "../types";
 
 import { FaSpinner } from "react-icons/fa";
 
-const AuthButton = ({ loading = false, loadingText = 'Carregando...', children, ...props }: AuthButtonProps) => {
-   return (
-      <button
-         type="submit"
-         className='w-full py-3 px-4 bg-focinhando-accent text-white font-medium rounded-lg hover:bg-focinhando-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-focinhando-accent transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm'
-         {...props}
-      >
-         {loading ? (
-            <span className='flex items-center justify-center'>
-               <FaSpinner className='animate-spin -ml-1 mr-3 h-5 w-5 text-white'/> 
-               {loadingText}
-            </span>
-         ) : children}
-      </button>
-   )
-}
+const AuthButton = ({
+  loading = false,
+  loadingText = "Carregando...",
+  children,
+  ...props
+}: AuthButtonProps) => {
+  return (
+    <button
+      type="submit"
+      className="w-full py-3 px-4 bg-focinhando-accent text-white font-medium rounded-lg hover:bg-focinhando-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-focinhando-accent transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+      {...props}
+    >
+      {loading ? (
+        <span className="flex items-center justify-center">
+          <FaSpinner className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+          {loadingText}
+        </span>
+      ) : (
+        children
+      )}
+    </button>
+  );
+};
 
-export default AuthButton
+export default AuthButton;
