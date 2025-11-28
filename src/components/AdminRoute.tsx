@@ -50,7 +50,6 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
   }, [apiBaseUrl, token, navigate]);
 
   if (loading) {
-    // Mostra loading enquanto verifica
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
@@ -62,16 +61,13 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
   }
 
   if (!token || !user) {
-    // Se não houver token ou usuário, redireciona para login
     return <Navigate to="/login" replace />;
   }
 
   if (user.role !== "admin") {
-    // Se não for admin, redireciona para home
     return <Navigate to="/" replace />;
   }
 
-  // Se for admin, renderiza o conteúdo protegido
   return <>{children}</>;
 };
 

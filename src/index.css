@@ -2,87 +2,85 @@
 @import "tailwindcss";
 
 @font-face {
-   font-family: "Cabinet Grotesk";
-   src: url("./assets/font/CabinetGrotesk-Variable.ttf") format("truetype");
-   font-weight: 100 900;
-   font-style: normal;
-   font-display: swap;
+  font-family: "Cabinet Grotesk";
+  src: url("./assets/font/CabinetGrotesk-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
-   font-family: "Cabinet Grotesk", "Inter", sans-serif;
+  font-family: "Cabinet Grotesk", "Inter", sans-serif;
 }
 
 @theme {
-   --color-focinhando-white: #fafafa;
-   --color-focinhando-accent: #ee6551;
-   --color-focinhando-accent-dark: #d94c42;
-   --color-focinhando-border: rgba(0, 0, 0, 0.15);
-   --color-focinhando-gray: rgba(206, 205, 205, 0.15);
-   --color-focinhando-dark: #333;
-   --color-focinhando-text: #666;
+  --color-focinhando-white: #fafafa;
+  --color-focinhando-accent: #ee6551;
+  --color-focinhando-accent-dark: #d94c42;
+  --color-focinhando-border: rgba(0, 0, 0, 0.15);
+  --color-focinhando-gray: rgba(206, 205, 205, 0.15);
+  --color-focinhando-dark: #333;
+  --color-focinhando-text: #666;
 
-   /* New pet card colors */
-   --color-focinhando-orange: #ff8c42;
-   --color-focinhando-orange-light: #ffb380;
-   --color-focinhando-blue: #4a90e2;
-   --color-focinhando-blue-light: #7db3f5;
-   --color-focinhando-purple: #9b59b6;
-   --color-focinhando-purple-light: #c39bd3;
-   --color-focinhando-green: #2ecc71;
-   --color-focinhando-green-light: #82e0aa;
-   --color-focinhando-pink: #e84393;
-   --color-focinhando-pink-light: #fd79a8;
-   --color-focinhando-teal: #1abc9c;
-   --color-focinhando-teal-light: #76d7c4;
-   --color-focinhando-bg-light: #f8f9fa;
-   --color-focinhando-shadow: rgba(0, 0, 0, 0.1);
+  --color-focinhando-orange: #ff8c42;
+  --color-focinhando-orange-light: #ffb380;
+  --color-focinhando-blue: #4a90e2;
+  --color-focinhando-blue-light: #7db3f5;
+  --color-focinhando-purple: #9b59b6;
+  --color-focinhando-purple-light: #c39bd3;
+  --color-focinhando-green: #2ecc71;
+  --color-focinhando-green-light: #82e0aa;
+  --color-focinhando-pink: #e84393;
+  --color-focinhando-pink-light: #fd79a8;
+  --color-focinhando-teal: #1abc9c;
+  --color-focinhando-teal-light: #76d7c4;
+  --color-focinhando-bg-light: #f8f9fa;
+  --color-focinhando-shadow: rgba(0, 0, 0, 0.1);
 
-   --animate-fadeIn: fadeIn 0.3s ease-in-out;
-   --animate-slideUp: slideUp 0.3s ease-out;
+  --animate-fadeIn: fadeIn 0.3s ease-in-out;
+  --animate-slideUp: slideUp 0.3s ease-out;
 }
 
 @keyframes fadeIn {
-   from {
-      opacity: 0;
-   }
+  from {
+    opacity: 0;
+  }
 
-   to {
-      opacity: 1;
-   }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-   from {
-      opacity: 0;
-      transform: translateY(20px);
-   }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-   to {
-      opacity: 1;
-      transform: translateY(0);
-   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Custom Scrollbar */
 .scrollbar-thin::-webkit-scrollbar {
-   width: 8px;
+  width: 8px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
-   background: transparent;
+  background: transparent;
 }
 
 .scrollbar-thumb-focinhando-accent::-webkit-scrollbar-thumb {
-   background-color: var(--color-focinhando-accent);
-   border-radius: 10px;
+  background-color: var(--color-focinhando-accent);
+  border-radius: 10px;
 }
 
 .scrollbar-thumb-focinhando-accent:hover::-webkit-scrollbar-thumb {
-   background-color: var(--color-focinhando-accent-dark);
+  background-color: var(--color-focinhando-accent-dark);
 }
 
 .scrollbar-track-focinhando-gray::-webkit-scrollbar-track {
-   background-color: var(--color-focinhando-gray);
-   border-radius: 10px;
+  background-color: var(--color-focinhando-gray);
+  border-radius: 10px;
 }

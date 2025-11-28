@@ -28,13 +28,11 @@ const Contact = () => {
       const token = localStorage.getItem("authToken");
 
       if (!token) {
-        // Se não tiver token, marca como carregado imediatamente
         setDataLoaded(true);
         return;
       }
 
       try {
-        // Buscar dados do usuário e complemento em paralelo
         const [userResponse, complementResponse] = await Promise.all([
           fetch(`${apiBaseUrl}/user`, {
             headers: {
@@ -51,7 +49,6 @@ const Contact = () => {
         const userData = await userResponse.json();
         const complementData = await complementResponse.json();
 
-        // Atualiza todos os dados de uma vez
         if (!userData.error && userData.user) {
           setUser(userData.user);
           setUserData({
@@ -63,7 +60,6 @@ const Contact = () => {
       } catch (error) {
         console.error("Erro ao carregar dados do usuário:", error);
       } finally {
-        // Marca como carregado após buscar os dados
         setDataLoaded(true);
       }
     };
