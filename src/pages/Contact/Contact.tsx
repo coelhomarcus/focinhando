@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useApi } from "@/hooks/useApi";
+import type { User } from "@/types";
 import {
   FaEnvelope,
   FaWhatsapp,
@@ -12,45 +13,58 @@ import ContactInfoCard from "./components/ContactInfoCard";
 import ContactForm from "./components/ContactForm";
 import ContactCTA from "./components/ContactCTA";
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 const Contact = () => {
   const { apiBaseUrl } = useApi();
   const [, setUser] = useState<User | null>(null);
   const [userData, setUserData] = useState({
     fullName: "",
     email: "",
+    phoneNumber: "",
   });
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     const loadUserData = async () => {
       const token = localStorage.getItem("authToken");
-      if (!token) return;
+
+      if (!token) {
+        // Se não tiver token, marca como carregado imediatamente
+        setDataLoaded(true);
+        return;
+      }
 
       try {
-        const response = await fetch(`${apiBaseUrl}/user`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        // Buscar dados do usuário e complemento em paralelo
+        const [userResponse, complementResponse] = await Promise.all([
+          fetch(`${apiBaseUrl}/user`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          fetch(`${apiBaseUrl}/user/complement`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+        ]);
 
-        const data = await response.json();
-        if (!data.error && data.user) {
-          setUser(data.user);
+        const userData = await userResponse.json();
+        const complementData = await complementResponse.json();
+
+        // Atualiza todos os dados de uma vez
+        if (!userData.error && userData.user) {
+          setUser(userData.user);
           setUserData({
-            fullName: data.user.name,
-            email: data.user.email,
+            fullName: userData.user.name,
+            email: userData.user.email,
+            phoneNumber: complementData.complement?.phoneNumber || "",
           });
         }
       } catch (error) {
         console.error("Erro ao carregar dados do usuário:", error);
+      } finally {
+        // Marca como carregado após buscar os dados
+        setDataLoaded(true);
       }
     };
 
@@ -119,7 +133,23 @@ const Contact = () => {
               </div>
             </div>
 
-            <ContactForm initialData={userData} />
+            {dataLoaded ? (
+              <ContactForm initialData={userData} />
+            ) : (
+              <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
+                <div className="animate-pulse space-y-5">
+                  <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                  <div className="space-y-3 pt-4">
+                    <div className="h-12 bg-gray-200 rounded"></div>
+                    <div className="h-12 bg-gray-200 rounded"></div>
+                    <div className="h-12 bg-gray-200 rounded"></div>
+                    <div className="h-12 bg-gray-200 rounded"></div>
+                    <div className="h-32 bg-gray-200 rounded"></div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { FormEvent, ChangeEvent } from "react";
 import { useApi } from "@/hooks/useApi";
 import { FaCheckCircle, FaTimesCircle, FaSpinner } from "react-icons/fa";
@@ -20,7 +20,7 @@ const ContactForm = ({ initialData }: ContactFormProps) => {
   const [formData, setFormData] = useState<ContactFormData>({
     fullName: initialData?.fullName || "",
     email: initialData?.email || "",
-    phoneNumber: "",
+    phoneNumber: initialData?.phoneNumber || "",
     subject: "",
     message: "",
   });
@@ -29,15 +29,7 @@ const ContactForm = ({ initialData }: ContactFormProps) => {
     "idle" | "success" | "error"
   >("idle");
 
-  useEffect(() => {
-    if (initialData?.fullName || initialData?.email) {
-      setFormData((prev) => ({
-        ...prev,
-        fullName: initialData.fullName || prev.fullName,
-        email: initialData.email || prev.email,
-      }));
-    }
-  }, [initialData]);
+  const hasPhoneFromProfile = !!initialData?.phoneNumber;
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -76,7 +68,7 @@ const ContactForm = ({ initialData }: ContactFormProps) => {
         setFormData({
           fullName: initialData?.fullName || "",
           email: initialData?.email || "",
-          phoneNumber: "",
+          phoneNumber: initialData?.phoneNumber || "",
           subject: "",
           message: "",
         });
@@ -114,7 +106,7 @@ const ContactForm = ({ initialData }: ContactFormProps) => {
             value={formData.fullName}
             readOnly
             disabled
-            placeholder="Carregando..."
+            placeholder="Seu nome completo"
             className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-200 text-gray-600 cursor-not-allowed text-sm"
           />
           <p className="text-xs text-gray-500 mt-1">
@@ -136,7 +128,7 @@ const ContactForm = ({ initialData }: ContactFormProps) => {
             value={formData.email}
             readOnly
             disabled
-            placeholder="Carregando..."
+            placeholder="seu@email.com"
             className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-200 text-gray-600 cursor-not-allowed text-sm"
           />
           <p className="text-xs text-gray-500 mt-1">
@@ -149,7 +141,7 @@ const ContactForm = ({ initialData }: ContactFormProps) => {
             htmlFor="phoneNumber"
             className="block mb-2 text-sm font-medium text-gray-700"
           >
-            Telefone <span className="text-gray-400 text-xs">(opcional)</span>
+            Telefone <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
@@ -157,9 +149,32 @@ const ContactForm = ({ initialData }: ContactFormProps) => {
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
+            required
+            readOnly={hasPhoneFromProfile}
+            disabled={hasPhoneFromProfile}
             placeholder="(00) 12345-6789"
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-focinhando-accent/50 focus:outline-none transition text-sm"
+            className={`w-full px-4 py-3 rounded-lg border border-gray-300 text-sm transition ${
+              hasPhoneFromProfile
+                ? "bg-gray-200 text-gray-600 cursor-not-allowed"
+                : "focus:border-gray-900 focus:ring-2 focus:ring-focinhando-accent/50 focus:outline-none"
+            }`}
           />
+          {hasPhoneFromProfile ? (
+            <p className="text-xs text-gray-500 mt-1">
+              Preenchido automaticamente com seus dados
+            </p>
+          ) : (
+            <p className="text-xs text-gray-500 mt-1">
+              Adicione um telefone no seu{" "}
+              <a
+                href="/profile"
+                className="text-focinhando-accent hover:underline"
+              >
+                perfil
+              </a>{" "}
+              para preenchimento automático
+            </p>
+          )}
         </div>
 
         <div>
