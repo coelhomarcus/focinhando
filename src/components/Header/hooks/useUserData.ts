@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useApi } from "@/hooks/useApi";
-import type { User, UserComplement } from "../types";
+import type { User, UserComplement } from "@/types";
 
 export const useUserData = () => {
   const { apiBaseUrl } = useApi();
