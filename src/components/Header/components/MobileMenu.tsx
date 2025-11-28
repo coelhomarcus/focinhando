@@ -9,7 +9,7 @@ import {
   FaCog,
   FaDog,
 } from "react-icons/fa";
-import type { User } from "../types";
+import type { User } from "@/types";
 
 interface MobileMenuProps {
   isOpen: boolean;

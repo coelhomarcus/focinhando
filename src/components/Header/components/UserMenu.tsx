@@ -7,7 +7,7 @@ import {
   FaDog,
   FaChevronDown,
 } from "react-icons/fa";
-import type { User } from "../types";
+import type { User } from "@/types";
 
 interface UserMenuProps {
   user: User | null;
