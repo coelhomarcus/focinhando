@@ -3,6 +3,7 @@ import { API_BASE_URL } from "@/config/api";
 import type { PetForm as PetFormType } from "../types";
 import { StatusMessage } from "./SharedComponents";
 import { FaSyringe, FaSpinner } from "react-icons/fa";
+import { useCity } from "@/hooks/useCity";
 
 const PetForm = () => {
   const [loading, setLoading] = useState(false);
@@ -25,6 +26,7 @@ const PetForm = () => {
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+  const { estados, cidades, loadingCidades } = useCity(petForm.state);
 
   const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
   const CLOUDINARY_UPLOAD_PRESET = import.meta.env
@@ -254,8 +256,8 @@ const PetForm = () => {
               required
               className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 focus:outline-none transition text-sm bg-white"
             >
-              <option value="macho">♂️ Macho</option>
-              <option value="fêmea">♀️ Fêmea</option>
+              <option value="macho">Macho</option>
+              <option value="fêmea">Fêmea</option>
             </select>
           </div>
 
@@ -279,33 +281,49 @@ const PetForm = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Cidade <span className="text-red-500">*</span>
+              Estado <span className="text-red-500">*</span>
             </label>
-            <input
-              type="text"
-              value={petForm.city}
-              onChange={(e) => setPetForm({ ...petForm, city: e.target.value })}
+            <select
+              value={petForm.state}
+              onChange={(e) =>
+                setPetForm({ ...petForm, state: e.target.value, city: "" })
+              }
               required
-              placeholder="Ex: Belém"
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 focus:outline-none transition text-sm"
-            />
+              className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 focus:outline-none transition text-sm bg-white"
+            >
+              <option value="">Selecione um estado</option>
+              {estados.map((estado) => (
+                <option key={estado.id} value={estado.id}>
+                  {estado.estado}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Estado <span className="text-red-500">*</span>
+              Cidade <span className="text-red-500">*</span>
             </label>
-            <input
-              type="text"
-              value={petForm.state}
-              onChange={(e) =>
-                setPetForm({ ...petForm, state: e.target.value })
-              }
+            <select
+              value={petForm.city}
+              onChange={(e) => setPetForm({ ...petForm, city: e.target.value })}
               required
-              maxLength={2}
-              placeholder="PA"
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 focus:outline-none transition text-sm uppercase"
-            />
+              disabled={!petForm.state || loadingCidades}
+              className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10 focus:outline-none transition text-sm bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+            >
+              <option value="">
+                {!petForm.state
+                  ? "Selecione um estado primeiro"
+                  : loadingCidades
+                  ? "Carregando cidades..."
+                  : "Selecione uma cidade"}
+              </option>
+              {cidades.map((cidade, index) => (
+                <option key={`${cidade.id}-${index}`} value={cidade.cidade}>
+                  {cidade.cidade}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>
