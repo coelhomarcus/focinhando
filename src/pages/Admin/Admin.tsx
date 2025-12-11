@@ -18,7 +18,6 @@ const Admin = () => {
     if (activeTab === "contacts") {
       loadContacts();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const loadContacts = async () => {
