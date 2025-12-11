@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { FormEvent, ChangeEvent } from "react";
-import { useApi } from "@/hooks/useApi";
+import { API_BASE_URL } from "@/config/api";
 import { FaCheckCircle, FaTimesCircle, FaSpinner } from "react-icons/fa";
 
 interface ContactFormData {
@@ -16,7 +16,6 @@ interface ContactFormProps {
 }
 
 const ContactForm = ({ initialData }: ContactFormProps) => {
-  const { apiBaseUrl } = useApi();
   const [formData, setFormData] = useState<ContactFormData>({
     fullName: initialData?.fullName || "",
     email: initialData?.email || "",
@@ -49,7 +48,7 @@ const ContactForm = ({ initialData }: ContactFormProps) => {
     try {
       const token = localStorage.getItem("authToken");
 
-      const response = await fetch(`${apiBaseUrl}/contact/register`, {
+      const response = await fetch(`${API_BASE_URL}/contact/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

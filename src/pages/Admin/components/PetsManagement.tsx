@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { API_BASE_URL } from "@/config/api";
 import {
   FaDog,
   FaCat,
@@ -9,9 +10,9 @@ import {
   FaEdit,
   FaTimes,
 } from "react-icons/fa";
-import type { Pet, PetsManagementProps } from "../types";
+import type { Pet } from "../types";
 
-const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
+const PetsManagement = () => {
   const [pets, setPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -54,7 +55,7 @@ const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
   const loadPets = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${apiBaseUrl}/pets`);
+      const response = await fetch(`${API_BASE_URL}/pets`);
       const data = await response.json();
 
       if (!data.error && data.pets) {
@@ -65,7 +66,7 @@ const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
     } finally {
       setLoading(false);
     }
-  }, [apiBaseUrl]);
+  }, []);
 
   useEffect(() => {
     loadPets();
@@ -83,7 +84,7 @@ const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
     setDeletingId(petId);
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch(`${apiBaseUrl}/pets/${petId}`, {
+      const response = await fetch(`${API_BASE_URL}/pets/${petId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -124,7 +125,7 @@ const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
     }
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch(`${apiBaseUrl}/pets/${editingPet.id}`, {
+      const response = await fetch(`${API_BASE_URL}/pets/${editingPet.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -213,7 +214,6 @@ const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
             key={pet.id}
             className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
           >
-            {/* Pet Image */}
             <div className="relative h-48 bg-gray-100">
               <img
                 src={pet.img}
@@ -237,7 +237,6 @@ const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
               </div>
             </div>
 
-            {/* Pet Info */}
             <div className="p-4">
               <div className="flex items-start justify-between mb-3">
                 <div>
@@ -263,7 +262,7 @@ const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
                 <div className="flex items-center gap-4 text-sm text-gray-600">
                   <span>Idade: {calculateAge(pet.age)}</span>
                   <span>•</span>
-                  <span>{pet.sex === "macho" ? "♂️ Macho" : "♀️ Fêmea"}</span>
+                  <span>{pet.sex === "macho" ? "Macho" : "Fêmea"}</span>
                 </div>
                 <div className="text-sm text-gray-600">
                   Peso: {pet.weight}kg
@@ -275,7 +274,7 @@ const PetsManagement = ({ apiBaseUrl }: PetsManagementProps) => {
               </p>
 
               {/* Action Buttons */}
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-2">
                 <button
                   onClick={() => handleEdit(pet)}
                   className="flex-1 px-4 py-2.5 bg-blue-50 text-blue-600 rounded-lg font-semibold hover:bg-blue-100 transition-colors flex items-center justify-center gap-2"

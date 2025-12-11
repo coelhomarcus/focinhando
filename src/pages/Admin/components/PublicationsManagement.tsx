@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { API_BASE_URL } from "@/config/api";
 import {
   FaEdit,
   FaTrash,
@@ -7,11 +8,9 @@ import {
   FaTimes,
   FaUpload,
 } from "react-icons/fa";
-import type { Publication, PublicationsManagementProps } from "../types";
+import type { Publication } from "../types";
 
-const PublicationsManagement = ({
-  apiBaseUrl,
-}: PublicationsManagementProps) => {
+const PublicationsManagement = () => {
   const [publications, setPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -56,7 +55,7 @@ const PublicationsManagement = ({
     setLoading(true);
     try {
       const response = await fetch(
-        `${apiBaseUrl}/publication/all-publications`
+        `${API_BASE_URL}/publication/all-publications`
       );
       const data = await response.json();
 
@@ -68,7 +67,7 @@ const PublicationsManagement = ({
     } finally {
       setLoading(false);
     }
-  }, [apiBaseUrl]);
+  }, []);
 
   useEffect(() => {
     loadPublications();
@@ -87,7 +86,7 @@ const PublicationsManagement = ({
     try {
       const token = localStorage.getItem("authToken");
       const response = await fetch(
-        `${apiBaseUrl}/publication/${publicationId}`,
+        `${API_BASE_URL}/publication/${publicationId}`,
         {
           method: "DELETE",
           headers: {
@@ -130,7 +129,7 @@ const PublicationsManagement = ({
     try {
       const token = localStorage.getItem("authToken");
       const response = await fetch(
-        `${apiBaseUrl}/publication/${editingPublication.id}`,
+        `${API_BASE_URL}/publication/${editingPublication.id}`,
         {
           method: "PUT",
           headers: {
@@ -221,7 +220,6 @@ const PublicationsManagement = ({
             key={publication.id}
             className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
           >
-            {/* Publication Image */}
             <div className="relative h-48 bg-gray-100">
               <img
                 src={publication.img}
@@ -239,7 +237,6 @@ const PublicationsManagement = ({
               </div>
             </div>
 
-            {/* Publication Info */}
             <div className="p-5">
               <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
                 {publication.title}
@@ -254,8 +251,7 @@ const PublicationsManagement = ({
                 {publication.text}
               </p>
 
-              {/* Action Buttons */}
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-2">
                 <button
                   onClick={() => handleEditClick(publication)}
                   className="flex-1 px-4 py-2.5 bg-blue-50 text-blue-600 rounded-lg font-semibold hover:bg-blue-100 transition-colors flex items-center justify-center gap-2"
@@ -286,7 +282,6 @@ const PublicationsManagement = ({
         ))}
       </div>
 
-      {/* Edit Modal */}
       {editingPublication && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
@@ -304,7 +299,6 @@ const PublicationsManagement = ({
 
             <div className="p-6">
               <div className="space-y-4">
-                {/* Título */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Título *
@@ -322,7 +316,6 @@ const PublicationsManagement = ({
                   />
                 </div>
 
-                {/* Tópico */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Tópico *
@@ -341,7 +334,6 @@ const PublicationsManagement = ({
                   />
                 </div>
 
-                {/* Imagem Upload */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Imagem *
@@ -379,7 +371,6 @@ const PublicationsManagement = ({
                     />
                   </label>
 
-                  {/* Preview da imagem */}
                   {(selectedFile || editingPublication.img) && (
                     <div className="mt-3 flex items-center gap-3">
                       <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 border-focinhando-accent/20">
@@ -400,7 +391,6 @@ const PublicationsManagement = ({
                   )}
                 </div>
 
-                {/* Texto */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Texto da Publicação *
@@ -419,7 +409,6 @@ const PublicationsManagement = ({
                 </div>
               </div>
 
-              {/* Buttons */}
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => setEditingPublication(null)}

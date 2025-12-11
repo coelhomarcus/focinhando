@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useApi } from "@/hooks/useApi";
+import { API_BASE_URL } from "@/config/api";
 import type { User, UserComplement } from "@/types";
 
 export const useUserData = () => {
-  const { apiBaseUrl } = useApi();
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [userComplement, setUserComplement] = useState<UserComplement | null>(
@@ -17,7 +16,7 @@ export const useUserData = () => {
       if (!token) return;
 
       try {
-        const response = await fetch(`${apiBaseUrl}/user`, {
+        const response = await fetch(`${API_BASE_URL}/user`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -35,7 +34,7 @@ export const useUserData = () => {
         }
 
         const complementResponse = await fetch(
-          `${apiBaseUrl}/user/complement`,
+          `${API_BASE_URL}/user/complement`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -52,7 +51,7 @@ export const useUserData = () => {
     };
 
     loadUserData();
-  }, [apiBaseUrl, navigate]);
+  }, [navigate]);
 
   const getUserAvatar = () => {
     if (userComplement?.img) {

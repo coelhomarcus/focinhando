@@ -1,12 +1,10 @@
 import { useState } from "react";
-import type {
-  PublicationForm as PublicationFormType,
-  PublicationFormProps,
-} from "../types";
+import { API_BASE_URL } from "@/config/api";
+import type { PublicationForm as PublicationFormType } from "../types";
 import { StatusMessage } from "./SharedComponents";
 import { FaSpinner } from "react-icons/fa";
 
-const PublicationForm = ({ apiBaseUrl }: PublicationFormProps) => {
+const PublicationForm = () => {
   const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
@@ -69,7 +67,7 @@ const PublicationForm = ({ apiBaseUrl }: PublicationFormProps) => {
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch(`${apiBaseUrl}/publication/register`, {
+      const response = await fetch(`${API_BASE_URL}/publication/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

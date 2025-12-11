@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useApi } from "@/hooks/useApi";
+import { API_BASE_URL } from "@/config/api";
 import type { Publication } from "./types";
 
 import BlogHero from "./components/BlogHero";
@@ -10,7 +10,6 @@ import LoadingState from "../../components/LoadingState";
 import EmptyState from "./components/EmptyState";
 
 const Blog = () => {
-  const { apiBaseUrl } = useApi();
   const [publications, setPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPublication, setSelectedPublication] =
@@ -23,7 +22,7 @@ const Blog = () => {
       try {
         const token = localStorage.getItem("authToken");
         const response = await fetch(
-          `${apiBaseUrl}/publication/all-publications`,
+          `${API_BASE_URL}/publication/all-publications`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -46,7 +45,7 @@ const Blog = () => {
     };
 
     loadPublications();
-  }, [apiBaseUrl]);
+  }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

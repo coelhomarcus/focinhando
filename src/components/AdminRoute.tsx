@@ -1,7 +1,7 @@
 import { Navigate, useNavigate } from "react-router";
 import type { ReactNode } from "react";
 import { useState, useEffect } from "react";
-import { useApi } from "@/hooks/useApi";
+import { API_BASE_URL } from "@/config/api";
 import { FaSpinner } from "react-icons/fa";
 import type { User } from "@/types";
 
@@ -10,7 +10,6 @@ interface AdminRouteProps {
 }
 
 const AdminRoute = ({ children }: AdminRouteProps) => {
-  const { apiBaseUrl } = useApi();
   const navigate = useNavigate();
   const token = localStorage.getItem("authToken");
   const [user, setUser] = useState<User | null>(null);
@@ -24,7 +23,7 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
       }
 
       try {
-        const response = await fetch(`${apiBaseUrl}/user`, {
+        const response = await fetch(`${API_BASE_URL}/user`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -47,7 +46,7 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
     };
 
     loadUser();
-  }, [apiBaseUrl, token, navigate]);
+  }, [token, navigate]);
 
   if (loading) {
     return (

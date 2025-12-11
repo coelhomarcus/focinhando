@@ -1,113 +1,117 @@
-import { useState, useEffect } from 'react'
-import { useApi } from '@/hooks/useApi'
-import type { Pet, FilterType } from './types'
-import HeroSection from './components/HeroSection'
-import FilterBar from './components/FilterBar'
-import PetGrid from './components/PetGrid'
-import PetModal from './components/PetModal'
+import { useState, useEffect } from "react";
+import { API_BASE_URL } from "@/config/api";
+import type { Pet, FilterType } from "./types";
+import HeroSection from "./components/HeroSection";
+import FilterBar from "./components/FilterBar";
+import PetGrid from "./components/PetGrid";
+import PetModal from "./components/PetModal";
 
 const Home = () => {
-   const { apiBaseUrl } = useApi()
-   const [pets, setPets] = useState<Pet[]>([])
-   const [filteredPets, setFilteredPets] = useState<Pet[]>([])
-   const [loading, setLoading] = useState(true)
-   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
-   const [selectedPet, setSelectedPet] = useState<Pet | null>(null)
-   const [searchQuery, setSearchQuery] = useState('')
+  const [pets, setPets] = useState<Pet[]>([]);
+  const [filteredPets, setFilteredPets] = useState<Pet[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+  const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
-   useEffect(() => {
-      const loadPets = async () => {
-         setLoading(true)
-         try {
-            const response = await fetch(`${apiBaseUrl}/pets`)
-            const data = await response.json()
+  useEffect(() => {
+    const loadPets = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${API_BASE_URL}/pets`);
+        const data = await response.json();
 
-            if (data.error) {
-               console.error('Erro ao carregar pets:', data.error)
-               return
-            }
+        if (data.error) {
+          console.error("Erro ao carregar pets:", data.error);
+          return;
+        }
 
-            const sortedPets = (data.pets || []).sort((a: Pet, b: Pet) => a.name.localeCompare(b.name))
-            setPets(sortedPets)
-            setFilteredPets(sortedPets)
-         } catch (error) {
-            console.error('Erro ao conectar com o servidor:', error)
-         } finally {
-            setLoading(false)
-         }
+        const sortedPets = (data.pets || []).sort((a: Pet, b: Pet) =>
+          a.name.localeCompare(b.name)
+        );
+        setPets(sortedPets);
+        setFilteredPets(sortedPets);
+      } catch (error) {
+        console.error("Erro ao conectar com o servidor:", error);
+      } finally {
+        setLoading(false);
       }
+    };
 
-      loadPets()
-   }, [apiBaseUrl])
+    loadPets();
+  }, []);
 
-   const applyFilters = (filterType: FilterType, search: string) => {
-      let filtered: Pet[]
+  const applyFilters = (filterType: FilterType, search: string) => {
+    let filtered: Pet[];
 
-      if (filterType === 'all') {
-         filtered = pets
-      } else if (filterType === 'Cão') {
-         filtered = pets.filter(pet => pet.specie === 'cão')
-      } else if (filterType === 'Gato') {
-         filtered = pets.filter(pet => pet.specie === 'gato')
-      } else if (filterType === 'filhote') {
-         const oneYearAgo = new Date()
-         oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
-         filtered = pets.filter(pet => new Date(pet.age) > oneYearAgo)
-      } else {
-         filtered = pets
-      }
+    if (filterType === "all") {
+      filtered = pets;
+    } else if (filterType === "Cão") {
+      filtered = pets.filter((pet) => pet.specie === "cão");
+    } else if (filterType === "Gato") {
+      filtered = pets.filter((pet) => pet.specie === "gato");
+    } else if (filterType === "filhote") {
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+      filtered = pets.filter((pet) => new Date(pet.age) > oneYearAgo);
+    } else {
+      filtered = pets;
+    }
 
-      if (search.trim()) {
-         const searchLower = search.toLowerCase()
-         filtered = filtered.filter(pet => 
-            pet.name.toLowerCase().includes(searchLower) ||
-            pet.race.toLowerCase().includes(searchLower)
-         )
-      }
-      
-      setFilteredPets(filtered.sort((a: Pet, b: Pet) => a.name.localeCompare(b.name)))
-   }
+    if (search.trim()) {
+      const searchLower = search.toLowerCase();
+      filtered = filtered.filter(
+        (pet) =>
+          pet.name.toLowerCase().includes(searchLower) ||
+          pet.race.toLowerCase().includes(searchLower)
+      );
+    }
 
-   const handleFilter = (filterType: FilterType) => {
-      setActiveFilter(filterType)
-      applyFilters(filterType, searchQuery)
-   }
+    setFilteredPets(
+      filtered.sort((a: Pet, b: Pet) => a.name.localeCompare(b.name))
+    );
+  };
 
-   const handleSearch = (query: string) => {
-      setSearchQuery(query)
-      applyFilters(activeFilter, query)
-   }
+  const handleFilter = (filterType: FilterType) => {
+    setActiveFilter(filterType);
+    applyFilters(filterType, searchQuery);
+  };
 
-   const openModal = (pet: Pet) => {
-      setSelectedPet(pet)
-   }
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    applyFilters(activeFilter, query);
+  };
 
-   const closeModal = () => {
-      setSelectedPet(null)
-   }
+  const openModal = (pet: Pet) => {
+    setSelectedPet(pet);
+  };
 
-   return (
-      <div className='pb-20'>
-         <HeroSection />
+  const closeModal = () => {
+    setSelectedPet(null);
+  };
 
-         <FilterBar
-            activeFilter={activeFilter}
-            filteredCount={filteredPets.length}
-            onFilterChange={handleFilter}
-            searchQuery={searchQuery}
-            onSearchChange={handleSearch}
-         />
+  return (
+    <div className="pb-20">
+      <HeroSection />
 
-         <PetGrid
-            pets={filteredPets}
-            loading={loading}
-            activeFilter={activeFilter}
-            onPetClick={openModal}
-         />
+      <FilterBar
+        activeFilter={activeFilter}
+        filteredCount={filteredPets.length}
+        onFilterChange={handleFilter}
+        searchQuery={searchQuery}
+        onSearchChange={handleSearch}
+      />
 
-         <PetModal pet={selectedPet} onClose={closeModal} />
-      </div>
-   )
-}
+      <PetGrid
+        pets={filteredPets}
+        loading={loading}
+        activeFilter={activeFilter}
+        onPetClick={openModal}
+      />
 
-export default Home
+      <PetModal pet={selectedPet} onClose={closeModal} />
+    </div>
+  );
+};
+
+export default Home;

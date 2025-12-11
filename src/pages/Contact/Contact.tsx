@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useApi } from "@/hooks/useApi";
+import { API_BASE_URL } from "@/config/api";
 import type { User } from "@/types";
 import {
   FaEnvelope,
@@ -14,7 +14,6 @@ import ContactForm from "./components/ContactForm";
 import ContactCTA from "./components/ContactCTA";
 
 const Contact = () => {
-  const { apiBaseUrl } = useApi();
   const [, setUser] = useState<User | null>(null);
   const [userData, setUserData] = useState({
     fullName: "",
@@ -34,12 +33,12 @@ const Contact = () => {
 
       try {
         const [userResponse, complementResponse] = await Promise.all([
-          fetch(`${apiBaseUrl}/user`, {
+          fetch(`${API_BASE_URL}/user`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }),
-          fetch(`${apiBaseUrl}/user/complement`, {
+          fetch(`${API_BASE_URL}/user/complement`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -65,7 +64,7 @@ const Contact = () => {
     };
 
     loadUserData();
-  }, [apiBaseUrl]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
